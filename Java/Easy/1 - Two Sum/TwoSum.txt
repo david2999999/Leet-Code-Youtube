@@ -1,0 +1,54 @@
+Question
+    Given an array of integers nums and an integer target, return indices of the two
+    numbers such that they add up to target.
+
+    You may assume that each input would have exactly one solution, and you may
+    not use the same element twice.
+
+    You can return the answer in any order.
+
+    Constraints:
+        - 2 <= nums.length <= 10^3
+        - -10^9 <= nums[i] <= 10^9
+        - -10^9 <= target <= 10^9
+        - Only one valid answer exists.
+
+Thoughts Before Coding
+    - Lets first over the brute force approach
+        - We will perform a nested 'for' loop
+            - For each of the element 'x'
+                - We will want to perform another 'for' loop to find 'y', where 'x + y' is
+                  equal to 'target'
+        - This approach will cost O(n^2) time complexity
+    - We need to find an optimized approach
+        - For each of the element 'x'
+            - We will want to check if 'target - x' exists
+        - This is because 'x + target - x' is equal to 'target'
+        - We will want a way to save the previous element we have seen before
+            - We should note that we need to return the indices of the two numbers
+            - This means we need to keep track of element and index
+                - We can create a HashMap to map 'element -> index'
+        - For each of the element 'x'
+            - We can check our HashMap for 'target - x'
+    - This approach will allow us to reduce the time complexity to O(n)
+
+Answer
+    - Create a HashMap 'map' to keep track of element and index
+    - Iterate through the indices of the input array 'nums', denoted as 'i'
+        - If 'map' contains 'target - nums[i]'
+            - Return { i, map.get(target - nums[i] }
+        - Put 'nums[i]' and 'i' into 'map'
+    - Return an empty array
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(n), where n is the length of the input array
+        - O(n), map
+
+
+
+
+
+
+
