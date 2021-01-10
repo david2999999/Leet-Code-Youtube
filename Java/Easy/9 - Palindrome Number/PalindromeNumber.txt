@@ -1,0 +1,50 @@
+Question
+    Determine whether an integer is a palindrome. An integer is a palindrome
+    when it reads the same backward as forward.
+
+    Follow up: Could you solve it without converting the integer to a string?
+
+    Constraints:
+        - -2^31 <= x <= 2^31 - 1
+
+Thoughts Before Coding
+    - A palindrome is a string that can be read the same way forwards and backwards
+        - This means if we reverse 'x'
+            - The reverse version of 'x' will be equal to 'x'
+    - We will implement the approach that does not require us to convert integer to a string
+        - How can we reverse 'x'?
+            - We can create a variable 'reverse' to keep track of reverse form of 'x'
+            - We will need to process the digits of 'x' from right -> left
+                - In order to retrieve the rightmost digit, we can use the modulus operator
+                    - rightmost digit = x % 10
+                - Multiple 'reverse' by 10, then increment by rightmost 'digit'
+                - Remove the rightmost 'x' using the division operator
+                    - x = x / 10
+        - After, we process all of the digits of 'x'
+            - We will compare 'x' with reverse form
+
+Answer
+    - Lets validate the input parameter
+        - if 'x' is negative,
+            - Return false
+    - Create two variables
+        - copy, equals to 'x'
+        - reverse, reverse form of 'x'
+    - While 'copy' is greater than 0
+        - Retrieve the rightmost digit
+             - digit = copy % 10
+        - Multiply 'reverse' by 10 and then increment by 'digit'
+        - Remove rightmost digit
+            - copy = copy / 10
+    - Return true if 'reverse' is equal to 'x'
+        - Else, return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(logx), where x is the input value
+        - O(logx), process each of the digits of 'x'
+    - Space Complexity = O(1)
+
+
+
+
+
