@@ -1,0 +1,65 @@
+Question
+    Write a function to find the longest common prefix string amongst an
+    array of strings.
+
+    If there is no common prefix, return an empty string "".
+
+    Constraints:
+        - 0 <= strs.length <= 200
+        - 0 <= strs[i].length <= 200
+        - strs[i] consists of only lower-case English letters.
+
+Thoughts Before Coding
+    - Initially we have the longest common prefix 'length', which is equal
+      to the length of the first word
+        - We will be comparing the first word with every other word
+        - But, we will only compare up the index up to 'length'
+            - This is because there is no point in checking for character
+              after this index
+    - ["flower","flow","flight"]
+        - Initially we have a length of '6'
+            - We will only compare the indices from '0 -> 5' (0th index)
+            - 'flower' with 'flow'
+                - Since 'flow' has a shorter length than '6'
+                    - We will need to update '6' to '4'
+                    - We will compare the characters from 0 -> 3
+        - Current length is equal to 4
+            - 'flow' 'flig'
+            - We will need to update our 'length' to 2
+        - Then we can generate a substring from indices 0 -> 1
+
+Answer
+    - Lets validate the input parameter first
+        - if 'strs' is empty
+            - return empty string
+    - Create a variable 'length' to keep track of the current longest common
+      prefix length, initially 'strs[0].length()'
+    - Iterate through the indices from 1 -> strs.length - 1, denoted as 'i'
+        - Update 'length' to 'strs[i].length()' if the current string is
+          shorter
+        - Iterate through the characters from 0 -> length - 1, denoted as 'j'
+            - Retrieve the character 'c' and 'd' from 'strs[0]' and 'strs[i]'
+            - If 'c' does not equal to 'd'
+                - Update 'length' to 'j'
+                - break out of loop
+    - Return a substring of 'strs[0]' from '0 -> length - 1'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n * k) + O(k) = O(n * k), where n is the number of
+        strings and k is the number of characters associated with each string
+        - O(n * k), compare the first string with every other string
+        - O(k), generate result substring
+    - Space Complexity = O(k), where k is the number of characters
+        associated with each string
+        - O(k), resulting substring
+
+
+
+
+
+
+
+
+
+
+
