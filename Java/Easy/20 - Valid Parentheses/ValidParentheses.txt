@@ -1,0 +1,45 @@
+Question
+    Given a string s containing just the characters '(', ')', '{', '}',
+    '[' and ']', determine if the input string is valid.
+
+    An input string is valid if:
+
+    Open brackets must be closed by the same type of brackets.
+    Open brackets must be closed in the correct order.
+
+    Constraints:
+        - 1 <= s.length <= 104
+        - s consists of parentheses only '()[]{}'.
+
+Thoughts Before Coding
+    - For each of the closing bracket 'c'
+        - We will want to check the previous opening bracket 'b'
+        - If 'c' is a matching closing bracket with 'b'
+            - Then we will need to remove 'b' from consideration
+        - This will allow the next closing bracket 'd' to be compared
+          with the previous opening bracket 'a'
+    - We can keep track of the previous opening brackets inside a stack
+        - Then for each of the closing brackets
+            - We will check if the closing bracket matches the opening
+              bracket that is on the top of the stack
+            - If the brackets/parentheses do match
+                - Then we will remove the opening bracket from the stack
+
+Answer
+    - Create a 'stack' to keep track of opening parentheses
+    - Iterate through the indices of 's', denoted as 'i'
+        - Retrieve the current character 'c' at index 'i'
+        - If 'c' is an opening bracket
+            - Push 'c' into the 'stack'
+        - Else
+            - If 'stack' is empty OR 'stack.pop()' (opening bracket) does
+              not match 'c'
+                - Return false
+    - Return true only if 'stack' is empty, which means all
+      of the opening brackets are paired up with closing brackets
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the length of the input string
+        - O(n), visit each index once
+    - Space Complexity = O(n), where n is the length of the input string
+         - O(n), stack
