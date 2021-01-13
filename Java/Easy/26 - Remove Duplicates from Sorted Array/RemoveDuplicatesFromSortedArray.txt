@@ -1,0 +1,36 @@
+Question
+    Given a sorted array nums, remove the duplicates in-place
+    such that each element appears only once and returns the
+    new length.
+
+    Do not allocate extra space for another array, you must
+    do this by modifying the input array in-place with O(1) extra memory.
+
+Thoughts Before Coding
+    - We can implement a two pointer approach
+        - One pointer 'i' will be used to populate unique numbers
+        - One pointer 'j' will scan forward to find unique numbers
+    - We should note that the input array is sorted in ascending order
+        - This means all of the duplicate numbers are grouped together
+        - After we have accounted for the element at 'nums[j]'
+            - We will want to skip all of the future elements that
+              is equal to 'nums[j]'
+    - After we have process all of the numbers with pointer 'j'
+        - The value of 'i' will determine the size of the output array
+          without duplicates
+
+Answer
+    - Create a variable 'i' to keep track of the current location
+      we populating
+    - Iterate through the indices of the input list, denoted as 'j'
+        - Populate 'nums[j]' at 'nums[i]'
+            - Increment 'i'
+        - While 'j' is not at the last index AND 'nums[j + 1]' is equal
+          to 'nums[j]'
+            - Increment 'j'
+    - Return 'i', the length of the new array without duplicates
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(1)
