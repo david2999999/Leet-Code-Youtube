@@ -1,0 +1,52 @@
+Question
+    Given a sorted array of distinct integers and a target value,
+    return the index if the target is found. If not, return the
+    index where it would be if it were inserted in order.
+
+    Constraints:
+        - 1 <= nums.length <= 10^4
+        - -10^4 <= nums[i] <= 10^4
+        - nums contains distinct values sorted in ascending order.
+        - -10^4 <= target <= 10^4
+
+Thoughts Before Coding
+    - We are trying to look for an element or insert position inside a sorted
+      array
+        - When looking for an element inside a sorted array
+        - The optimal approach will be to use binary search
+    - For each of the element at index 'mid'
+        - if 'nums[mid]' is equal to 'target'
+            - We will return 'mid'
+        - If 'nums[mid]' is less than 'target'
+            - We want to search rightward from 'mid + 1'
+        - If 'nums[mid]' is greater than 'target'
+            - Search to the left with 'mid' inclusive
+
+Answer
+    - Create two variables
+        - left, the current left boundary
+        - right, the current right boundary, initially at the end of the array
+    - While 'left' is less than 'right'
+        - Calculate 'mid'
+            - mid = left + (right - left) / 2
+        - If 'nums[mid]' is equal to 'target'
+            - Return 'mid'
+        - Else if 'nums[mid]' is less than 'target'
+            - left = mid + 1
+        - Else
+            - right = mid
+    - If 'nums[left]' is less than 'target'
+        - Return 'left + 1'
+    - Else
+        - Return 'left'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(logn), where n is the length of the input array
+        - O(logn), binary search
+    - Space Complexity = O(1)
+
+
+
+
+
+
