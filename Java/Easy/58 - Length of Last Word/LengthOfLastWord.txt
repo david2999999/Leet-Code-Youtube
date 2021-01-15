@@ -1,0 +1,36 @@
+Question
+    Given a string s consists of some words separated by spaces,
+    return the length of the last word in the string. If the last word
+    does not exist, return 0.
+
+    A word is a maximal substring consisting of non-space characters only.
+
+    Constraints:
+        - 1 <= s.length <= 10^4
+        - s consists of only English letters and spaces ' '.
+
+Thoughts Before Coding
+    - We will be checking the characters from right -> left
+    - We should note that there may be trailing spaces inside the input string
+        - We will want to skip all of the trailing spaces before
+          we starting count the characters inside the last word
+
+Answer
+    - Create two variables
+        - i, our current location inside 's', initially 's.length() - 1'
+        - length, the length of the last word
+    - While 'i' is greater than or equal to 0 AND the current character
+      at 'i' is equal to ' '
+        - Decrement 'i'
+    - While 'i' is greater than or equal to 0 AND the current characters
+      at 'i' is not equal to ' '
+        - Decrement 'i'
+        - Increment 'length'
+    - Return 'length'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the length of the input string
+        - O(n), visit each index once
+    - Space Complexity = O(1)
+
+
