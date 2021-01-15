@@ -1,0 +1,36 @@
+Question
+    Given an integer array nums, find the contiguous subarray
+    (containing at least one number) which has the largest sum and return its sum.
+
+    Constraints:
+        - 1 <= nums.length <= 3 * 10^4
+        - -10^5 <= nums[i] <= 10^5
+
+Thoughts Before Coding
+    - For each of the number 'x' inside the input array
+        - We have 2 choices
+            - Add 'x' to the current running sum
+            - Start a new running sum with 'x'
+        - When should we start a new running sum with 'x'?
+            - When our current running sum is a negative value
+                - We should start a new subarray
+            - This is because 'x + negative value' will only lower
+              the value of 'x'
+                - So, we should just start a new subarray of 'x'
+    - We will return the contiguous subarray, which contains the highest sum
+
+Answer
+    - Create two variables
+        - sum, the current running sum, initially 0
+        - maxSum, the maximum subarray sum, initially 'Integer.MIN_VALUE'
+    - Iterate through the elements of 'nums', denoted as 'num'
+        - If 'sum' is less than 0
+            - Reset 'sum' to 0 (we are starting a new subarray with 'num')
+        - Increment 'sum' by 'num'
+        - Update 'maxSum' if 'sum' is greater
+    - Return 'maxSum'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each element once
+    - Space Complexity = O(1)
