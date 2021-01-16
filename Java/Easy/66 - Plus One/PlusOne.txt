@@ -1,0 +1,74 @@
+Question
+    Given a non-empty array of decimal digits representing a non-negative
+    integer, increment one to the integer.
+
+    The digits are stored such that the most significant digit is at the
+    head of the list, and each element in the array contains a single digit.
+
+    You may assume the integer does not contain any leading zero, except
+    the number 0 itself.
+
+    Constraints:
+        - 1 <= digits.length <= 100
+        - 0 <= digits[i] <= 9
+
+Thoughts Before Coding
+    - We will be processing the numbers from right -> left
+        - We will need to increment 1 to the last digit
+    - There are two side cases we need to handle
+        - When adding 1 to the last digit
+            - There may be 'carry' over from the sum
+                - Example: 19
+                    - 20
+                - This means we will need to keep track of the carry
+                  in our addition
+        - When adding 1 to the last digit
+            - The output array may be longer than the input array
+                - Example: 999
+                    - The result will be 1000, which 1 digit more than the
+                      length of the input array
+            - This means we will need to keep track of our result inside
+              a list first
+                - Then we will convert the list to an array after
+
+Answer
+    - Create the following variables
+        - result, linked list to keep track of the sum after adding 1 to
+                   the input array
+        - carry, the current carry, initially 1
+    - Iterate through the indices from right -> left of 'digits', denoted as 'i'
+        - Retrieve the digit 'd' from index 'i' from 'digits'
+        - Find the 'sum'
+            - sum = d + carry
+        - If 'sum' is greater than 9
+            - Set 'carry' to 1
+        - Else
+            - Set 'carry' to 0
+        - Prepend 'sum % 10' to 'result'
+            - The reason we are using modulus operation is because
+              we want to get the ones place into our result
+                - 19 -> 9
+    - If 'carry' is greater than 0
+        - Prepend 1 to 'result'
+    - Return an array version of 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2 * n) = O(n), where n is the length of the input array
+        - O(2 * n), visit each number once to find the sum, and then convert
+          the 'result' list to an array
+    - Space Complexity = O(2 * n) = O(n), where n is the length of the input array
+        - O(2 * n), result list and array
+
+
+
+
+
+
+
+
+
+
+
+
+
+
