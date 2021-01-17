@@ -1,0 +1,49 @@
+Question
+    Given a non-negative integer x, compute and return the square root of x.
+
+    Since the return type is an integer, the decimal digits are truncated,
+    and only the integer part of the result is returned.
+
+Thoughts Before Coding
+    - The square root of 'x' is in the range of '0 -> (x / 2) + 1'
+        - Since, our range is sorted in ascending order
+            - We can implement a binary search approach to find target value
+    - For each of the 'mid' value
+        - We will calculate the 'square' of 'mid'
+            - square = mid * mid
+        - If 'square' is equal to 'x'
+            - Then 'mid' is the target value
+        - If 'square' is less than 'x'
+            - Then 'square' may or may not be the largest square that
+              is less than 'x'
+            - So, we will need to search rightward with 'mid' inclusive
+        - If 'square' is greater than 'x'
+            - Then we need to search leftward from 'mid - 1'
+
+Answer
+    - Create two variables
+        - left, the current left boundary, initially 0
+        - right, the current right boundary, initially '(x/2) + 1'
+    - While 'left' is less than 'right'
+        - Calculate 'mid'
+            - mid = left + (right - left) / 2 + 1
+                - The +1 just picks the upper mid value
+                    - [1, 2], we will pick 2 instead of 1
+        - Calculate 'square'
+            - square = mid * mid
+        - If 'square' is equal to 'x'
+            - Return 'mid'
+        - Else if 'square' is less than 'x'
+            - left = mid
+        - Else
+            - right = mid - 1
+    - Return 'left', which 'left * left' will be the largest square that
+      is less than 'x'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(logx), where x is the input value
+        - O(logx), binary search
+    - Space Complexity = O(1)
+
+
+
