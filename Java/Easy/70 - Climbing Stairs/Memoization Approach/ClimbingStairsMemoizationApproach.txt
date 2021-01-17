@@ -1,0 +1,60 @@
+Question
+    You are climbing a staircase. It takes n steps to reach the top.
+
+    Each time you can either climb 1 or 2 steps. In how many
+    distinct ways can you climb to the top?
+
+    Constraints:
+        - 1 <= n <= 45
+
+Thoughts Before Coding
+    - In the recursive approach
+        - The recursive solution is very inefficient due to overlapping
+          recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the total number of distinct 'ways'
+              at the current value 'n'
+            - This means we can cache 'n' with 'ways'
+
+Answer
+    - Create an array 'memo' to cache previously calculated results
+        - The indices represent 'n'
+        - The values represent 'ways'
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - n, our current step
+            - memo, cache
+        - What is the base case?
+            - If 'n' is equal to 0, OR 'n' is equal to '1'
+                - Return 1
+            - If 'memo[n]' is not equal to 0
+                - return 'memo[n]'
+        - In each of the recursive call
+            - Recursively find the number of 'ways1' when we take
+              1 step
+                - n => n - 1
+            - Recursively find the number of 'ways2' when we take
+              2 steps
+                - n => n - 2
+            - Put 'ways1 + ways2' at 'memo[n]'
+            - Return 'memo[n]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the input value
+        - O(n), there is 'n' possible states
+    - Space Complexity = O(n) + O(n) = O(n), where n is the input value
+         - O(n), 'memo' array
+         - O(n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
