@@ -1,0 +1,60 @@
+Question
+    You are climbing a staircase. It takes n steps to reach the top.
+
+    Each time you can either climb 1 or 2 steps. In how many
+    distinct ways can you climb to the top?
+
+    Constraints:
+        - 1 <= n <= 45
+
+Thoughts Before Coding
+    - We are trying to find the number of distinct ways to reach
+      the top '0 -> n'
+        - We should note that going from '0 -> n' is the same
+          as going from 'n -> 0'
+        - We will implement a recursive approach that goes
+          from 'n -> 0'
+            - When we reach the bottom floor at 0, we have 1
+              distinct way
+    - We will first implement a recursive approach
+        - In each of the recursive call
+            - We have 2 choices
+                - We can either take 1 step or take 2 steps
+            - We will want to find the total number of distinct ways
+              from both choices
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - n, our current step
+        - What is the base case?
+            - If 'n' is equal to 0, OR 'n' is equal to '1'
+                - Return 1
+        - In each of the recursive call
+            - Recursively find the number of 'ways1' when we take
+              1 step
+                - n => n - 1
+            - Recursively find the number of 'ways2' when we take
+              2 steps
+                - n => n - 2
+            - Return 'ways1 + ways2'
+    - This solution is not efficient enough and will result in "TLE" error
+        - We can optimize this approach using memoization
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2^n), where n is the input value
+        - O(2^n), each recursive call has up to 2 choices and
+          a depth of 'n'
+    - Space Complexity = O(n), where n is the input value
+        - O(n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
