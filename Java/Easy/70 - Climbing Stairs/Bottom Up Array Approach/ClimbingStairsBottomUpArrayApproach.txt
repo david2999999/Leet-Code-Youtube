@@ -1,0 +1,54 @@
+Question
+    You are climbing a staircase. It takes n steps to reach the top.
+
+    Each time you can either climb 1 or 2 steps. In how many
+    distinct ways can you climb to the top?
+
+    Constraints:
+        - 1 <= n <= 45
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached the current value 'n' with the number
+                  of 'ways' we can reach the last step
+            - This means we can create an array 'ways' to keep track
+              of the numbers of ways for each value 'n'
+    - What are the default values inside the 'ways' array?
+        - When 'n' is equal to 0
+            - Then we have reached the last step
+                - So, the number of ways is equal to 1
+        - When 'n' is equal to 1
+            - We have only 1 way to reach the last step
+                - The number ways is equal to 1
+
+Answer
+    - Lets validate the input value
+        - If 'n' is equal to 0 OR equal to 1
+            - Return 1
+    - Create an array 'ways' to keep track of the number
+      of ways for each value 'n'
+        - The indices represent 'n'
+        - The values represents 'ways'
+    - Set 'ways[0]' AND 'ways[1]' to 1
+    - Iterate through from '2 -> n', denoted as 'i'
+        - Find the total number of ways we can reach the bottom step
+            - ways[i] = ways[i - 1] + ways[i - 2]
+    - Return 'ways[n]', total number of ways if we start at the top step
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the input value
+        - O(n), visit each index once
+    - Space Complexity = O(n), where 'n' is the input value
+        - O(n), 'ways' array
+
+
+
+
+
+
+
+
+
+
