@@ -1,0 +1,46 @@
+Question
+    Given the head of a sorted linked list, delete all duplicates
+    such that each element appears only once. Return the linked
+    list sorted as well.
+
+    Constraints:
+        - The number of nodes in the list is in the range [0, 300].
+        - -100 <= Node.val <= 100
+        - The list is guaranteed to be sorted in ascending order.
+
+Thoughts Before Coding
+    - Since the input list sorted in ascending order
+        - All of the duplicate nodes are grouped together
+    - This means for each of the node 'x'
+        - We will first check if 'x.next' has the same value as 'x'
+        - If 'x.next' does contain the same value
+            - We will want to skip the current node
+        - We will only append the last node of each duplicate group
+            - x -> x -> (x)
+
+Answer
+    - Create two variables
+        - sHead, sentinel head of the new list
+        - sTail, sentinel tail of the new list, initially 'sHead'
+        - node, our current location inside the input list
+    - While 'node' is not null
+        - While 'node.next' is not null AND 'node.next.val' is equal to 'node.val'
+            - Set 'node' to 'node.next'
+        - Create a variable 'next' and set it to 'node.next'
+        - Set 'node.next' to null
+        - Set 'sTail.next' to 'node'
+        - Set 'sTail' to 'node'
+        - Set 'node' to 'next'
+    - Return 'sHead.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes in the input list
+        - O(n), visit each node once
+    - Space Complexity = O(1), modify the input list
+
+
+
+
+
+
+
