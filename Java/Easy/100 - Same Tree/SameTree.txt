@@ -1,0 +1,61 @@
+Question
+    Given the roots of two binary trees p and q, write a function to
+    check if they are the same or not.
+
+    Two binary trees are considered the same if they are structurally
+    identical, and the nodes have the same value.
+
+    Constraints:
+        - The number of nodes in both trees is in the range [0, 100].
+        - -10^4 <= Node.val <= 10^4
+
+Thoughts Before Coding
+    - For each of the pair of nodes 'p' and 'q'
+        - If 'p' and 'q' are both null
+            - Then it is a valid pair
+        - If only one of the nodes is null
+            - Then it is an invalid pair
+        - If the nodes contain the same value
+            - Then it is a valid pair
+        - If the nodes does not contain the same value
+            - Then it is an invalid pair
+    - We can implement a preorder recursive approach
+        - We will first compare the nodes at the current root of the subtree
+        - Then we will compare the left and right subtree
+
+Answer
+    - Implement the recursive preorder traversal
+        - What parameters do we need?
+            - p, the current node inside tree 'p'
+            - q, the current node inside tree 'q'
+        - What is the base case?
+            - If both of the nodes are null
+                - Return true
+            - If one of the nodes is null
+                - Return false
+        - In each of the recursive call
+            - If the two node values are not the same
+                - Return false
+            - Recursively compare the left subtree
+                - p => p.left
+                - q => q.left
+            - Recursively compare the right subtree
+                - p => p.right
+                - q => q.right
+            - Return true only if both recursive calls returns true
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes in the smaller tree
+        - O(n), visit each node once
+    - Space Complexity = O(h), where h is the height of the smaller tree
+        - O(h), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
