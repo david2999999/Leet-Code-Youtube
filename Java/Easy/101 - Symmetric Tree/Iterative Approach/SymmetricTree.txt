@@ -1,0 +1,66 @@
+Question
+    Given a binary tree, check whether it is a mirror of itself
+    (ie, symmetric around its center).
+
+Thoughts Before Coding
+    - We will be implementing the iterative approach
+        - In each of the iteration
+            - we will be comparing the values of two nodes 'p' and 'q'
+            - If both of the nodes are null
+                - Then they are a valid pair
+            - If one of the nodes is null
+                - Then they are an invalid pair
+            - If the nodes have the same value
+                - Then they are a valid pair
+            - If the nodes does not have the same value
+                - Then they are an invalid pair
+    - we can keep track of our nodes inside a 'queue'
+        - In each of the iteration
+            - We will poll 2 nodes out of queue for comparison
+            - After comparing the 2 nodes
+                - We will add the children of the nodes into the 'queue'
+
+Answer
+    - Lets validate the input parameter
+        - If 'root' is equal to null
+            - Return true
+    - Create a 'queue' to keep track of our nodes
+        - Add 'root' twice into 'queue'
+    - While 'queue' is not empty
+        - Poll two nodes 'p' and 'q' from 'queue'
+        - If both of the nodes are null
+            - continue to next iteration
+        - If one of the nodes is null OR the nodes does not contain the same value
+            - Return false
+        - Add 'p.left' AND 'q.right' into 'queue'
+        - Add 'p.right' AND 'q.left' into 'queue'
+    - return true
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes in the tree
+        - O(n), visit each node once
+    - Space Complexity = O(n), where n is the number of nodes in the tree
+        - O(n), queue
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
