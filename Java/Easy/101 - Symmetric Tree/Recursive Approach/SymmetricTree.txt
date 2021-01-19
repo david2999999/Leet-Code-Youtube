@@ -1,0 +1,71 @@
+Question
+    Given a binary tree, check whether it is a mirror of itself
+    (ie, symmetric around its center).
+
+Thoughts Before Coding
+    - Lets first implement the recursive approach
+        - We will be comparing two nodes 'p' and 'q'
+            - If 'p' AND 'q' are both null
+                - Then it is a valid pair
+            - If only one of the nodes is null
+                - Then it is an invalid pair
+            - If the values of the nodes are not the same
+                - Then it is an invalid
+            - If the values of the nodes are the same
+                - Then is is a valid pair
+        - After the comparing the current two nodes
+            - We will compare 'p.left' with 'q.right'
+            - We will compare 'p.right' with 'q.left'
+
+Answer
+    - Lets validate the input parameter
+        - If 'root' is equal to null
+            - Return true
+    - Recursively compare the subtree
+        - What parameters do we need?
+            - p, node 1, initially 'root.left'
+            - q, node 2, initially 'root.right'
+        - What is the base case?
+            - If both of the nodes are null
+                - Return true
+            - If one of the nodes is null
+                - Return false
+        - In each of the recursive call
+            - If the node values are not the same
+                - Return false
+            - Recursively compare the subtree
+                - p => p.left
+                - q => q.right
+            - Recursively compare the other subtree
+                - p => p.right
+                - q => q.left
+            - Return true only if both recursive calls returns true
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes in the tree
+        - O(n), visit each node once
+    - Space Complexity = O(h), where h is the height of the tree
+        - O(h), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
