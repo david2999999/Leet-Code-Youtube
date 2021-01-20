@@ -1,0 +1,55 @@
+Question
+    Given an array where elements are sorted in ascending order,
+    convert it to a height balanced BST.
+
+    For this problem, a height-balanced binary tree is defined as a
+    binary tree in which the depth of the two subtrees of every node
+    never differ by more than 1.
+
+Thoughts Before Coding
+    - We are given an array 'nums' of sorted values
+        - Which number should we pick to be the root of the current subtree?
+            - We will want to pick the value at the mid index to
+              be the root of our current subtree
+            - This will allow elements to the left of 'mid' to be
+              the node values for the left subtree
+            - Then the elements to the right of 'mid' will be the
+              node values for the right subtree
+        - We will be keeping track of our current boundaries
+
+Answer
+    - Implement a recursive approach
+        - What parameters do we need?
+            - nums, the input array
+            - left, the current left boundary, initially 0
+            - right, the current right boundary, initially 'nums.length - 1'
+        - What is the base case?
+            - If 'left' is greater than 'right'
+                - Return null
+        - In each of the recursive call
+            - Calculate the 'mid' index
+                - mid = left + (right - left) / 2
+            - Generate a 'root' node with 'nums[mid]'
+            - Recursively generate the left subtree of 'root'
+                - right => mid - 1
+            - Recursively generate the right subtree of 'root'
+                - left => mid + 1
+            - Return 'root'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the length of the input array
+        - O(n), visit each index once to generate a 'root' node
+    - Space Complexity = O(h) + O(n) = O(n), where n is the length of the input array
+        - O(h), recursive call stack memory
+        - O(n), newly generated tree
+
+
+
+
+
+
+
+
+
+
+
