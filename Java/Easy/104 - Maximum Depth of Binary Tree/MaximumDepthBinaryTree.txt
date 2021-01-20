@@ -1,0 +1,64 @@
+Question
+    Given the root of a binary tree, return its maximum depth.
+
+    A binary tree's maximum depth is the number of nodes along the longest
+    path from the root node down to the farthest leaf node.
+
+    Constraints:
+        - The number of nodes in the tree is in the range [0, 104].
+        - -100 <= Node.val <= 100
+
+Thoughts Before Coding
+    - We will implement a recursive depth first search approach
+        - For each of the node 'x'
+            - We will first want to find the maximum depth of the 'left' subtree
+            - Then find the maximum depth of the 'right' subtree
+        - Since, we want to find the maximum depth at 'x'
+            - We will want to pick the larger value between 'left' and 'right'
+            - Then in order to account for the node 'x'
+                - We will increment 1 to the larger value
+
+Answer
+    - Implement the recursive depth first search approach
+        - What parameters do we need?
+            - root, the current root of the subtree
+        - What is the base case?
+            - If 'root' is equal to null
+                - Return 0
+        - In each of the recursive call
+            - Recursively find the maximum depth of 'left' subtree
+                - root => root.left
+            - Recursively find the maximum depth of 'right' subtree
+                - root => root.right
+            - Return 'max(left, right) + 1'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the total number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(h), where 'h' is the height of the tree
+        - O(h), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
