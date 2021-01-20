@@ -1,0 +1,64 @@
+Question
+    Given a binary tree, return the bottom-up level order traversal
+    of its nodes' values. (ie, from left to right, level by level
+    from leaf to root)
+
+Thoughts Before Coding
+    - Lets break this question down
+        - Lets first go over how to perform a level order traversal
+            - We can implement a level order traversal using a 'queue'
+            - In each of the iteration
+                - The 'size' of the 'queue' will determine the number of
+                  nodes at the current level
+        - How can we perform a bottom level order traversal?
+            - We can still perform the regular level order traversal
+            - But, the values of each level will be inserted to the front
+              of the resulting list
+
+Answer
+    - Lets validate the input parameter
+        - If 'root' is null
+            - Return an empty list
+    - Create the following variables
+        - result, list of values from all levels
+        - queue, queue to perform level order traversal
+    - Add 'root' to 'queue'
+    - While 'queue' is not empty
+        - Create a list 'values' to keep track of the values at the current row
+        - Retrieve the 'size' of the 'queue'
+            - This will determine the number of nodes at the current level
+        - Iterate through from 0 -> size - 1
+            - Poll a 'node' from the 'queue'
+            - Add 'node.val' to 'values'
+            - If 'node.left' is not null
+                - Add 'node.left' to 'queue'
+            - If 'node.right' is not null
+                - Add 'node.right' to 'queue'
+        - Add 'values' to the front of 'result'
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the nodes in the tree
+        - O(n), visit each node once
+    - Space Complexity = O(n) + O(n) = O(n), where 'n' is the nodes in the tree
+        - O(n), queue
+        - O(n), result list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
