@@ -1,0 +1,82 @@
+Question
+    Given the root of a binary tree and an integer targetSum,
+    return true if the tree has a root-to-leaf path such that
+    adding up all the values along the path equals targetSum.
+
+    A leaf is a node with no children.
+
+    Constraints:
+        - The number of nodes in the tree is in the range [0, 5000].
+        - -1000 <= Node.val <= 1000
+        - -1000 <= targetSum <= 1000
+
+Thoughts Before Coding
+    - We will implement a recursive approach
+        - We will be keeping track of the current sum of our path
+          in the recursive parameters
+        - For each of the node 'x'
+            - We will want to add the value of 'x' to the current sum
+            - If 'x' is a leaf node
+                - We will want to return true if the current sum
+                  is equal to 'targetSum'
+                - If the current sum is not equal to 'targetSum'
+                    - We can return false
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - node, the current node we are visiting
+            - sum, the current sum, initially 0
+            - targetSum, the input target sum
+        - What is the base case?
+            - if 'node' is equal to null
+                - return false
+        - In each of the recursive call
+            - Increment 'sum' by 'node.val'
+            - If 'node' is a leaf node
+                - Return true if 'sum' is equal to 'targetSum'
+                - Else, return false
+            - Recursively check if we can find a path in the 'left' subtree
+                - node => node.left
+            - Recursively check if we can find a path in the 'right' subtree
+                - node => node.right
+            - Return true if either of the paths is valid
+            - Return false, if both of the paths are invalid
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(h), where h is the height of the tree
+        - O(h), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
