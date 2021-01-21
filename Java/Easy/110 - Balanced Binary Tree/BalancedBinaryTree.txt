@@ -1,0 +1,80 @@
+Question
+    Given a binary tree, determine if it is height-balanced.
+
+    For this problem, a height-balanced binary tree is defined as:
+
+    a binary tree in which the left and right subtrees of every node
+    differ in height by no more than 1.
+
+    Constraints:
+        - The number of nodes in the tree is in the range [0, 5000].
+        - -10^4 <= Node.val <= 10^4
+
+Thoughts Before Coding
+    - We will implementing a recursive depth first search approach
+        - For each of the node 'x'
+            - We will first want to recursively find the height
+              of the 'left' subtree
+            - Then we will recursively find the height of the
+              'right' subtree
+            - If the difference between 'left' and 'right' is
+              greater than 1
+                - Then we know it is not a balanced binary tree
+                - We will need an indication to allow the
+                  parent of 'x' to know that we have found
+                  an invalid binary subtree
+                - We can return an error code to the parent nodes
+                    - This error code will be 'Integer.MAX_VALUE'
+            - If the difference between 'left' and 'right' is
+              less than or equal to 1
+                - We will need to let the parent node of 'x'
+                  to know the larger height of the two subtree
+                - We will need to return 'max(left, right) + 1'
+
+Answer
+    - Implement a recursive depth first search approach
+        - What parameters do we need?
+            - node, the current node we are visiting
+        - What is the base case?
+            - If 'node' is equal to null
+                - Return 0
+        - In each of the recursive call
+            - Recursively find the height of the 'left' subtree
+                - node => node.left
+            - Recursively find the height of the 'right' subtree
+                - node => node.right
+            - If 'left' OR 'right' is equal to 'Integer.MAX_VALUE'
+              OR the absolute difference between 'left' and 'right'
+              is greater than 1
+                - Return 'Integer.MAX_VALUE'
+            - Return 'max(left, right) + 1' (+1 accounts for 'node')
+    - If the recursive result is not equal to 'Integer.MAX_VALUE'
+        - Return true
+    - Else,
+        - Return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(h), where h is the height of the tree
+        - O(h), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
