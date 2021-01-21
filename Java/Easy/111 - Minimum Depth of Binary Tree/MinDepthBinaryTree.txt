@@ -1,0 +1,75 @@
+Question
+    Given a binary tree, find its minimum depth.
+
+    The minimum depth is the number of nodes along the shortest
+    path from the root node down to the nearest leaf node.
+
+    Note: A leaf is a node with no children.
+
+    Constraints:
+        - The number of nodes in the tree is in the range [0, 10^5].
+        - -1000 <= Node.val <= 1000
+
+Thoughts Before Coding
+    - We will implement a recursive depth first search approach
+        - For each of the node 'x'
+            - We will first recursively find the minimum depth
+              of the 'left' subtree
+            - Then find the minimum depth of the 'right' subtree
+            - Since, we want the minimum depth at the current node
+                - We will want the smaller value between 'left, right'
+                  and increment by 1 to account for 'x'
+        - We should note that a valid path is from 'root -> leaf'
+            - Any of the other paths are invalid
+
+Answer
+    - Lets validate the input parameter
+        - If 'root' is equal to null
+            - Return 0
+    - Recursively find the minimum depth
+        - What parameters do we need?
+            - node, the current node we are visiting
+        - What is the base case?
+            - If 'node' is equal to null,
+                - Return 'Integer.MAX_VALUE'
+            - If both of the 'node' is equal to null
+                - Return 1
+        - In each of the recursive call
+            - Recursively find the min depth of the 'left' subtree
+                - node => node.left
+            - Recursively find the min depth of the 'right' subtree
+                - node => node.right
+            - Return 'min(left, right) + 1' (+1 accounts for 'node')
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(h), where h is the height of the tree
+        - O(h), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
