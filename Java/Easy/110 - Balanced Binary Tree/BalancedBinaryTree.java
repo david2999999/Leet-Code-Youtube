@@ -1,15 +1,19 @@
 public class BalancedBinaryTree {
-    public int minDepth(TreeNode root) {
-        return root == null ? 0 : getMinDepth(root);
+    public boolean isBalanced(TreeNode root) {
+        return getHeight(root) != Integer.MAX_VALUE;
     }
 
-    private int getMinDepth(TreeNode node) {
-        if (node == null) return Integer.MAX_VALUE;
-        if (node.left == null && node.right == null) return 1;
+    private int getHeight(TreeNode node) {
+        if (node == null) return 0;
 
-        int left = getMinDepth(node.left);
-        int right = getMinDepth(node.right);
+        int left = getHeight(node.left);
+        int right = getHeight(node.right);
 
-        return Math.min(left, right) + 1;
+        if (left == Integer.MAX_VALUE || right == Integer.MAX_VALUE ||
+                Math.abs(left - right) > 1) {
+            return Integer.MAX_VALUE;
+        }
+
+        return Math.max(left, right) + 1;
     }
 }
