@@ -1,0 +1,33 @@
+Question
+    Given an integer rowIndex, return the rowIndexth row of the Pascal's triangle.
+
+    Notice that the row index starts from 0.
+
+    Constraints:
+        - 0 <= rowIndex <= 33
+
+Thoughts Before Coding
+    - We will initially have a list, which only contains the value of 1
+    - Then for each of the new rows
+        - We will first need to have a value of 1 at the front of the list
+          and also at the end of the list
+        - To find the elements in the middle of the list
+            - We will need to find the sum of pairs of elements from the previous
+              row
+
+Answer
+    - Create a list 'prev', which will initially have a value of 1
+    - Iterate through from 1 -> rowIndex, denoted as 'r'
+        - Create a list 'cur' to keep track of the values at the current row
+        - Add '1' to 'cur'
+        - Iterate through the indices from 1 -> size of 'prev', denoted as 'i'
+            - Add 'prev.get(i - 1) + prev.get(i)' to 'cur'
+        - Add '1' to 'cur'
+        - Set 'prev' to 'cur'
+    - Return 'prev'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n * (n + 1) / 2) = O(n^2), where 'n' is the input value
+        - O(n * (n + 1) / 2), all of the cells
+    - Space Complexity = O(n), where 'n' is the input value
+        - O(n), resulting list
