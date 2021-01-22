@@ -25,7 +25,8 @@ Answer
         - If 'root' is equal to null
             - Return true
     - Create a 'queue' to keep track of our nodes
-        - Add 'root' twice into 'queue'
+        - Add 'root.left' to 'queue'
+        - Add 'root.right' to 'queue'
     - While 'queue' is not empty
         - Poll two nodes 'p' and 'q' from 'queue'
         - If both of the nodes are null

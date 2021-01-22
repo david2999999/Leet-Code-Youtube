@@ -3,8 +3,8 @@ public class SymmetricTree {
         if (root == null) return true;
 
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        queue.add(root);
+        queue.add(root.left);
+        queue.add(root.right);
 
         while (!queue.isEmpty()) {
             TreeNode p = queue.poll(), q = queue.poll();
