@@ -1,0 +1,43 @@
+Question
+    You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+    You want to maximize your profit by choosing a single day to buy one stock and
+    choosing a different day in the future to sell that stock.
+
+    Return the maximum profit you can achieve from this transaction. If you cannot
+    achieve any profit, return 0.
+
+Thoughts Before Coding
+    - For each of the index 'j'
+        - What is the maximum profit we can generate if we sell at the current index?
+            - We will want to find the minimum price that is before index 'j' to
+              generate a maximum profit
+        - This means we will need to keep track of the previous minimum value stock
+            - Then for each of the index 'j'
+                - We can check if we can generate a higher profit using 'prices[j] - min'
+
+Answer
+    - Lets validate the input parameter
+        - if 'prices' is empty
+            - Return 0
+    - Create two variables
+        - maxProfit, the maximum profit we can generate, initially 0
+        - minPrice, the previous minimum price, initially 'prices[0]'
+    - Iterate through the indices of 'prices' from 1 -> end of the array, denoted as 'i'
+        - Update 'maxProfit' if 'prices[i] - minPrice' is greater
+        - Update 'minPrice' if 'prices[i]' is smaller
+    - Return 'maxProfit'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
