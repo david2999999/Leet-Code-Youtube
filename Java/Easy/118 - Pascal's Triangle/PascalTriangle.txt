@@ -1,0 +1,60 @@
+Question
+    Given a non-negative integer numRows, generate the first numRows
+    of Pascal's triangle.
+
+Thoughts Before Coding
+    - We will be implement a recursive approach
+        - For each of the row 'x'
+            - We will first have our initial 1 at the front
+              and at the end of the row
+            - Then we will generate the previous row at 'x - 1'
+                - Then for each of the elements inside the previous
+                  row
+                    - We will find the sum of the pairs and
+                      place the sum inside the current row
+
+Answer
+    - Lets validate the input parameter
+        - If 'numRows' is equal to 0
+            - Return an empty list
+    - Create a list 'result' to keep track of the triangle
+    - Implement a recursive approach to generate the triangle
+        - What parameters do we need?
+            - r, the current row
+            - result, list of all rows
+        - What is the base case?
+            - If 'r' is equal to 1
+                - Create a 'list' with a value of 1
+                - Add 'list' to 'result'
+                - Return 'list'
+        - In each of the recursive call
+            - Recursively find the list of the previous row 'prev'
+                - r => r - 1
+            - Create a list 'cur' to keep track of the values
+              of the current row
+            - Append '1' to 'cur'
+            - Iterate through the indices from '1 -> end of prev', denote as 'i'
+                - Append 'prev.get(i - 1) + prev.get(i)' to 'cur'
+            - Append '1' to 'cur'
+            - Add 'cur' to 'result'
+            - Return 'cur'
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O((n * (n + 1) )/ 2) = O(n^2), where n is the number of rows
+        - O((n * (n + 1) )/ 2), we generate a total of '(n * (n + 1))/ 2' cells
+    - Space Complexity = O((n * (n + 1) )/ 2) + O(n) = O(n^2), where n is the number of rows
+        - O((n * (n + 1) )/ 2), result list
+        - O(n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
