@@ -1,0 +1,91 @@
+Question
+    Given a string, determine if it is a palindrome,
+    considering only alphanumeric characters and ignoring cases.
+
+    Note: For the purpose of this problem, we define empty
+    string as valid palindrome.
+
+    Constraints:
+        - s consists only of printable ASCII characters.
+
+Thoughts Before Coding
+    - We can implement a two pointer approach
+        - One pointer 'i' will be located on the left side
+        - One pointer 'j' will be located on the right side
+    - In each of the iteration
+        - we will be comparing the characters at the two pointers
+    - There are a few side cases we need to handle
+        - The first side case is we are ignoring cases
+            - This means we can convert the input string to its lowercase form
+            - This will allow us to compare character in lowercase form
+        - The second side case is that we are only considering alphanumeric characters
+            - This means we are skipping the characters that is not a digit
+              and not a letter
+                - Considering only digits and letters
+
+Answer
+    - Create two variables
+        - i, the left pointer, initially 0
+        - j, the right pointer, initially 's.length() - 1'
+    - Set 's' to lowercase form
+    - While 'i' is less than 'j'
+        - Retrieve the characters 'c' and 'd' from the two pointers
+        - If 'c' is not alphanumeric
+            - Increment 'i'
+            - continue to next iteration
+        - If 'd' is not alphanumeric
+            - Decrement 'j'
+            - continue to next iteration
+        - If 'c' is not equal to 'd'
+            - Return false
+        - Increment 'i' and decrement 'j'
+    - return true
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n) + O(n) = O(n), where 'n' is the length of the input string
+        - O(n), set 's' to lowercase
+        - O(n), visit each character once using two pointer
+    - Space Complexity = O(n), where 'n' is the length of the input string
+        - O(n), lowercase form of 's'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
