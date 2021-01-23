@@ -1,0 +1,84 @@
+Question
+    Say you have an array prices for which the ith element is the
+    price of a given stock on day i.
+
+    Design an algorithm to find the maximum profit. You may complete
+    as many transactions as you like (i.e., buy one and sell one share
+    of the stock multiple times).
+
+    Note: You may not engage in multiple transactions at the same time
+    (i.e., you must sell the stock before you buy again).
+
+    Constraints:
+        - 1 <= prices.length <= 3*10^4
+        - 0 <= prices[i] <= 10^4
+
+Thoughts Before Coding
+    - We are allowed to perform as many transactions as possible
+        - But, we are only allowed to sell the stock before we buy again
+    - This means we should buy a stock in all of the valleys and
+      sell the stock in its adjacent peak
+    - We will be keeping track of our current index 'i'
+        - Then we will first search for a valley
+            - Then we will search for its adjacent peak
+        - Then the profit we can gain is 'peak - valley'
+
+Answer
+    - Create two variables
+        - i, the current index
+        - profit, the maximum profit we can gain
+    - While 'i' is not out of bound
+        - While 'i' is not at the last index AND 'prices[i + 1]' is less than
+          or equal to the 'prices[i]'
+            - Increment 'i'
+        - Create a variable 'valley' and set it to 'prices[i]'
+        - While 'i' is not at the last index AND 'prices[i + 1]' is greater than
+          or equal to the 'prices[i]'
+            - Increment 'i'
+        - Increment 'profit' by 'prices[i] - valley'
+        - Increment 'i'
+    - Return 'profit'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
