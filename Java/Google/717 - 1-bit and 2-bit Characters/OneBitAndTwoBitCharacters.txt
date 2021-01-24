@@ -1,0 +1,48 @@
+Question
+    We have two special characters.
+    The first character can be represented by one bit 0.
+    The second character can be represented by two bits (10 or 11).
+
+    Now given a string represented by several bits.
+    Return whether the last character must be a one-bit
+    character or not. The given string will always end with a zero.
+
+    Note:
+        - 1 <= len(bits) <= 1000.
+        - bits[i] is always 0 or 1.
+
+Thoughts Before Coding
+    - If we iterate through from left -> right
+        - For each of the bit 'b' at index 'i'
+            - If 'b' is equal to 1
+                - It must be 2 bits
+                    - Then we can move to index 'i + 2'
+            - Else, 'b' is equal to 0
+                - It must be 1 bit
+                    - Then we can move to index 'i + 1'
+    - After performing the iteration
+        - if our last index is at the end of the array
+            - Then it must be a 1 bit (0)
+
+Answer
+    - Create a variable 'i' to keep track of our current index
+    - While 'i' is less than the last index (bits.length - 1)
+        - If 'bits[i]' is equal to 1
+            - Set 'i' to 'i + 2'
+        - Else
+            - Set 'i' to 'i + 1'
+    - Return true if 'i' is at the last index of 'bits'
+        - Else, return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each index at most once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
