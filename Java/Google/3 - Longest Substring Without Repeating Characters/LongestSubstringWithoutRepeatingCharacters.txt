@@ -1,0 +1,52 @@
+Question
+    Given a string s, find the length of the longest
+    substring without repeating characters.
+
+    Constraints:
+        - 0 <= s.length <= 5 * 10^4
+        - s consists of English letters, digits, symbols and spaces.
+
+Thoughts Before Coding
+    - We can implement a sliding window approach
+        - We can keep track of our current left 'i' and right 'j' boundaries
+          of our current window
+        - For each of the new character 'c'
+            - If 'c' is already inside our current window
+                - We can shrink our window to remove 'c' before
+                  adding 'c' to our window
+        - We will want to pick the window with the longest length
+    - We will need a quick way to determine if the current character
+      is inside our window
+        - We can create a HashSet to keep track of the current characters
+          inside our window
+        - Then for each of the character 'c'
+            - We can check if 'c' is inside the HashSet
+
+Answer
+    - Create a HashSet 'seen' to keep track of the characters in our window
+    - Create a variable 'i' to be our left boundary, initially 0
+    - Create a variable 'max' to keep track of the longest window
+    - Iterate through the indices from '0 -> s.length() - 1', denoted as 'j'
+        - retrieve the character 'c' at index 'j'
+        - While 'seen' contains 'c'
+            - Remove the character 'd' that is located at index 'i' from 'seen'
+            - Increment 'i'
+        - Add 'c' to 'seen'
+        - Update 'max' if 'j - i + 1'
+    - Return 'max'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input string
+        - O(n), sliding window, visit each element at most twice
+    - Space Complexity = O(k), where 'k' is the number of unique characters
+        - O(k), 'seen' set
+
+
+
+
+
+
+
+
+
+
