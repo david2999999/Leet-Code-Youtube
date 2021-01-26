@@ -1,0 +1,108 @@
+Question
+    The string "PAYPALISHIRING" is written in a zigzag pattern on a
+    given number of rows like this: (you may want to display this
+    pattern in a fixed font for better legibility)
+
+    P   A   H   N
+    A P L S I I G
+    Y   I   R
+    And then read line by line: "PAHNAPLSIIGYIR"
+
+    Constraints:
+    - 1 <= s.length <= 1000
+    - s consists of English letters (lower-case and upper-case), ',' and '.'.
+    - 1 <= numRows <= 1000
+
+Thoughts Before Coding
+    - We will need a way to store the characters associated with
+      each row
+        - We can create an array of StringBuilders to keep track
+          of the characters in each row
+            - The indices of the array will determine the row
+              we are currently on
+    - We will need a way to indicate our current row and also the current
+      direction we are at
+        - When our current is equal to the first row or the last row
+            - We will need to change directions
+        - We can indicate our direction
+            - 1 - moving down (row + dir)
+            - -1 - moving up (row - dir)
+
+Answer
+    - lets validate the input parameter
+        - If 'numRows' is equal to 1
+            - Return 's'
+    - Create an array of StringBuilders 'sbs'
+        - The indices represent 'row'
+        - The values represent the characters at the row
+    - Create two variables
+        - row, our current row, initially 0
+        - dir, our current direction, initially 0
+    - Iterate through the indices of 's', denoted as 'i'
+        - Retrieve the current character 'c' at index 'i'
+        - Increment 'row' by 'dir'
+        - Append 'c' to 'sbs[row]'
+        - If 'row' is equal to 0, OR 'row' is at the last row (numRows - 1)
+            - If 'dir' is equal to 0
+                - Set 'dir' to '1'
+            - Else
+                - Set 'dir' to '-dir'
+    - Now, we are going to convert the array of string builders to a
+      single string
+        - Create a StringBuilder 'result'
+        - Iterate through the 'sbs', denoted as 'sb'
+            - Append 'sb.toString()' to 'result'
+    - Return 'result.toString()'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n) + O(k) = O(n), where 'n' is the length
+      of the input string 's', and 'k' is the number of rows
+        - O(n), visit each character once
+        - O(k), converting array of StringBuilders to 'result'
+    - Space Complexity = O(n) + O(n) = O(n), where 'n' is the length
+       of the input string 's'
+       - O(n), array of StringBuilders
+       - O(n), 'result' string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
