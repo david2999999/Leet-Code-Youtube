@@ -1,0 +1,69 @@
+Question
+    Given an array nums of n integers, are there elements a, b, c in
+    nums such that a + b + c = 0? Find all unique triplets in the array
+    which gives the sum of zero.
+
+    Notice that the solution set must not contain duplicate triplets.
+
+    Constraints:
+        - 0 <= nums.length <= 3000
+        - -10^5 <= nums[i] <= 10^5
+
+Thoughts Before Coding
+    - The brute force approach will be to perform 3 nested 'for' loops
+        - This approach will cost us O(n^3) time complexity because
+          of the nested 'for' loops
+    - In order to implement a more optimized approach
+        - We have to sort the input array in ascending order
+        - For each of the element at index 'i'
+            - We can implement a two pointer approach to find the
+              other two elements
+        - This will allow us to reduce the time complexity to O(n^2)
+    - Since, the input array is sorted
+        - All of the duplicate elements are grouped together
+        - This means if we already used the element 'x' for
+          the current triplet
+            - We will want to skip all future occurrences of 'x'
+        - [x, y, z]
+
+Answer
+    - Create a list 'triplets' to keep track of all triplets
+    - Sort the input array in ascending order
+    - Iterate through the indices from 0 -> nums.length - 3, denoted as 'i'
+        - If 'i' is not equal to 0 AND 'nums[i]' is equal to 'nums[i - 1]'
+            - continue to next iteration
+        - Create our two pointers
+            - j, initially 'i + 1'
+            - k, initially 'nums.length - 1'
+        - While 'j' is less than 'k'
+            - If 'j' is not equal to 'i + 1' AND 'nums[j]' is equal to 'nums[j - 1]'
+                - Increment 'j'
+                - continue to next iteration
+            - If 'k' is not equal to 'nums.length - 1' AND 'nums[k]' is equal to 'nums[k + 1]'
+                - decrement 'k'
+                - continue to next iteration
+            - Find the 'sum' of triplets
+                - sum = nums[i] + nums[j] + nums[k]
+            - If 'sum' is equal to 0
+                - Add the three numbers to 'triplets'
+                - Increment 'j'
+            - Else if 'sum' is less than 0
+                - Increment 'j'
+            - Else
+                - Decrement 'k'
+    - Return 'triplets'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(nlogn) + O(n^2) = O(n^2), where 'n' is the length of the input array
+        - O(nlogn), sorting
+        - O(n^2), iterate + two pointer
+    - Space Complexity = O(t), where 't' is the number of triplets
+        - O(t), 'result' list
+
+
+
+
+
+
+
+
