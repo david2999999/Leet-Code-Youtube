@@ -1,0 +1,76 @@
+Question
+    Given an array nums of n integers and an integer target,
+    find three integers in nums such that the sum is closest to
+    target. Return the sum of the three integers. You may assume
+    that each input would have exactly one solution.
+
+    Constraints:
+        - 3 <= nums.length <= 10^3
+        - -10^3 <= nums[i] <= 10^3
+        - -10^4 <= target <= 10^4
+
+Thoughts Before Coding
+    - The brute force approach will be to perform 3 nested 'for' loops
+      to find the triplets with the closest sum
+        - This approach will cost us O(n^2) time complexity because
+          of the 'for' loop
+    - In order to optimize our solution
+        - We will need to sort the input array in ascending order
+        - Then for each of the element at index 'i'
+            - We can implement a two pointer approach to find our
+              other two elements
+        - This approach will allow us to reduce the time complexity
+          to o(n^2)
+
+Answer
+    - Create the following variables
+        - minDiff, initially 'Integer.MAX_VALUE'
+        - result, resulting sum, initially -1
+    - Sort the input array in ascending order
+    - Iterate through the indices of 'nums' from '0 -> nums.length - 3', denoted as 'i'
+        - If 'i' is not equal to 0 AND 'nums[i]' is equal to 'nums[i - 1]'
+            - Continue to next iteration
+        - Create two variables
+            - j, initially 'i + 1'
+            - k, initially 'nums.length - 1'
+        - While 'i' is less than 'k'
+            - Find the 'sum'
+                - sum = nums[i] + nums[j] + nums[k]
+            - Find the difference 'diff' between 'sum' and 'target'
+                - diff = abs(sum - target)
+            - If 'diff' is smaller than 'minDiff'
+                - Set 'minDiff' to 'diff'
+                - Update 'result' to 'sum'
+            - If 'sum' is less than 'target'
+                - Increment 'j'
+            - Else
+                - Decrement 'k'
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(nlogn) + O(n^2) = O(n^2), where 'n' is the length of the input array
+        - O(nlogn), sorting
+        - O(n^2), iterate + two pointer
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
