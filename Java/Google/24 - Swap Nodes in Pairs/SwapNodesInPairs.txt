@@ -1,0 +1,52 @@
+Question
+    Given a linked list, swap every two adjacent nodes and return its head.
+
+    Follow up: Can you solve the problem without modifying the values in the
+    list's nodes? (i.e., Only nodes themselves may be changed.)
+
+Thoughts Before Coding
+    - For each of pair of nodes 'x' and 'y'
+        - We will first want to save 'y.next' as the 'next'
+        - We will append 'y' to our resulting list first
+            - Then append 'x' to our resulting list
+    - After swapping the two nodes
+        - We will continue our traversal from 'next'
+
+Answer
+    - Create the following variables
+        - sHead, the sentinel head of the new list
+        - sTail, the sentinel tail, initially 'sHead'
+        - node, our current location, initially 'head'
+    - While 'node' is not equal to null
+        - Create a variable 'next'
+            - If 'node.next' is null
+                - Set 'next' to null
+            - Else
+                - Set 'next' to 'node.next.next'
+        - If 'node.next' is null
+            - Set 'sTail.next' to 'node'
+            - Set 'sTail' to 'node'
+        - Else
+            - Set 'node.next.next' to null
+            - Set 'sTail.next' to 'node.next'
+            - Set 'sTail' to 'node.next'
+            - Set 'node.next' to null
+            - Set 'sTail.next' to 'node'
+            - Set 'sTail' to 'node'
+        - Set 'node' to 'next'
+    - Return 'sHead.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
