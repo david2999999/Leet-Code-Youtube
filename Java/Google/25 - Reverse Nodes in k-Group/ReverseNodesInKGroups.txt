@@ -1,0 +1,61 @@
+Question
+    Given a linked list, reverse the nodes of a linked list k at a time and
+    return its modified list.
+
+    k is a positive integer and is less than or equal to the length of the
+    linked list. If the number of nodes is not a multiple of k then left-out
+    nodes, in the end, should remain as it is.
+
+    Follow up:
+        - Could you solve the problem in O(1) extra memory space?
+        - You may not alter the values in the list's nodes, only nodes
+          itself may be changed.
+
+Thoughts Before Coding
+    - We will need to keep track of the current number of nodes
+      that is in our current group
+        - If the number of nodes 'count' is equal to 'k'
+            - We will need to reverse the nodes in our current group
+    - We can keep track of the nodes in our current group using two pointers
+        - One pointer 'n1' will track of the left boundary of our group
+        - One pointer 'n2' will scan forward to find new nodes
+
+Answer
+    - Create the following variables
+        - sHead, sentinel head of the resulting list
+        - sTail, sentinel tail, initially 'sHead'
+        - count, the number of nodes in our current group
+        - n1, n2, initially 'head'
+    - While 'n2' is not equal to null
+        - Create a node 'next' and set it to 'n2.next'
+        - Increment 'count'
+        - If 'count' is equal to 'k'
+            - Set 'n2.next' to null
+            - Reverse the nodes in between 'n1' and 'n2' to get
+              the 'rHead' and 'rTail' of the reversed list
+            - Set 'sTail.next' to 'rHead'
+            - Set 'sTail' to 'rTail'
+            - Set 'n1' to 'next'
+            - Set 'count' to 0
+        - Else if 'next' is equal to null
+            - Set 'sTail.next' to 'n1'
+        - Set 'n2' to 'next'
+    - Return 'sHead.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2 * n) = O(n), where n is the number of nodes
+        - O(2 * n), visit each node at most twice
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
