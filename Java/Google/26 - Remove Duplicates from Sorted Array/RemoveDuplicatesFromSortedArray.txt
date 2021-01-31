@@ -1,0 +1,57 @@
+Question
+    Given a sorted array nums, remove the duplicates in-place
+    such that each element appears only once and returns the new
+    length.
+
+    Do not allocate extra space for another array, you must
+    do this by modifying the input array in-place with O(1)
+    extra memory.
+
+    Constraints:
+        - 0 <= nums.length <= 3 * 10^4
+        - -10^4 <= nums[i] <= 10^4
+        - nums is sorted in ascending order.
+
+Thoughts Before Coding
+    - We can implement a two pointer approach
+        - One pointer 'i' will be on the left side to populate unique elements
+        - One pointer 'j' will scan forward to the right to find
+          unique elements
+    - Since, the input array is sorted in ascending order
+        - All of the duplicate elements must be grouped together
+        - If we find an unique element 'x' at index 'j'
+            - We can populate 'x' at pointer 'i' before 'i' forward
+            - Then we can skip all of the occurrences of 'x' to
+              find our next unique element
+    - After 'j' is out of bound
+        - Then the value of 'i' will determine the length of the result
+          array
+
+Answer
+    - Create a variable 'i' to be our left pointer
+    - Iterate through the indices of 'nums', denoted as 'j'
+        - Set 'nums[i]' to 'nums[j]'
+            - increment 'i'
+        - While 'j' is not at the index AND 'nums[j + 1]' is equal to 'nums[j]'
+            - increment 'j'
+    - Return 'i'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the length of the input array
+        - O(n), visit each element once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
