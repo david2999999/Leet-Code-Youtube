@@ -1,0 +1,94 @@
+Question
+    Given an array of integers nums sorted in ascending order, find the
+    starting and ending position of a given target value.
+
+    If target is not found in the array, return [-1, -1].
+
+    Follow up: Could you write an algorithm with O(log n) runtime complexity?
+
+Thoughts Before Coding
+    - The brute force approach will be two perform a single iteration
+      through the input array to find the starting and ending indices
+        - This approach will us O(n) time complexity
+    - Since, we are looking for elements inside a sorted array
+        - We can use modified binary search
+    - We will find the ending index and then the starting index
+        - How can we find the 'end' index?
+            - For each of the element at index 'mid'
+                - If 'nums[mid]' is equal to 'target'
+                    - This means we will need to continue our search
+                      to the right with 'mid' inclusive
+        - How can we find the 'start' index?
+            - For each of the element at index 'mid'
+                - If 'nums[mid]' is equal to 'target'
+                    - This means we will need to continue our search
+                      to the left with 'mid' inclusive
+
+Answer
+    - Lets first find the 'end' index
+        - Create two variables
+            - left, our left boundary
+            - right, our right boundary
+        - While 'left' is less than 'right'
+            - Calculate 'mid'
+                - mid = (left + (right - left) / 2) + 1
+                    - +1, we pick the upper mid index
+                        - [8, (8)]
+            - If 'nums[mid]' is equal to 'target'
+                - Set 'left' to 'mid'
+            - Else if 'nums[mid]' is less than 'target'
+                - Set 'left' to 'mid + 1'
+            - Else 'nums[mid]' is greater than 'target'
+                - Set 'right' to 'mid - 1'
+        - If 'left' is out of bound (all elements inside the input array
+          is less than 'target')
+            - Set 'end' to '-1'
+        - If 'nums[left]' is not equal to 'target'
+            - Set 'end' to '-1'
+        - Set 'end' to 'left' (rightmost index)
+    - If 'end' is equal to -1
+        - Return { -1, -1 }
+    - Find the 'start' index
+        - Create two variables
+            - left, the left boundary
+            - right, the right boundary
+        - While 'left' is less than 'right'
+            - Calculate the 'mid' index
+                - mid = left + (right - left) / 2
+                    - [(8), 8]
+            - If 'nums[mid]' is equal to 'target'
+                - Set 'right' to 'mid'
+            - Else if 'nums[mid]' is less than 'target'
+                - Set 'left' to 'mid + 1'
+            - Else
+                - Set 'right' to 'mid - 1'
+        - Set 'start' to 'left'
+    - Return { start, end }
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2 * logn) = O(logn), where n is the length
+      of the input array
+        - O(2 * logn), 2 binary search
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
