@@ -1,0 +1,59 @@
+Question
+    Given an array nums and a value val, remove all instances of that value
+    in-place and return the new length.
+
+    Do not allocate extra space for another array, you must do this by
+    modifying the input array in-place with O(1) extra memory.
+
+    The order of elements can be changed. It doesn't matter what you
+    leave beyond the new length.
+
+    Constraints:
+        - 0 <= nums.length <= 100
+        - 0 <= nums[i] <= 50
+        - 0 <= val <= 100
+
+Thoughts Before Coding
+    - We can implement a two pointer approach
+        - One pointer 'i' will be on the left side to populate
+          elements that we do not want to remove
+        - One pointer 'j' will scan forward to the right to find
+          elements that we do not want to remove
+            - We will skip all of the elements that is equal to 'val'
+            - We will place all of the elements that is not equal
+              to 'val' at pointer 'i' before moving 'i' forward
+    - After 'j' goes out of bound
+        - Then the value of 'i' will be length of the resulting list
+
+Answer
+    - Create one variable
+        - i, the current left pointer
+    - Iterate through the indices of 'nums', denoted as 'j'
+        - If 'nums[j]' is not to 'val'
+            - Set 'nums[i]' to 'nums[j]'
+            - Increment 'i'
+    - Return 'i'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each index once with pointer 'j'
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
