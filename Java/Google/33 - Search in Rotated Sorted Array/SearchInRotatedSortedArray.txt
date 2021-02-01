@@ -1,0 +1,83 @@
+Question
+    You are given an integer array nums sorted in ascending
+    order (with distinct values), and an integer target.
+
+    Suppose that nums is rotated at some pivot unknown to you
+    beforehand (i.e., [0,1,2,4,5,6,7] might become
+    [4,5,6,7,0,1,2]).
+
+    If target is found in the array return its index,
+    otherwise, return -1.
+
+    Constraints:
+        1 <= nums.length <= 5000
+        -10^4 <= nums[i] <= 10^4
+        All values of nums are unique.
+        nums is guaranteed to be rotated at some pivot.
+        -10^4 <= target <= 10^4
+
+Thoughts Before Coding
+    - The brute force approach will be to perform a single
+      iteration through the input array
+        - This approach will cost us O(n) time complexity
+    - When searching inside a sorted array
+        - We can perform a binary search
+    - For each of the 'mid' index
+        - If we have 'left' and 'right' boundaries
+            - If 'nums[left]' is less than or equal to 'nums[mid]'
+                - This means the left side is sorted in ascending order
+                - Then if 'target' is in between these 2 numbers
+                    - We can search from 'left -> mid'
+            - Else, the right side is in ascending order
+                - We can search the right side if 'target' is
+                  in between 'nums[mid]' and 'nums[right]'
+
+Answer
+    - Create two variables
+        - left, the current left boundary, initially 0
+        - right, the current right boundary, nums.length - 1
+    - While 'left' is less than or equal to 'right'
+        - Calculate 'mid'
+            - mid = left + (right - left) / 2
+        - If 'nums[mid]' is equal to 'target'
+            - Return 'mid'
+        - If 'nums[left]' is less than or equal to 'nums[mid]'
+            - If 'target' is in between 'nums[left]' and 'nums[mid]'
+                - Set 'right' to 'mid - 1'
+            - Else
+                - Set 'left' to 'mid + 1'
+        - Else, (the right side is sorted)
+            - If 'target' is in between 'nums[mid]' and 'nums[right]'
+                - Set 'left' to 'mid + 1'
+            - Else
+                - Set 'right' to 'mid - 1'
+    - Return -1
+
+What is the time and space Complexity?
+    - Time Complexity = O(logn), where n is the length of the input array
+        - O(logn), binary search
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
