@@ -1,0 +1,58 @@
+Question
+    Given a sorted array of distinct integers and a target value,
+    return the index if the target is found. If not, return the index
+    where it would be if it were inserted in order.
+
+    Constraints:
+        - 1 <= nums.length <= 10^4
+        - -10^4 <= nums[i] <= 10^4
+        - nums contains distinct values sorted in ascending order.
+        - -10^4 <= target <= 10^4
+
+Thoughts Before Coding
+    - The brute force approach will be to perform a single iteration
+      through the input array to find the insertion index
+        - This approach will cost O(n) time complexity
+    - We have to see that the input array is sorted in ascending order
+        - This means we can perform a binary search approach
+    - For each of the index 'mid'
+        - If 'nums[mid]' is equal to 'target'
+            - Then 'mid' is the target index
+        - If 'nums[mid]' is less than 'target'
+            - We will need to continue our search rightward
+        - If 'nums[mid]' is greater than 'target'
+            - We will need to continue our search leftward from 'mid'
+
+Answer
+    - Create two variables
+        - left, the left boundary
+        - right, the right boundary
+    - While 'left' is less than 'right'
+        - Calculate the 'mid' index
+            - mid = left + (right - left) / 2
+        - If 'nums[mid]' is equal to 'target'
+            - Return 'mid'
+        - Else if 'nums[mid]' is less than 'target'
+            - Set 'left' to 'mid + 1'
+        - Else
+            - Set 'right' to 'mid'
+    - If 'nums[left]' is less than 'target'
+        - Return 'left + 1'
+    - Else
+        - Return 'left'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(logn), where n is the length of the input array
+        - O(logn), binary search
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
