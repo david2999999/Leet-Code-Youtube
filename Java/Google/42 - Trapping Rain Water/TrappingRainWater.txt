@@ -1,0 +1,74 @@
+Questions
+    Given n non-negative integers representing an elevation map
+    where the width of each bar is 1, compute how much water it can
+    trap after raining.
+
+Thoughts Before Coding
+    - How much water can we trap at index 'i'?
+        - We will need to find the largest pillar on the left side and
+          also the largest pillar on the right side
+            - Then the amount of water 'min(left, right) - height[i]'
+    - This means we can implement a two pointer approach
+        - The two pointers will be used our current boundaries
+        - In each of the iteration
+            - We will be moving the pointer with a smaller height
+            - Why are we moving the pointer will a smaller height?
+                - If we are currently at the left side at index 'i'
+                    - We know that there will be a higher height on the right side
+                     to allow us to trap water
+                    - This means we need to determine the highest pillar on the left side
+                        - The largest height on the left side must be smaller than
+                          the largest height on the right side
+                    - Then the amount of water we can trap is 'maxLeft - height[i]'
+                - If we are currently at the right side at index 'j'
+                    - We know that there will be a higher height on the left side
+                     to allow us to trap water
+                    - This means we need to determine the highest pillar on the right side
+                        - The largest height on the right side must be smaller than
+                          the largest height on the left side
+                    - Then the amount of water we can trap is 'maxRight - height[j]'
+
+Answer
+    - Create the following variables
+        - i, the current left boundary, initially 0
+        - j, the current right boundary, initially at the end of array
+        - water, the total water trapped, initially 0
+        - maxLeft, the current tallest pillar on the left side, initially 0
+        - maxRight, the current tallest pillar on the right side, initially 0
+    - While 'i' is less than or equal 'j'
+        - If 'height[i]' is less than 'height[j]'
+            - If 'maxLeft' is smaller than 'height[i]'
+                - Update 'maxLeft' to 'height[i]'
+                - Increment 'i'
+            - Else
+                - Increment 'water' by 'maxLeft - height[i]'
+                - Increment 'i'
+        - Else (we can trap water on the right side)
+            - If 'maxRight' is smaller than 'height[j]'
+                - Set 'maxRight' to 'height[j]'
+                - decrement 'j'
+            - Else
+                - Increment 'water' by 'maxRight - height[j]'
+                - Decrement 'j'
+    - Return 'water'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), two pointer approach
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
