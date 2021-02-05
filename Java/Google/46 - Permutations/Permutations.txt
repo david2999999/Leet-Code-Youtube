@@ -1,0 +1,60 @@
+Question
+    Given an array nums of distinct integers, return all the possible
+    permutations. You can return the answer in any order.
+
+    Constraints:
+       - 1 <= nums.length <= 6
+       - -10 <= nums[i] <= 10
+       - All the integers of nums are unique.
+
+Thoughts Before Coding
+    - We will be implementing a recursive backtracking approach
+        - For each of the element 'x' inside the input array
+            - We will need to check if we have already added 'x' to our
+              current permutation
+            - This means we will need a boolean array to indicate
+              the elements that we have already added into our permutation
+            - After accounting for 'x' in our current permutation, we will need to backtrack
+              our steps
+                - This will allow us to give space to the next element and
+                  also allow us to find the next permutation
+
+Answer
+    - Create a list 'result' to keep track of all permutations
+    - Implementing the recursive backtracking approach
+        - What parameters do we need?
+            - nums, the input array
+            - used, boolean array to keep track of previously used elements
+            - permutation, current permutation
+            - result, all permutations
+        - What is the base case?
+            - If the size of 'permutation' is equal to the length of 'nums'
+                - Add a copy of 'permutation' to 'result'
+                - Return from the recursive call
+        - In each of the recursive call
+            - Iterate through the indices of 'nums', denoted as 'i'
+                - if 'used[i]' is true
+                    - continue to next index
+                - Set 'used[i]' to true
+                - Add 'nums[i]' to 'permutation'
+                - Recursively find the rest of the permutation
+                - Set 'used[i]' to false
+                - Remove the last element from 'permutation'
+    - Return 'result'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
