@@ -1,0 +1,50 @@
+Question
+    Given an array of strings strs, group the anagrams together.
+    You can return the answer in any order.
+
+    An Anagram is a word or phrase formed by rearranging the letters
+    of a different word or phrase, typically using all the original
+    letters exactly once.
+
+Thoughts Before Coding
+    - We will need to way to find the similarities between anagrams
+        - Anagrams are words that have the same characters, but the characters
+          are not in the same position
+        - This means if we sort the characters of two anagrams
+            - The two strings will become the same
+        - This means we can create a HashMap, where we map the 'sorted version -> list
+          of valid anagrams'
+
+Answer
+    - Create a HashMap 'map' to keep track 'sorted word -> list of valid anagrams'
+    - Iterate through the words inside 'strs', denoted as 'word'
+        - Find the sorted version 'sort' of 'word'
+        - Put 'sort' and a new list into 'map' if it does not exists
+        - Add 'word' to the list associated with 'sort' inside the 'map'
+    - Create a list 'result'
+    - Iterate through the values of 'map', denoted as 'anagrams'
+        - Add 'anagrams' to 'result'
+    - Return 'result'
+
+What is the time and Space Complexity?
+    - Time Complexity = O(n*klogk) + O(n) = O(n*klogk), where 'n' is the total number of words
+      and 'k' is the length of the longest string
+        - O(n*klogk), for each of the words, we sort its characters
+        - O(n), converting 'map' to 'result' list
+    - Space Complexity = O(2 * nk) = O(nk), where 'n' is the total number of words
+        - O(2 * nk), 'map' and 'result'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
