@@ -1,0 +1,64 @@
+Question
+    Given an array of non-negative integers nums, you are initially
+    positioned at the first index of the array.
+
+    Each element in the array represents your maximum jump length at
+    that position.
+
+    Determine if you are able to reach the last index.
+
+Thoughts Before Coding
+    - Lets first find a brute force approach
+        - We can implement a recursive depth first search
+            - For each of the index 'i'
+                - We can check if we can reach the end of the array with up to 'nums[i]'
+                    - This means we will recursively check all of the options
+                      from 'i -> i + nums[i]'
+            - This approach will cost us O(k^n) time complexity
+                - k, is average number of steps in each index
+                - n, length of the input array
+    - In order to find an optimized approach, we will left -> right, while
+      keeping track of the latest index that can reach the last index
+        - [2,3,1,1,(4)] latest index = 4
+            - [2,3,1,(1),4]  latest index = 3
+                 - [2,3,(1),1,4] latest index = 2
+                    - [2,(3),1,1,4] latest index = 1
+                        - [(2),3,1,1,4] latest index = 0
+
+Answer
+    - Create a variable 'j' to keep track of our latest index, initially 'nums.length - 1'
+    - Iterate through the indices from 'nums.length - 2 -> 0', denoted as 'i'
+        - If 'nums[i] + i' is greater than or equal to 'j'
+            - Update 'j' to 'i'
+    - return true if 'j' is equal to 0
+        - Else, return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
