@@ -1,0 +1,62 @@
+Question
+    A robot is located at the top-left corner of a m x n grid
+    (marked 'Start' in the diagram below).
+
+    The robot can only move either down or right at any point in
+    time. The robot is trying to reach the bottom-right corner
+    of the grid (marked 'Finish' in the diagram below).
+
+    How many possible unique paths are there?
+
+Thoughts Before Coding
+    - We are trying to reach from top left corner to bottom right corner
+        - This is the same as going from bottom right corner to top left corner
+    - We will be starting from the cell 'm, n'
+        - Then we will try to find the number of uniques path to cell '1, 1'
+    - We will first implement a brute force recursive call
+        - In each of the recursive call
+            - We will have two choices
+                - We can either move upward or move leftward
+                - We will want to find the total number of unique paths from
+                  both choices
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - m, the current row
+            - n, the current column
+        - What is the base case?
+            - If 'm' and 'n' is equal to 1
+                - Return 1
+            - If 'm' OR 'n' is equal to 0
+                - Return 0
+        - In each of the recursive call
+            - Recursively find the number of 'paths1' if we move leftward
+                - n => n - 1
+            - Recursively find the number of 'paths2' if we move upward
+                - m => m - 1
+            - Return 'paths1 + paths2'
+    - This solution is not efficient enough and will result in "TLE"
+        - We will optimize this using memoization in the next video
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2^(m + n)), where m,n are the input values
+        - O(2^(m + n)), each recursive call, we have 2 choices and a depth of 'm + n'
+    - Space Complexity = O(m + n), where m,n are the input values
+        - O(m + n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
