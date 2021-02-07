@@ -1,0 +1,54 @@
+Question
+    Given an array of intervals where intervals[i] = [starti, endi],
+    merge all overlapping intervals,
+    and return an array of the non-overlapping intervals that
+    cover all the intervals in the input.
+
+    Constraints:
+        - 1 <= intervals.length <= 10^4
+        - intervals[i].length == 2
+        - 0 <= starti <= endi <= 10^4
+
+Thoughts Before Coding
+    - How can we combine two intervals [a, b] and [c, d] where a <= c
+        - If 'c' is less than or equal to 'b'
+            - Then we can merge the two intervals
+        - The newly merged interval will be [a, max(b, d)]
+    - The brute force approach will be to perform a nested 'for' loop to check
+      all possible pairs of intervals
+        - This approach will cost us O(n^2) time complexity
+    - In order to find an optimized approach
+        - We will need to sort the input array in ascending order in terms of 'start' time
+        - This will allow us to compare adjacent intervals instead and allow
+          us to reduce the time complexity to O(nlogn)
+
+Answer
+    - Sort the input array in ascending order in terms of 'start'
+    - Create a list 'merged' to keep track of all merged intervals
+    - Iterate through the elements of 'intervals', denoted as 'cur'
+        - If 'merged' is empty
+            - Add 'cur' to 'merged'
+            - continue to next iteration
+        - Retrieve the previous interval 'prev' from 'merged'
+        - If 'cur[0]' is less than or equal to 'prev[1]'
+            - Add '{ prev[0], max(cur[1], prev[1]) }'
+        - Else
+            - Add 'prev' to 'merged'
+            - Add 'cur' to 'merged'
+    - Return an array representation of 'merged'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(nlogn) + O(n*2) = O(nlogn), where n is the length of the input array
+        - O(nlogn), sorting
+        - O(n*2), iterate through twice
+    - Space Complexity = O(2 * n) = O(n), where n is the length of the input array
+        - O(2*n), 'merged' list and array
+
+
+
+
+
+
+
+
+
