@@ -1,0 +1,82 @@
+Question
+    A robot is located at the top-left corner of a m x n grid
+    (marked 'Start' in the diagram below).
+
+    The robot can only move either down or right at any point in time.
+    The robot is trying to reach the bottom-right corner of the grid
+    (marked 'Finish' in the diagram below).
+
+    Now consider if some obstacles are added to the grids. How many
+    unique paths would there be?
+
+    An obstacle and space is marked as 1 and 0 respectively in the grid.
+
+    Constraints:
+        - m == obstacleGrid.length
+        - n == obstacleGrid[i].length
+        - 1 <= m, n <= 100
+        - obstacleGrid[i][j] is 0 or 1.
+
+Thoughts Before Coding
+    - The recursive approach was inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the number of 'paths' to reach the bottom right
+              corner at the current cell 'r, c'
+            - This means can cache 'r, c' with the number of 'paths'
+
+Answer
+    - Create a 2D matrix 'memo' to cache previously calculated results
+        - The rows represent 'r'
+        - The columns represent 'c'
+        - The values represent number of 'paths'
+    - Fill 'memo' with -1
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - r, the current row of the robot
+            - c, the current column of the robot
+            - grid, the input grid
+            - m, the number of rows
+            - n, the number of columns
+            - memo, cache
+        - What is the base case?
+            - If the robot is out of bound OR 'grid[r][c]' is equal to 1
+                - return 0
+            - If 'r, c' is at the bottom right corner
+                - Return 1
+            - If 'memo[r][c]' is not equal to -1
+                - Return 'memo[r][c]'
+        - In each of the recursive call
+            - Recursively find the number of paths of going rightward
+                - c => c + 1
+            - Recursively find the number of paths of going downward
+                - r => r + 1
+            - Put the sum of the two recursively calls at 'memo[r][c]'
+            - return 'memo[r][c]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(mn) + O(mn) = O(mn), where m,n are the number of rows and columns
+        - O(mn), fill 'memo' with -1
+        - O(mn), there are 'm * n' possible states with 'r, c'
+    - Space Complexity = O(mn) + O(m + n) = O(mn), where m,n are the number of rows and columns
+        - O(mn), 'memo'
+        - O(m + n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
