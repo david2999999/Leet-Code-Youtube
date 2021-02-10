@@ -1,0 +1,75 @@
+Question
+    A robot is located at the top-left corner of a m x n grid
+    (marked 'Start' in the diagram below).
+
+    The robot can only move either down or right at any point in time.
+    The robot is trying to reach the bottom-right corner of the grid
+    (marked 'Finish' in the diagram below).
+
+    Now consider if some obstacles are added to the grids. How many
+    unique paths would there be?
+
+    An obstacle and space is marked as 1 and 0 respectively in the grid.
+
+    Constraints:
+        - m == obstacleGrid.length
+        - n == obstacleGrid[i].length
+        - 1 <= m, n <= 100
+        - obstacleGrid[i][j] is 0 or 1.
+
+Thoughts Before Coding
+    - We will need to keep track of the current position of robot, which we will denote as 'r, c'
+        - At each of the cells
+            - We have two choices
+                - We can either go rightward or downward
+                - We will need to find the total number of paths from both choices
+            - When we reach the bottom right corner
+                - We have found 1 possible way to reach the star
+        - If the robot steps out of bound OR steps into an obstacle
+            - The number of unique paths will be equal to 0
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - r, the current row of the robot
+            - c, the current column of the robot
+            - grid, the input grid
+            - m, the number of rows
+            - n, the number of columns
+        - What is the base case?
+            - If the robot is out of bound OR 'grid[r][c]' is equal to 1
+                - return 0
+            - If 'r, c' is at the bottom right corner
+                - Return 1
+        - In each of the recursive call
+            - Recursively find the number of paths of going rightward
+                - c => c + 1
+            - Recursively find the number of paths of going downward
+                - r => r + 1
+            - Return the sum of the two recursively calls
+    - This approach is not efficient enough and we will need to optimize it
+      using memoization
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2^(m + n)), where m,n are the number of rows and columns
+        - O(2^(m + n)), each recursive call has 2 choices with a depth of 'm + n'
+    - Space Complexity = O(m + n), where m,n are the number of rows and columns
+        - O(m + n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
