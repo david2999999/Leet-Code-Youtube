@@ -1,0 +1,68 @@
+Question
+    A robot is located at the top-left corner of a m x n grid
+    (marked 'Start' in the diagram below).
+
+    The robot can only move either down or right at any point in time.
+    The robot is trying to reach the bottom-right corner of the grid
+    (marked 'Finish' in the diagram below).
+
+    Now consider if some obstacles are added to the grids. How many
+    unique paths would there be?
+
+    An obstacle and space is marked as 1 and 0 respectively in the grid.
+
+    Constraints:
+        - m == obstacleGrid.length
+        - n == obstacleGrid[i].length
+        - 1 <= m, n <= 100
+        - obstacleGrid[i][j] is 0 or 1.
+
+Thoughts Before Coding
+    - In the 2D matrix approach
+        - In each of the iteration
+            - We are only relying values from the current row 'r' and the row below at 'r + 1'
+            - This means we can use a single array to represent our 2D matrix
+                - In each of the row iteration
+                    - We will replacing/updating the values from the previous row iteration
+
+Answer
+    - Create an 'paths' to keep track of the unique paths
+    - Iterate through from 'm - 1 => 0', denoted as 'r'
+        - Iterate through from 'n - 1 => 0', denoted as 'c'
+            - If 'obstacleGrid[r][c]' is equal to 1
+                - Set 'paths[c]' to 0
+                - continue to next iteration
+            - If 'r, c' is at the bottom right corner
+                - Place '1' at 'paths[c]'
+                - continue to next iteration
+            - Create a variable 'cur' and set it 'paths[c]'
+            - Set 'paths[c]' to 0
+            - If 'r' is not at the last row
+                - Increment 'paths[c]' by 'cur'
+            - If 'c' is not at the last column
+                - Increment 'paths[c]' by 'paths[c + 1]'
+    - Return 'paths[0]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(mn), where m,n are the number of rows and columns
+        - O(mn), nested 'for' loop
+    - Space Complexity = O(n), where n is the total number of columns
+        - O(n), 'paths' array
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
