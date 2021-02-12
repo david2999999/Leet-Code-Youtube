@@ -1,0 +1,48 @@
+Question
+    Given a m x n grid filled with non-negative numbers, find a path
+    from top left to bottom right, which minimizes the sum of all numbers
+    along its path.
+
+    Note: You can only move either down or right at any point in time.
+
+    Constraints:
+        - m == grid.length
+        - n == grid[i].length
+        - 1 <= m, n <= 200
+        - 0 <= grid[i][j] <= 100
+
+Thoughts Before Coding
+    - We will implement a recursive approach
+        - We will need to keep track of our current cell at 'r, c'
+        - In each of the recursive call we have two choices
+            - We either go rightward or go downward
+            - We will pick the choice that will give us the minimum path sum
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - r, the current row
+            - c, the current column
+            - grid, input grid
+        - What is the base case?
+            - When 'r, c' is at the bottom right corner
+                - Return 'grid[r][c]'
+        - In each of the recursive call
+            - Create a variable 'minSum' to keep track of the minimum sum, initially 'Integer.MAX_VALUE'
+            - If 'r' is not at the last row
+                - Recursively find the 'sum1' if we move downward
+                    - r => r + 1
+                - Update 'minSum' if 'sum1 + grid[r][c]' is smaller
+            - If 'c' is not at the last column
+                - Recursively find the 'sum2' if we move rightward
+                    - c => c + 1
+                - Update 'minSum' if 'sum2 + grid[r][c]' is smaller
+            - Return 'minSum'
+    - This solution is not efficient enough due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2^(m + n)), where m,n are the number of rows and columns
+        - O(2^(m + n)), each recursive call has 2 choices with a depth of m + n
+    - Space Complexity = O(m + n), where m,n are the number of rows and columns
+        - O(m + n), recursive call stack memory
