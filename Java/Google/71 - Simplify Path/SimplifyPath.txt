@@ -1,0 +1,75 @@
+Question
+    Given a string path, which is an absolute path (starting with
+    a slash '/') to a file or directory in a Unix-style file system,
+    convert it to the simplified canonical path.
+
+    In a Unix-style file system, a period '.' refers to the current
+    directory, a double period '..' refers to the directory up a level,
+    and any multiple consecutive slashes (i.e. '//') are treated as a
+    single slash '/'. For this problem, any other format of periods
+    such as '...' are treated as file/directory names.
+
+    The canonical path should have the following format:
+        - The path starts with a single slash '/'.
+        - Any two directories are separated by a single slash '/'.
+        - The path does not end with a trailing '/'.
+        - The path only contains the directories on the path from the
+          root directory to the target file or directory (i.e., no period
+          '.' or double period '..')
+
+    Return the simplified canonical path.
+
+Thoughts Before Coding
+    - We will first need to split the input string by '/'
+        - This will allow us to get all of the directories
+    - Then we can process all of the directories inside a 'stack'
+        - When we see '..', we will pop an element from the stack
+        - When we see '.', we will do nothing
+        - When we see '', we will do nothing
+        - Any other element, we will push into the 'stack'
+
+Answer
+    - Create a 'stack'
+    - Split the input string 'path' into an array of 'directories'
+    - Iterate through the 'directories', which we call 'dir'
+        - if 'dir' is empty OR is equal to '.'
+            - Continue to next iteration
+        - If 'dir' is equal to '..'
+            - If 'stack' is not empty
+                - Pop an element from 'stack'
+        - Else
+            - Push 'dir' into 'stack'
+    - Create a StringBuilder 'result'
+    - While 'stack' is not empty
+        - Append "/" to to 'result'
+        - Append 'stack.removeLast()' to 'result'
+    - If 'result' is empty
+        - Append '/' to 'result'
+    - Return a string representation of 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(3 * n) = O(n), where 'n' is the length of the input string
+        - O(3 * n), split + iterate + while loop
+    - Space Complexity = O(3 * n) = O(n), where 'n' is the length of the input string
+        - O(3 * n), directories, stack, result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
