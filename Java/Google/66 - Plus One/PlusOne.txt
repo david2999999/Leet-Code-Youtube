@@ -1,0 +1,62 @@
+Question
+    Given a non-empty array of decimal digits representing a non-negative
+    integer, increment one to the integer.
+
+    The digits are stored such that the most significant digit is at the
+    head of the list, and each element in the array contains a single digit.
+
+    You may assume the integer does not contain any leading zero, except
+    the number 0 itself.
+
+    Constraints:
+        - 1 <= digits.length <= 100
+        - 0 <= digits[i] <= 9
+
+Thoughts Before Coding
+    - We will be adding 1 to the rightmost digit in the input array
+    - A side case we have to handle is when there is a carry
+        - We will need to pass the carry to the adjacent digit on the left side
+        - This means we will need to keep track of the sum and the current carry
+    - Another side case we have to handle is when we add 1 to the input array
+        - The resulting array will be length of 1 greater than the length of the input array
+            - [9,9,9] -> [1,0,0,0]
+        - We will keep track of our result inside a list then convert it later
+
+Answer
+    - Create a linked list 'result' to keep track of the sum
+    - Create a variable 'carry', which will be equal to 1
+    - Iterate through the indices from 'digits.length - 1 -> 0', denoted as 'i'
+        - Find the 'sum'
+            - sum = digits[i] + carry
+        - Set 'carry' to 1 if 'sum' is greater than 9
+            - Else, set 'carry' to 0
+        - Prepend 'sum % 10' into 'result' (19, prepend 9 to the list)
+    - If 'carry' is greater than 0
+        - Prepend 1 to 'result'
+    - Return an array representation of 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2*n) = O(n), where 'n' is the length of the input array
+        - O(2*n), process each index + converting list to array
+    - Space Complexity = O(2*n) = O(n), where 'n' is the length of the input array
+        - O(2*n), result list and array
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
