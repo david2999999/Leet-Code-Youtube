@@ -1,0 +1,78 @@
+Question
+    Given two strings word1 and word2, return the minimum number of
+    operations required to convert word1 to word2.
+
+    You have the following three operations permitted on a word:
+        - Insert a character
+        - Delete a character
+        - Replace a character
+
+    Constraints:
+        - 0 <= word1.length, word2.length <= 500
+        - word1 and word2 consist of lowercase English letters.
+
+Thoughts Before Coding
+    - The recursive approach is inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the minimum number of operation 'ops' at the current indices 'i, j'
+            - This means we can cache 'i, j' with 'ops'
+
+Answer
+    - create a 2D 'memo' to cache 'i, j' with 'ops'
+        - The rows represent 'i'
+        - The columns represent 'j'
+        - The values represent 'ops'
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - i, our current index inside 'word1'
+            - j, our current index inside 'word2'
+            - word1, input word
+            - word2, input word
+            - memo, cache
+        - What is the base case?
+            - If both 'i' and 'j' are out of bound
+                - Return 0
+            - If 'i' is out of bound
+                - Return 'word2.length() - j'
+            - If 'j' is out of bound
+                - Return 'word1.length() - i'
+            - if 'memo[i][j]' is not equal to 0
+                - Return 'memo[i][j]'
+        - In each of the recursive call
+            - If the characters at the pointers are equal
+                - Put the recursive result of moving both pointers forward at 'memo[i][j]'
+                    - i => i + 1
+                    - j => j + 1
+                - Return 'memo[i][j]'
+            - Else
+                - Recursively find the number of operations 'ops1' if we perform an insert
+                    - j => j + 1
+                - Recursively find the number of operation 'ops2' if we perform a deletion
+                    - i => i + 1
+                - Recursively find the number of operations 'ops3' if we perform a replace
+                    - i => i + 1
+                    - j => j + 1
+                - Put 'min(ops1, ops2, ops3) + 1' inside 'memo[i][j]'
+                - return 'memo[i][j]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(mn), where m,n are the lengths of the two input strings
+        - O(mn), there are 'm*n' possible states
+    - Space Complexity = O(mn) + O(m + n) = O(mn), where m,n are the lengths of the two input strings
+        - O(mn), 'memo' matrix
+        - O(m + n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
