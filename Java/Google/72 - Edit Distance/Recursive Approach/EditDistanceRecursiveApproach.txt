@@ -1,0 +1,80 @@
+Question
+    Given two strings word1 and word2, return the minimum number of
+    operations required to convert word1 to word2.
+
+    You have the following three operations permitted on a word:
+        - Insert a character
+        - Delete a character
+        - Replace a character
+
+    Constraints:
+        - 0 <= word1.length, word2.length <= 500
+        - word1 and word2 consist of lowercase English letters.
+
+Thoughts Before Coding
+    - We will implementing brute force approach
+        - We can have two indices 'i' and 'j' to indicate our current locations inside 'word1' and 'word2' respectively
+        - In each of the recursive call
+            - We will be compare the characters 'c' and 'd' at the two indices
+            - if 'c' and 'd' are equal
+                - Then we can move both pointers forward
+            - If 'c' and 'd' are not equal
+                - If we insert a character inside 'word1', we will need to move the pointer inside 'word2'
+                    - Set 'j' to 'j + 1'
+                - If we delete a character inside 'word1', we will need to move the pointer inside 'word1'
+                    - Set 'i' to 'i + 1'
+                - If we decide to replace a character inside 'word1', we will need to move both pointers forward
+                    - Set 'i' to 'i + 1'
+                    - Set 'j' to 'j + 1'
+                - We will pick the choice that will give us the minimum number of operations
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - i, our current index inside 'word1'
+            - j, our current index inside 'word2'
+            - word1, input word
+            - word2, input word
+        - What is the base case?
+            - If both 'i' and 'j' are out of bound
+                - Return 0
+            - If 'i' is out of bound
+                - Return 'word2.length() - j'
+            - If 'j' is out of bound
+                - Return 'word1.length() - i'
+        - In each of the recursive call
+            - If the characters at the pointers are equal
+                - Return the recursive result of moving both pointers forward
+                    - i => i + 1
+                    - j => j + 1
+            - Else
+                - Recursively find the number of operations 'ops1' if we perform an insert
+                    - j => j + 1
+                - Recursively find the number of operation 'ops2' if we perform a deletion
+                    - i => i + 1
+                - Recursively find the number of operations 'ops3' if we perform a replace
+                    - i => i + 1
+                    - j => j + 1
+                - Return 'min(ops1, ops2, ops3) + 1'
+        - This approach is not efficient enough due to overlapping recursive calls
+            - We can avoid overlapping recursive calls using memoization
+
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(3^(m + n)), where m,n are the length of the two input string
+        - O(3^(m + n)), each recursive call, we have up to 3 choices and depth of 'm + n'
+    - Space Complexity = O(m + n), where m,n are the length of the two input string
+        - O(m + n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
