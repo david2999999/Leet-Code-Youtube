@@ -15,8 +15,8 @@ public class EditDistanceMemoizationApproach {
             return memo[i][j] = Math.min(
                 minDistance(i, j + 1, word1, word2, memo),
                 Math.min(
-                        minDistance(i + 1, j, word1, word2, memo),
-                        minDistance(i + 1, j + 1, word1, word2, memo)
+                    minDistance(i + 1, j, word1, word2, memo),
+                    minDistance(i + 1, j + 1, word1, word2, memo)
                 )
             ) + 1;
         }
