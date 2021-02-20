@@ -1,0 +1,52 @@
+Question
+    Given a sorted array nums, remove the duplicates in-place such that
+    duplicates appeared at most twice and return the new length.
+
+    Do not allocate extra space for another array; you must do this by
+    modifying the input array in-place with O(1) extra memory.
+
+    Clarification:
+        Confused why the returned value is an integer, but your answer is an array?
+
+        Note that the input array is passed in by reference, which means a
+        modification to the input array will be known to the caller.
+
+Thoughts Before Coding
+    - The input array is sorted in ascending order
+        - This means the elements that are the same are grouped together
+    - We can implement a two pointer approach
+        - One pointer 'i' will stay on the left side to populate numbers that appears at most twice
+        - One pointer 'j' will be scanning forward for new elements to be populated at pointer 'i'
+    - Since we want each number to only appear twice
+        - We will need to keep track of the frequency 'x' for the current number
+        - For each of the element 'num'
+            - If the current frequency 'x' is less than or equal to 2
+                - We can populate 'num' at pointer 'i'
+
+Answer
+    - Create two variables
+        - i, our left pointer, initially 0
+        - count, the frequency of the current character
+    - Iterate through the indices of 'nums', denoted as 'j'
+        - Increment 'count'
+        - If 'count' is less than or equal to 2
+            - Set 'nums[i]' to 'nums[j]'
+            - Increment 'i'
+        - If 'j' is at the last index OR the current element is not equal to the next element
+            - Set 'count' to 0
+    - Return 'i'
+
+What is the Time and Space Complexity?
+   - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), two pointer approach
+   - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
