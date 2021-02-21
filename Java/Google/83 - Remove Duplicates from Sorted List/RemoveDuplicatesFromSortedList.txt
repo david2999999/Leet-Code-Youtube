@@ -1,0 +1,51 @@
+Question
+    Given the head of a sorted linked list, delete all duplicates
+    such that each element appears only once. Return the linked
+    list sorted as well.
+
+    Constraints:
+        - The number of nodes in the list is in the range [0, 300].
+        - -100 <= Node.val <= 100
+        - The list is guaranteed to be sorted in ascending order
+
+Thoughts Before Coding
+    - The input list is sorted
+        - This means all of the duplicate nodes are grouped together
+    - For each of the node 'x'
+        - We can check if 'x' is a duplicate node by comparing with the next node 'x.next'
+        - If 'x.val' is equal to 'x.next.val'
+            - We will want to skip all of the nodes with 'x.val' until we reach the last node
+            - We will be appending the last node to our resulting list
+        - If 'x.val' is not equal to 'x.next.val'
+            - Then we can just append 'x' to our resulting list
+
+Answer
+    - Create the following variables
+        - sHead, sentinel head of the resulting list
+        - sTail, sentinel tail of the resulting list, initially 'sHead'
+        - node, our current location inside the input list, initially 'head'
+    - While 'node' is not equal to null
+        - While 'node.next' is not null AND 'node.val' is equal to 'node.next.val'
+            - Set 'node' to 'node.next'
+        - Create a variable 'next' and set it to 'node.next'
+        - Set 'node.next' to null
+        - Set 'sTail.next' to 'node'
+        - Set 'sTail' to 'node'
+        - Set 'node' to 'next'
+    - Return 'sHead.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes in the input list
+        - O(n), visit each node once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
