@@ -1,0 +1,43 @@
+Question
+    Given the head of a linked list and a value x, partition it such that all nodes
+    less than x come before nodes greater than or equal to x.
+
+    You should preserve the original relative order of the nodes in each
+    of the two partitions.
+
+    Constraints:
+        - The number of nodes in the list is in the range [0, 200].
+        - -100 <= Node.val <= 100
+        - -200 <= x <= 200
+
+Thoughts Before Coding
+    - We can have two lists
+        - One list 'l1' will keep track of the node values that are smaller than 'x'
+        - One list 'l2' will keep track of the node values that are greater than or equal to 'x'
+    - Then after we have processed all of the nodes
+        - We can append 'l2' to 'l1'
+
+Answer
+    - Create the following variables
+        - h1, the sentinel head of 'l1'
+        - t1, the sentinel tail of 'l1', initially 'h1'
+        - h2, the sentinel head of 'l2'
+        - t2, the sentinel tail of 'l2', initially 'h2'
+        - node, our current location inside the input list, initially 'head'
+    - While 'node' is equal to null
+        - Create a variable 'next' and set it to 'node.next'
+        - Set 'node.next' to null
+        - If 'node.val' is less than 'x'
+            - Set 't1.next' to 'node'
+            - Set 't1' to 'node'
+        - Else
+            - Set 't2.next' to 'node'
+            - Set 't2' to 'node'
+        - Set 'node' to 'next'
+    - Set 't1.next' to 'h2.next'
+    - Return 'h1.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes in the input list
+        - O(n), process each node once
+    - Space Complexity = O(1)
