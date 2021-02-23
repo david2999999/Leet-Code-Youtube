@@ -1,4 +1,4 @@
-public class DecodeWays {
+public class DecodeWaysRecursiveApproach {
     public int numDecodings(String s) {
         return numDecodings(0, s);
     }
