@@ -1,0 +1,59 @@
+Question
+    Given an integer array nums that may contain duplicates,
+    return all possible subsets (the power set).
+
+    The solution set must not contain duplicate subsets. Return
+    the solution in any order.
+
+    Constraints:
+        - 1 <= nums.length <= 10
+        - -10 <= nums[i] <= 10
+
+Thoughts Before Coding
+    - We will be implementing a recursive backtracking approach
+        - For each of the element 'x' inside the input array at index 'i'
+        - After adding 'x' to our current subset
+            - We will continue our search from 'i + 1'
+        - After accounting for 'x', we will want to backtrack of steps to give space
+          for the next element and allow us to find the next subset
+            - This can be done by removing the last element that was added into our current subset
+    - Since the solution set must not contain duplicates
+        - We must sort the input array in ascending order
+            - This will allow us to group duplicate numbers together
+        - If we have already used an element 'y' for index 'j' inside our subset
+            - We will want to skip all of the future occurrences of 'j' inside our subset
+
+Answer
+    - Sort the input array in ascending order
+    - Create our list of lists 'result' to keep track of all subsets
+    - Implement our recursive backtracking approach
+        - What parameters do we need?
+            - i, our current starting index
+            - nums, the input array
+            - subset, the current subset
+            - result, list of all subsets
+        - In each of the recursive call
+            - Add a copy of 'subset' to 'result'
+            - Iterate through the indices from 'i -> nums.length - 1', denoted as 'j'
+                - If 'j' is not equal to 'i' AND 'nums[j - 1]' is equal to 'nums[j]'
+                    - continue to next iteration
+                - Add 'nums[j]' to 'subset'
+                - Recursively find the rest of the elements in our subset
+                    - i => j + 1
+                - Remove the last element from 'subset'
+    - return 'result'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
