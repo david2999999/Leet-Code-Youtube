@@ -1,0 +1,83 @@
+Question
+    A message containing letters from A-Z can be encoded into numbers using the
+    following mapping:
+        'A' -> "1"
+        'B' -> "2"
+        ...
+        'Z' -> "26"
+
+    To decode an encoded message, all the digits must be grouped then mapped back
+    into letters using the reverse of the mapping above (there may be multiple ways).
+    For example, "11106" can be mapped into:
+        - "AAJF" with the grouping (1 1 10 6)
+        - "KJF" with the grouping (11 10 6)
+
+    Note that the grouping (1 11 06) is invalid because "06" cannot be mapped into 'F' since "6" is different from "06".
+
+    Given a string s containing only digits, return the number of ways to decode it.
+
+    The answer is guaranteed to fit in a 32-bit integer.
+
+Thoughts Before Coding
+    - In the recursive approach
+        - The solution is very inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the number of 'ways' we can decode at index 'i'
+            - This means we can cache 'i' with 'ways'
+
+Answer
+    - Create an array 'memo' to cache previously calculated results
+        - The indices represent 'i'
+        - The values represent 'ways'
+    - Fill 'memo' with -1
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - i, our current index we are decoding
+            - s, the input string
+            - memo, cache
+        - What is the base case?
+            - If 'i' is out of bound, we have found 1 way to decode
+                - Return 1
+            - If 'memo[i]' is not equal to -1
+                - Return 'memo[i]'
+        - In each of the recursive call
+            - Create a variables 'ways', initially 0
+            - Create a variable 'num1', which will be the numeric value of the character at index 'i'
+            - Create a variable 'num2', the number if we decode two digits
+                - If 'i' is not at the last index
+                    - Retrieve the two digits 'c' and 'd' from indices 'i' and 'i + 1'
+                    - Set 'num2' to the numeric value of 'c * 10 + d'
+                - Else
+                    - Set 'num2' to 0
+            - If 'num1' is greater than or equal to 1 AND less than or equal to 9
+                - Recursively find the numbers of ways 'x' from 'i + 1'
+                    - i => i + 1
+                - Increment 'ways' by 'x'
+            - If 'num2' is within the range of '10 -> 26'
+                - Recursively find the numbers of ways 'y' from 'i + 2'
+                    - i => i + 2
+                - Increment 'ways' by 'y'
+            - Put 'ways' at 'memo[i]'
+            - Return 'memo[i]'
+
+What is Time and Space Complexity?
+    - Time Complexity = O(n + n) = O(n), where 'n' is the length of the input array
+        - O(n), fill 'memo' with -1
+        - O(n), there are 'n' possible states
+    - Space Complexity = O(2 * n) = O(n), where 'n' is the length of the input array
+        - O(2 * n), memo and recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
