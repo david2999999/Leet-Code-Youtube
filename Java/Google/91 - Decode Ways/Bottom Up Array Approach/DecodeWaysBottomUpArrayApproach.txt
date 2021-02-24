@@ -1,0 +1,68 @@
+Question
+    A message containing letters from A-Z can be encoded into numbers using the
+    following mapping:
+        'A' -> "1"
+        'B' -> "2"
+        ...
+        'Z' -> "26"
+
+    To decode an encoded message, all the digits must be grouped then mapped back
+    into letters using the reverse of the mapping above (there may be multiple ways).
+    For example, "11106" can be mapped into:
+        - "AAJF" with the grouping (1 1 10 6)
+        - "KJF" with the grouping (11 10 6)
+
+    Note that the grouping (1 11 06) is invalid because "06" cannot be mapped into 'F' since "6" is different from "06".
+
+    Given a string s containing only digits, return the number of ways to decode it.
+
+    The answer is guaranteed to fit in a 32-bit integer.
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached 'i' with the number of 'ways' to decode
+                - This means we can create an array 'ways' to keep track of the number of ways
+                  to decode for all indices 'i'
+    - What are the default values inside 'ways' array?
+        - When 'i' is out of bound
+            - We have successfully found 1 way to decode the input string
+
+Answer
+    - Create an array 'ways' to keep track of the number of ways
+      to decode for all indices 'i'
+    - Iterate through from 's.length() -> 0', denoted as 'i'
+        - If 'i' is equal to 's.length()'
+            - Set 'ways[i]' to 1
+            - continue to next iteration
+        - Create a variable 'num1', which will be equal to the numeric value of the character at index 'i'
+        - Create a variable 'num2', which will be decoding two digits
+            - If 'i' is not at the last index
+                - Find the two character 'c' and 'd' from indices 'i' and 'i + 1'
+                - Set 'num2' to 'c * 10 + d'
+            - Else
+                - Set 'num2' to 0
+        - If 'num1' is in between 1 -> 9
+            - Increment 'ways[i]' by 'ways[i + 1]'
+        - if 'num2' is in between 10 -> 26
+            - Increment 'ways[i]' by 'ways[i + 2]'
+    - Return 'ways[0]', which is the number of ways to decode the input string if we start at index 0
+
+What is Time and Space Complexity?
+    - Time Complexity = O(n), where n is the length of the input string
+        - O(n), visit each index once
+    - Space Complexity = O(n), where n is the length of the input string
+        - O(n), 'ways' array
+
+
+
+
+
+
+
+
+
+
+
+
