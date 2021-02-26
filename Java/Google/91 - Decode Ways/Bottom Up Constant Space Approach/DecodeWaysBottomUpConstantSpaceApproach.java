@@ -22,4 +22,4 @@ public class DecodeWaysBottomUpConstantSpaceApproach {
 
         return ways1;
     }
-}
+}92. Reverse Linked List II
