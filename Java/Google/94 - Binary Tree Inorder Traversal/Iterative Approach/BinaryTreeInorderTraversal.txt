@@ -1,0 +1,32 @@
+Question
+    Given the root of a binary tree, return the inorder
+    traversal of its nodes' values.
+
+Thoughts Before Coding
+    - The direction of an inorder traversal is 'left -> root -> right'
+    - We will need a way to mimic the recursive call stack
+        - This can be done using a 'stack' data structure
+    - For each of the node 'x'
+        - We will want to process the nodes on the left side of 'x' before
+          we process 'x'
+
+Answer
+    - Lets validate the input parameter
+        - If 'root' is null
+            - Return an empty lists
+    - Create a 'stack' to implement inorder traversal
+    - Create a list 'result' to keep track of all node values
+    - Push all of the nodes on the left path of 'root' into 'stack'
+    - While 'stack' is not empty
+        - Pop a 'node' from 'stack'
+        - Add 'node.val' to 'result'
+        - Push 'node.right' and all of the nodes on the left path of 'node.right' into
+          the 'stack'
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the total number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(n) + O(h) = O(n), where 'n' is the total number of nodes and 'h' is the height of the input tree
+        - O(h), stack
+        - O(n), result list
