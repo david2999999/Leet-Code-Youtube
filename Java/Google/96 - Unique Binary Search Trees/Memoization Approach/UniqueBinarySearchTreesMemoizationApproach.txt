@@ -1,0 +1,53 @@
+Question
+    Given an integer n, return the number of structurally
+    unique BST's (binary search trees) which has exactly n
+    nodes of unique values from 1 to n.
+
+Thoughts Before Coding
+    - In the recursive approach
+        - The solution was very inefficient due to overlapping recursive calls
+    - We can avoid overlapping recursive calls using memoization
+        - What do we need to cache?
+            - in each of the recursive call
+                - We are trying to find the number of binary search 'trees' for each
+                  of the value 'n'
+                - This means we cache 'n' with 'trees'
+
+Answer
+    - Create an array 'memo' to cache previously calculated results
+        - The indices represent 'n'
+        - The values represent 'trees'
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - n, the current number of nodes
+            - memo, cache
+        - What is the base case?
+            - if 'n' is equal to 0 OR equal to 1
+                - Return 1
+            - If 'memo[n]' is not equal to 0
+                - Return 'memo[n]'
+        - In each of the recursive call
+            - Create a variable 'trees' to keep track of the total number of BST
+            - Iterate through from '1 -> n', denoted as 'i'
+                - Recursively find the number of 'left' subtrees
+                    - n => i - 1
+                - Recursively find the number of 'right' subtrees
+                    - n => n - i
+                - Increment 'trees' by 'left x right'
+            - Put 'trees' at 'memo[n]'
+            - return 'memo[n]'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
