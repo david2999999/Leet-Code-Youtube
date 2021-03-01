@@ -1,0 +1,48 @@
+Question
+    Given an integer n, return the number of structurally
+    unique BST's (binary search trees) which has exactly n
+    nodes of unique values from 1 to n.
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached the number of nodes 'n' with the number of binary search
+                  'trees' that we can generate
+                - This means we can create an array 'trees' to keep track of the
+                  number of BST for all possible values of 'n'
+    - What are the default values inside the 'trees' array?
+        - When 'n' is equal to 0 OR 1
+            - Then the number of BST is equal to 1
+
+Answer
+    - Create an array 'trees' to keep track of the
+      number of BST for all possible values of 'n'
+    - Iterate through from 0 -> n, denoted as 'i'
+        - If 'i' is equal to 0 OR 1
+            - Set 'trees[i]' to 1
+            - continue to next iteration
+        - Iterate through from '1 -> i', denoted as 'j'
+            - Increment 'trees[i]' by 'trees[j - 1] * trees[i - j]'
+    - Return 'trees[n]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n^2), where n is the input value
+        - O(n^2), nested 'for' loops
+    - Space Complexity = O(n), where n is the input value
+        - O(n), trees array
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
