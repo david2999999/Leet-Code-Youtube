@@ -1,0 +1,78 @@
+Question
+    Given strings s1, s2, and s3, find whether s3 is formed by an interleaving of s1 and s2.
+
+    An interleaving of two strings s and t is a configuration where they are
+    divided into non-empty substrings such that:
+        - s = s1 + s2 + ... + sn
+        - t = t1 + t2 + ... + tm
+        - |n - m| <= 1
+
+    The interleaving is s1 + t1 + s2 + t2 + s3 + t3 + ... or t1 + s1 + t2 + s2 + t3 + s3 + ...
+
+    Note: a + b is the concatenation of strings a and b.
+
+    Constraints:
+        - 0 <= s1.length, s2.length <= 100
+        - 0 <= s3.length <= 200
+        - s1, s2, and s3 consist of lower-case English letters.
+
+Thoughts Before Coding
+    - The recursive approach is inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are checking we can interleave 'canInterleave' the two strings at
+              the current indices 'i' and 'j'
+            - This means we can cache 'i' and 'j' with 'canInterleave'
+
+Answer
+    - Lets validate the input parameter
+        - If the sum of the lengths of 's1' and 's2' is not equal to the length of 's3'
+            - Return false
+    - Create a 2D matrix 'memo' to cache previously calculated results
+        - The rows indicate 'i'
+        - The columns indicate 'j'
+        - The values indicate 'canInterleave'
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - s1, input string
+            - s2, input string
+            - s3, input string
+            - i, our current location inside 's1'
+            - j, our current location inside 's2'
+            - memo, cache
+        - What is the base case?
+            - If 'i' and 'j' are both of out of bound
+                - Return true
+            - If 'memo[i][j]' is not equal to null
+                - Return 'memo[i][j]'
+        - In each of the recursive calls
+            - If 'i' is not out of bound AND the current character at index 'i' inside 's1' is
+              equal to the character at index 'i + j' inside 's3'
+                - Recursively check if we can interleave the strings by moving 'i' forward
+                    - i => i + 1
+                - If the recursive call is true
+                    - Put true at 'memo[i][j]'
+                    - Return true
+            - If 'j' is not out of bound AND the current character at index 'j' inside 's2' is
+              equal to the character at index 'i + j' inside 's3'
+                - Recursively check if we can interleave the strings by moving 'j' forward
+                    - j => j + 1
+                - If the recursive call is true
+                    - Put true at 'memo[i][j]'
+                    - Return true
+            - Put false at 'memo[i][j]'
+            - Return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(m*n), where 'm,n' are the length of the two input string
+        - O(m*n), there is a total of 'm * n'
+    - Space Complexity = O(m + n) + O(m * n) = O(m * n), where 'm,n' are the length of the two input string
+        - O(m + n), recursive call stack memory
+        - O(m * n), 'memo' cache
+
+
+
+
+
+
