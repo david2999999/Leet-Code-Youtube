@@ -1,0 +1,60 @@
+Question
+    Given strings s1, s2, and s3, find whether s3 is formed by an interleaving of s1 and s2.
+
+    An interleaving of two strings s and t is a configuration where they are
+    divided into non-empty substrings such that:
+        - s = s1 + s2 + ... + sn
+        - t = t1 + t2 + ... + tm
+        - |n - m| <= 1
+
+    The interleaving is s1 + t1 + s2 + t2 + s3 + t3 + ... or t1 + s1 + t2 + s2 + t3 + s3 + ...
+
+    Note: a + b is the concatenation of strings a and b.
+
+    Constraints:
+        - 0 <= s1.length, s2.length <= 100
+        - 0 <= s3.length <= 200
+        - s1, s2, and s3 consist of lower-case English letters.
+
+Thoughts Before Coding
+    - In the 2D bottom up approach
+        - In each of the iteration
+            - we are only relying on values from rows 'i' and 'i + 1'
+            - This means we can use a single array to represent our 2D matrix
+                - In each of the row iteration
+                    - We can update the values from the previous iteration
+
+Answer
+    - Lets validate the input parameter
+        - if the sum of the lengths of 's1' and 's2' is not equal to 's3'
+            - return false
+    - Create an array'canInterleave' to keep track if we can interleave the two strings
+    - Iterate through the indices from 's1.length() -> 0', denoted as 'i'
+        - Iterate through the indices from 's2.length() -> 0', denoted as 'j'
+            - If 'i' AND 'j' are both out of bound
+                - Set 'canInterleave[j]' to true
+                - continue to next iteration
+            - If 'i' is not out of bound AND the current character inside 's1' at index 'i' is equal
+              to the current character inside 's3' at index 'i + j'
+                - If 'canInterleave[j]' is true
+                    - continue to next iteration
+            - If 'j' is not out of bound AND the current character inside 's2' at index 'j' is equal
+              to the current character inside 's3' at index 'i + j'
+                - If 'canInterleave[j + 1]' is true
+                    - Set 'canInterleave[j]' to true
+                    - continue to next iteration
+            - Set 'canInterleave[j]' to false
+    - Return 'canInterleave[0]'
+
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(m * n), where m,n are the length of the two input strings
+        - O(m * n), nested 'for' loop
+    - Space Complexity = O(n), where 'n' is the length of the second string
+        - O(n), 'canInterleave' array
+
+
+
+
+
+
