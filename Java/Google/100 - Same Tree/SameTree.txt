@@ -1,0 +1,55 @@
+Question
+    Given the roots of two binary trees p and q, write a function
+    to check if they are the same or not.
+
+    Two binary trees are considered the same if they are
+    structurally identical, and the nodes have the same value.
+
+Thoughts Before Coding
+    - If we are currently comparing two nodes 'p' and 'q'
+        - If both of the nodes are null
+            - Then they are the same
+        - If one of the nodes is null
+            - Then they are not the same
+        - If the values of the nodes are equal
+            - Then they are the same
+        - If the values of the nodes are not equal
+            - Then they are not the same
+
+Answer
+    - Implement a recursive approach
+        - What parameters do we need?
+            - p, the current node in the first tree
+            - q, the current node in the second tree
+        - What is the base case?
+            - If both nodes are null
+                - Return true
+            - If one of the nodes is null
+                - Return false
+        - In each of the recursive call
+            - If the node values are not the same
+                - Return false
+            - Recursively compare the left subtree
+                - p => p.left
+                - q => q.left
+            - Recursively compare the right subtree
+                - p => p.right
+                - q => q.right
+            - Return true if both recursive calls are true
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes in the smaller tree
+        - O(n), visit each node once
+    - Space Complexity = O(h), where 'h' is the height of the smaller tree
+        - O(h), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
