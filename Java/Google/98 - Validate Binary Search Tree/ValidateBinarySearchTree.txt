@@ -1,0 +1,58 @@
+Question
+    Given the root of a binary tree, determine if it is a valid binary
+    search tree (BST).
+
+    A valid BST is defined as follows:
+        - The left subtree of a node contains only nodes with keys less than the node's key.
+        - The right subtree of a node contains only nodes with keys greater than the node's key.
+        - Both the left and right subtrees must also be binary search trees.
+
+Thoughts Before Coding
+    - Each of the nodes inside the binary search tree as a upper and a lower limit
+        - If the value of the current node 'x' is less than or equal to the current lower limit
+            - Then it is not a valid BST
+        - If the value of the current node 'x' is greater than or equal to the current upper limit
+            - Then it is not a valid BST
+        - When we traverse to the left subtree
+            - We will want to update the upper limit
+        - When we traverse to the right subtree
+            - We will want to update the lower limit
+
+Answer
+    - We will be implementing a recursive approach
+        - What parameters do we need?
+            - node, the current we are visiting
+            - min, the current lower boundary, initially null
+            - max, the current upper boundary, initially null
+        - What is the base case?
+            - if 'node' is equal to null
+                - Return true
+        - In each of the recursive call
+            - If 'min' is not equal to null AND 'node.val' is less than or equal to 'min'
+                - Return false
+            - If 'max' is not equal to null AND 'node.val' is greater than or equal to 'max'
+                - Return false
+            - Recursively check the left subtree
+                - max => node.val
+            - Recursively check the right subtree
+                - min => node.val
+            - Return true if both recursive calls are true
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes in the BST
+        - O(n), visit each node once
+    - Space Complexity = O(h), where 'h' is the height of the BST
+        - O(h), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
