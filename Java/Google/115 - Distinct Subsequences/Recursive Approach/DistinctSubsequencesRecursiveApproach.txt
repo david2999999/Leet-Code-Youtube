@@ -1,0 +1,66 @@
+Question
+    Given two strings s and t, return the number of distinct
+    subsequences of s which equals t.
+
+    A string's subsequence is a new string formed from the original
+    string by deleting some (can be none) of the characters without
+    disturbing the remaining characters' relative positions.
+    (i.e., "ACE" is a subsequence of "ABCDE" while "AEC" is not).
+
+    It is guaranteed the answer fits on a 32-bit signed integer.
+
+    Constraints:
+        - 0 <= s.length, t.length <= 1000
+        - s and t consist of English letters.
+
+Thoughts Before Coding
+    - We will first implement a recursive approach
+        - We can have two pointers 'i' and 'j', which will indicate our current location inside 's' and 't'
+        - In each of the recursive call
+            - We have two choices
+                - The first choice is skipping the current character inside 's'
+                - The second choice only happens if the current two characters at the two indices are the same
+                    - If the two characters are the same
+                        - We can move both pointers forward
+            - We will want to find the total number of subsequences from both choices
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - s, the input string
+            - t, the input string
+            - i, current index inside 's'
+            - j, current index inside 't'
+        - What is the base case?
+            - If 'j' is out of bound
+                - Return 1
+            - If 'i' is out of bound
+                - Return 0
+        - In each of the recursive call
+            - Create a variable 'subsequences', initially 0
+            - recursively find the number of subsequences 'x' if we move 'i' forward
+                - i => i + 1
+            - Increment 'subsequences' by 'x'
+            - If the current two characters at 'i' and 'j' are the same
+            - recursively find the number of subsequences 'y' if we move 'i' and 'j' forward
+                - i => i + 1
+                - j => j + 1
+            - Increment 'subsequences' by 'y'
+            - Return 'subsequences'
+        - This solution is not efficient enough due to overlapping recursive calls
+            - We will optimize this solution using memoization approach
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2^(m + n)), where 'm,n' is the length of the two input strings
+        - O(2^(m + n)), in each of the recursive call
+            - We have up to 2 choices, and a depth of 'm + n'
+    - Space Complexity = O(m + n), where 'm,n' is the length of the two input strings
+        - O(m + n), recursive call stack memory
+
+
+
+
+
+
+
+
