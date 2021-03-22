@@ -13,40 +13,35 @@ Question
         - 0 <= prices[i] <= 10^5
 
 Thoughts Before Coding
-    - We will be converting the memoization approach to a bottom up approach
-        - Where do we start?
-            - In the memoization approach
-                - We have cached 'i, state, t' with maximum profit 'maxProfit'
-            - This means we can create a 3D matrix 'maxProfit' to keep track of the maximum profit for all
-              for all combinations of 'i, state, t'
-    - What are the default values inside the 'maxProfit' matrix?
-        - When 'i' is out of bound OR 't' is equal 0
-            - The maximum profit will be equal to 0
+    - In the 3D bottom up matrix approach
+        - We are only relying on values from the rows 'i + 1'
+        - This means we can create a 2D matrix to represent our 3D matrix
+            - in each of the iteration
+                - We will be updating the values from the previous iteration
 
 Answer
-    - Create a 3D matrix 'maxProfit' to keep track of the maximum profit for all
+    - Create a 2D matrix 'maxProfit' to keep track of the maximum profit for all
       for all combinations of 'i, state, t'
-        - The 'x-axis' represents 'i'
-        - The 'y-axis' represents 'state'
-        - The 'z-axis' represents 't'
+        - The row represents 'state'
+        - The column represents 't'
     - Iterate through the indices from 'prices.length - 1 -> 0', denoted as 'i'
         - Iterate through the states from '1 -> 0', denoted as 'state'
             - Iterate through the transactions from '1 -> 2', denoted as 't'
                 - If 'state' is equal to 0 (buy state)
-                    - Set 'maxProfit[i][state][t]' to the larger value between
-                        - maxProfit[i + 1][1][t] - prices[i]
-                        - maxProfit[i + 1][state][t]
+                    - Set 'maxProfit[state][t]' to the larger value between
+                        - maxProfit[1][t] - prices[i]
+                        - maxProfit[state][t]
                 - Else (sell state)
-                    - Set 'maxProfit[i][state][t]' to the larger value between
-                        - maxProfit[i + 1][0][t - 1] + prices[i]
-                        - maxProfit[i + 1][state][t]
-    - Return 'maxProfit[0][0][2]'
+                    - Set 'maxProfit[state][t]' to the larger value between
+                        - maxProfit[0][t - 1] + prices[i]
+                        - maxProfit[state][t]
+    - Return 'maxProfit[0][2]'
 
 What is the Time and Space Complexity?
     - Time Complexity = O(n * 4) = O(n), where 'n' is the length of the input array
         - O(n * 4), nested 'for' loop
-    - Space Complexity =  O(n * 2 * 3) = O(n), where 'n' is the length of the input array
-        - O(n * 2 * 3), 'maxProfit' matrix
+    - Space Complexity = O(2 * 3) = O(1)
+        - O(2 * 3), 'maxProfit' matrix
 
 
 
