@@ -1,0 +1,61 @@
+Question
+    You are given the root of a binary tree containing digits from 0 to 9 only.
+
+    Each root-to-leaf path in the tree represents a number.
+        - For example, the root-to-leaf path 1 -> 2 -> 3 represents the
+           number 123.
+
+    Return the total sum of all root-to-leaf numbers.
+
+    A leaf node is a node with no children.
+
+    Constraints:
+        - The number of nodes in the tree is in the range [1, 1000].
+        - 0 <= Node.val <= 9
+        - The depth of the tree will not exceed 10.
+
+Thoughts Before Coding
+    - We will be implementing a recursive approach
+        - We will keep track of the current path number 'num' in our recursive parameter
+        - Then for each of the node 'x'
+            - We will first multiply 'num' by 10 before adding 'x.val'
+        - If 'x' is a leaf node, then we have found a path number
+            - We can just return 'num'
+        - If 'x' is not a leaf node
+            - We will want to continue to find the path number on its 'left' and 'right' subtree
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - node, the current node we are visiting
+            - num, current path number, initially 0
+        - What is the base case?
+            - If 'node' is equal to null
+                - Return 0
+        - In each of the recursive call
+            - Multiply 'num' by 10
+            - Increment 'num' by 'node.val'
+            - If both children node of 'node' is equal to null
+                - Return 'num'
+            - Recursively find the path number on the 'left' subtree
+                - node => node.left
+                - num => num
+            - Recursively find the path number on the 'right' subtree
+                - node => node.right
+                - num => num
+            - Return 'left + right'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes in the input tree
+        - O(n), visit each node once
+    - Space Complexity = O(h), where 'h' is the height of the tree
+        - O(h), recursive call stack memory
+
+
+
+
+
+
+
+
+
