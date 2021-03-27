@@ -1,0 +1,60 @@
+Question
+    Given an m x n matrix board containing 'X' and 'O', capture
+    all regions surrounded by 'X'.
+
+    A region is captured by flipping all 'O's into 'X's in that surrounded region.
+
+    Constraints:
+        - m == board.length
+        - n == board[i].length
+        - 1 <= m, n <= 200
+        - board[i][j] is 'X' or 'O'.
+
+Thoughts Before Coding
+    - For each of the cells, which contains a value of 'O', that is at the borders of the matrix
+      can not be surrounded by 'X'
+        - Any of the cells, which contains a value of 'O', that is also connected to a 'O' at the
+          borders can also not be surrounded by 'X'
+    - We can perform 2 scans on the input matrix
+        - The first scan will check for 'O's that is connected to the borders
+            - We will mark all of the cells, which contains a value of 'O', and also connected to the
+              borders to 'U'
+        - The second scan will flip the cells
+            - Any cells will a value of 'O' will be changed to 'X'
+            - Any cells with a value of 'U' will be changed to 'O'
+
+Answer
+    - Validate the input parameter first
+        - If 'board' is empty
+            - Return
+    - Iterate through the rows, denoted as 'r'
+        - Perform a recursive depth first search on 'r, 0'
+            - What parameters do we need?
+                - r, the current row
+                - c, the current column, initially 0
+                - board, the input board
+            - What is the base case?
+                - If 'r, c' is out of bound OR does not contain a 'O'
+                    - Return from the recursive call
+            - In each of the recursive call
+                - Set 'board[r][c]' to 'U'
+                - Iterate through the 4 directions, denoted as 'd'
+                    - Recursively traverse in that direction
+                        - r => r + d[0]
+                        - c => c + d[1]
+        - Perform a recursive depth first search on 'r, board[r].length - 1'
+    - Iterate through the columns, denoted as 'c'
+        - Perform a recursive depth first search on '0, c'
+        - Perform a recursive depth first search on 'board.length - 1, c'
+    - Iterate through the rows and columns of 'board', denoted as 'r, c'
+        - If 'board[r][c]' is equal to 'O'
+            - Set 'board[r][c]' to 'X'
+        - If 'board[r][c]' is equal to 'U'
+            - Set 'board[r][c]' to 'O'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2r + 2c + r * c) + O(r * c) = O(r * c), where r, c is the numbers of rows and columns
+        - O(2r + 2c + r * c), marking unflippable cells
+        - O(r + c), converting cells
+    - Space Complexity = O(r * c), where r, c is the numbers of rows and columns
+        - O(r * c), recursive call stack memory
