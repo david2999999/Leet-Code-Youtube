@@ -1,0 +1,55 @@
+Question
+    Given an m x n binary matrix filled with 0's and 1's, find the
+    largest square containing only 1's and return its area.
+
+    Constraints:
+        - m == matrix.length
+        - n == matrix[i].length
+        - 1 <= m, n <= 300
+        - matrix[i][j] is '0' or '1'.
+
+Thoughts Before Coding
+    - For each of the cells at (r, c) with a value of '1' can be represented as the top left corner
+      of a square
+        - How can we find the area of the current square?
+            - We will first need to find the length of the squares to 'right, bottom, bottom right'
+                - right = (r, c + 1)
+                - bottom = (r + 1, c)
+                - right bottom = (r + 1, c + 1)
+            - Lets indicate the three lengths as (a, b, c)
+                - Then the 'length' of the current square at the top left corner at (r, c) will be equal to
+                  'min(a, b, c) + 1'
+        - We will want to pick the longest 'length' out of all of the squares
+            - Then to find the largest area, we can 'length^2'
+
+Answer
+    - Create a variable 'maxLength' to keep track of the square with the maximum length
+    - Iterate through the rows and columns of 'matrix', denoted as 'r, c'
+        - Implement our recursive approach to find the 'length' of the square with the top left corner at 'r, c'
+            - What parameters do we need?
+                - r, the current row
+                - c, the current column
+                - matrix, input matrix
+            - What is the base case?
+                - If 'r, c' is out of bound OR 'matrix[r][c]' does not contain a '1'
+                    - Return 0
+            - In each of the recursive call
+                - Recursively find the length 'a' of the square to the right
+                    - c => c + 1
+                - Recursively find the length 'b' of the square to the bottom
+                    - r => r + 1
+                - Recursively find the length 'c' of the square to the bottom right
+                    - r => r + 1
+                    - c => c + 1
+                - Return 'min(a, b, c) + 1'
+        - Update 'maxLength' if 'length' is greater
+    - Return 'maxLength * maxLength'
+    - This recursive approach is not efficient enough due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+
+What is the Time and Space Complexity?
+    - Time Complexity = O((m * n) * (3^(m + n))), where 'm,n' are the number of rows and columns
+        - O((m * n) * (3^(m + n))), iterate through all of the rows and columns
+            - Each recursive call has up to 3 choices and a depth of 'm + n'
+    - Space Complexity = O(m + n), where 'm,n' are the number of rows and columns
+        - O(m + n), recursive call stack memory
