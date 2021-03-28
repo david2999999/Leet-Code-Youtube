@@ -1,0 +1,60 @@
+Question
+    Given an m x n binary matrix filled with 0's and 1's, find the
+    largest square containing only 1's and return its area.
+
+    Constraints:
+        - m == matrix.length
+        - n == matrix[i].length
+        - 1 <= m, n <= 300
+        - matrix[i][j] is '0' or '1'.
+
+Thoughts Before Coding
+    - In the recursive approach
+        - The solution is not efficient enough due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the 'length' of the square with the top left corner at 'r, c'
+            - This means we can cache 'r, c' with 'length'
+
+Answer
+    - Validate the input parameter
+        - If 'matrix' is empty
+            - Return 0
+    - Create our 2D matrix 'memo' to cache previously calculated results
+        - The rows represent 'r'
+        - The columns represent 'c'
+        - The values represent 'length'
+    - Create a variable 'maxLength' to keep track of the square with the maximum length
+    - Iterate through the rows and columns of 'matrix', denoted as 'r, c'
+        - Implement our top down memoization approach to find the 'length' of the square with the top
+          left corner at 'r, c'
+            - What parameters do we need?
+                - r, the current row
+                - c, the current column
+                - matrix, input matrix
+                - memo, cache
+            - What is the base case?
+                - If 'r, c' is out of bound OR 'matrix[r][c]' does not contain a '1'
+                    - Return 0
+                - If 'memo[r][c]' is not equal to 0
+                    - Return 'memo[r][c]'
+            - In each of the recursive call
+                - Recursively find the length 'a' of the square to the right
+                    - c => c + 1
+                - Recursively find the length 'b' of the square to the bottom
+                    - r => r + 1
+                - Recursively find the length 'c' of the square to the bottom right
+                    - r => r + 1
+                    - c => c + 1
+                - Put 'min(a, b, c) + 1' at 'memo[r][c]'
+                - Return 'memo[r][c]'
+        - Update 'maxLength' if 'length' is greater
+    - Return 'maxLength * maxLength'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2 * mn) = O(mn), where 'm,n' are the number of rows and columns
+        - O(2 * mn), we visit each cell in the iteration and also the recursive calls
+    - Space Complexity = O(m + n) + O(mn) = O(mn), where 'm,n' are the number of rows and columns
+        - O(m + n), recursive call stack memory
+        - O(mn), 'memo' matrix
