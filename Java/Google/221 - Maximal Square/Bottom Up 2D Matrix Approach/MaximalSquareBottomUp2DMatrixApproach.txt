@@ -1,0 +1,45 @@
+Question
+    Given an m x n binary matrix filled with 0's and 1's, find the
+    largest square containing only 1's and return its area.
+
+    Constraints:
+        - m == matrix.length
+        - n == matrix[i].length
+        - 1 <= m, n <= 300
+        - matrix[i][j] is '0' or '1'.
+
+Thoughts Before Coding
+    -  Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached 'r, c' with the 'length' of the square
+            - This means we can create a 2D matrix 'length' to keep track of the
+              length of all the squares with the top left corner at 'r, c'
+
+Answer
+    - Lets validate the input parameter
+        - If 'matrix' is empty
+            - Return 0
+    - Create a 2D matrix 'length' to keep track of the
+     length of all the squares with the top left corner at 'r, c'
+        - The rows represent 'r'
+        - The columns represent 'c'
+        - The values represent 'length'
+    - Create a variable 'maxLength' to keep track of the largest length of all squares
+    - Iterate through the rows from 'matrix.length - 1 -> 0', denoted as 'r'
+        - iterate through the columns from 'matrix[r].length - 1 -> 0', denoted as 'c'
+            - If 'matrix[r][c]' is equal to '0'
+                - continue to next iteration
+            - Set 'length[r][c]' to the minimum value between
+                - length[r + 1][c], the length of the square to the bottom
+                - length[r][c + 1], the length of the square to the right
+                - length[r + 1][c + 1], the length of the square to the bottom right
+            - Increment 'length[r][c]' by 1
+            - Update 'maxLength' if 'length[r][c]' is greater
+    - Return 'maxLength^2'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(mn), where 'm,n' are the number of rows and columns
+        - O(mn), nested 'for' loop
+    - Space Complexity = O(mn), where 'm,n' are the number of rows and columns
+        - O(mn), 'length' matrix
