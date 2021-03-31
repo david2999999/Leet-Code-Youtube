@@ -1,0 +1,49 @@
+Question
+    Given an m x n binary matrix filled with 0's and 1's, find the
+    largest square containing only 1's and return its area.
+
+    Constraints:
+        - m == matrix.length
+        - n == matrix[i].length
+        - 1 <= m, n <= 300
+        - matrix[i][j] is '0' or '1'.
+
+Thoughts Before Coding
+    - In the 2D bottom up approach
+        - In each of the iteration
+            - We are only relying on values from rows 'r' and 'r + 1'
+            - This means we can create a single array to represent our 2D matrix
+                - In each of the iteration
+                    - We will be replacing the values from the previous iteration
+
+Answer
+    - Lets validate the input parameter
+        - If 'matrix' is empty
+            - Return 0
+    - Create an array 'length' to keep track of the length of all the squares
+        - The indices represent 'c'
+        - The values represent 'length'
+    - Create a variable 'maxLength' to keep track of the longest length of all squares
+    - Iterate through the rows from 'matrix.length - 1 -> 0', denoted as 'r'
+        - Create a variable 'prev' to keep track of the previous value before
+          we have replaced it at 'r + 1, c + 1'
+        - iterate through the columns from 'matrix[r].length - 1 -> 0', denoted as 'c'
+            - If 'matrix[r][c]' is equal to '0'
+                - Set 'prev' to 'length[c]'
+                - Set 'length[c]' to 0
+                - continue to next iteration
+            - Create a variable 'cur' and set to 'length[c]'
+            - Set 'length[c]' to the minimum value between
+                - length[c], the length of the square to the bottom
+                - length[c + 1], the length of the square to the right
+                - prev, the length of the square to the bottom right
+            - Increment 'length[c]' by 1
+            - Update 'maxLength' if 'length[c]' is greater
+            - Update 'prev' to 'cur'
+    - Return 'maxLength^2'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(mn), where 'm,n' are the number of rows and columns
+        - O(mn), nested 'for' loop
+    - Space Complexity = O(n), where 'n' is the number of columns
+        - O(n), 'length' array
