@@ -22,4 +22,3 @@ public class DecodeWaysRecursiveApproach {
         return ways;
     }
 }
-}
