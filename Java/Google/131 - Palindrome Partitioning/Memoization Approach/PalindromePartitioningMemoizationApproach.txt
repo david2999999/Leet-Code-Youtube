@@ -1,0 +1,66 @@
+Question
+    Given a string s, partition s such that every substring of the partition
+    is a palindrome. Return all possible palindrome partitioning of s.
+
+    A palindrome string is a string that reads the same backward as forward.
+
+    Constraints:
+        - 1 <= s.length <= 16
+        - s contains only lowercase English letters.
+
+Thoughts Before Coding
+    - In the recursive approach
+        - The solution is not efficient enough due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the palindrome partitions 'result' at each of the starting
+              index 'i'
+            - this means we can cache 'i' with 'result'
+
+Answer
+    - Validate the input parameter
+        - If 's' is empty
+            - Return an empty list
+    - Create an array 'memo' to cache all of the previously calculated results
+        - The indices represent 'i'
+        - The values represent 'result'
+    - Implementing our top down memoization approach
+        - What parameters do we need?
+            - i, our current starting index, initially 0
+            - s, input string
+            - memo, cache
+        - What is the base case?
+            - If 'memo[i]' is not equal to null
+                - Return 'memo[i]'
+        - In each of the recursive call
+            - Create a list 'result' to hold palindrome partitions
+            - If 'i' is out of bound
+                - Add a empty list to 'result'
+                - Return 'result'
+            - Create a StringBuilder 'str' to keep track of the current substring
+            - Iterate through the indices from 'i -> end of string s', denoted as 'j'
+                - Append the current character at 'j' to 'str'
+                - If the current substring from indices 'i -> j' is a palindrome
+                    - Recursively find the 'partitions' from 'j + 1'
+                    - Iterate through the 'partitions', denoted as 'par'
+                        - Create a list 'partition'
+                        - Add a string representation of 'str' to 'partition'
+                        - Add all of 'par' to 'partition'
+                        - Add 'partition' to 'result'
+            - Put 'result' at 'memo[i]'
+            - Return 'result'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
