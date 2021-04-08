@@ -1,0 +1,51 @@
+Question
+    Given a string s, partition s such that every substring of the partition
+    is a palindrome. Return all possible palindrome partitioning of s.
+
+    A palindrome string is a string that reads the same backward as forward.
+
+    Constraints:
+        - 1 <= s.length <= 16
+        - s contains only lowercase English letters.
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached the starting index 'i' with the palindrome partitions 'result' with
+                  all starting index 'i'
+            - This means we can create an array 'result' to keep track of the palindrome partitions
+              for all possible values of 'i'
+
+Answer
+    - Create an array 'result' to keep track to keep track of the palindrome partitions
+     for all possible values of 'i'
+        - The indices represent 'i'
+        - The values represent palindrome partitions
+    - Iterate through from 's.length() -> 0', denoted as 'i'
+        - If 'i' is equal to 's.length()'
+            - Add an empty list to 'result[i]'
+            - continue to next iteration
+        - Create a StringBuilder 'str' to keep track of our current string
+        - Iterate through the indices from 'i -> s.length() - 1', denoted as 'j'
+            - Append the character at 'j' to 'str'
+            - If the current substring from 'i -> j' is a palindrome
+                - Iterate through the palindrome partitions starting at 'j + 1', denote as 'par'
+                    - Create a list 'partitions'
+                    - Add 'str.toString()' to 'partitions'
+                    - Add all of 'par' to 'partitions'
+                    - Add 'partitions' to 'result[i]'
+    - Return 'result[0]', the palindrome partitions if our starting index is 0
+
+
+
+
+
+
+
+
+
+
+
+
+
