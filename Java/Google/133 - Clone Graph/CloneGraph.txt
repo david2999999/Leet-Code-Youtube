@@ -1,0 +1,51 @@
+Question
+    Given a reference of a node in a connected undirected graph.
+
+    Return a deep copy (clone) of the graph.
+
+    Each node in the graph contains a val (int) and a list (List[Node]) of
+    its neighbors.
+
+    class Node {
+        public int val;
+        public List<Node> neighbors;
+    }
+
+Thoughts Before Coding
+    - We will be implementing a recursive approach to clone graph
+        - For each of the node 'x'
+            - We will first need to create a 'clone' of 'x'
+            - Then we will need to iterate through the neighbors of 'x'
+                - We will want to clone the neighbor of 'x' before connecting
+                  the cloned neighbor to 'clone'
+    - We should note that the input graph may contain cycles
+        - This means we may visit a node 'x' multiples
+            - We will need a way to save previously clone nodes of 'x'
+            - We can create a HashMap where we keep track of 'x -> clone'
+
+Answer
+    - Implement our recursive approach
+        - What parameters do we need?
+            - node, the current node we are cloning
+            - map, HashMap to keep track of previously cloned nodes
+        - What is the base case?
+            - If 'node' is null
+                - Return null
+            - If 'map' contains 'node'
+                - Return 'map.get(node)'
+        - In each of the recursive call
+            - Create a 'clone' of 'node'
+            - Put 'node' and 'clone' into 'map'
+            - Iterate through neighbors of 'node', denoted as 'neighbor'
+                - Recursively clone 'neighbor', which we can call 'y'
+                    - node => neighbor
+                - Add 'y' to the list of neighbors of 'clone'
+            - Return 'clone'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n + e), where 'n,e' are the number of nodes and edges
+        - O(n + e), visit all nodes and edges
+    - Space Complexity = O(n + e) + O(n) + O(n) = O(n + e), where 'n,e' are the number of nodes and edges
+        - O(n + e), newly generated clone of the input graph
+        - O(n), recursive call stack memory
+        - O(n), 'map'
