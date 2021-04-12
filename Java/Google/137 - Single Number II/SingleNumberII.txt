@@ -1,0 +1,27 @@
+Question
+    Given an integer array nums where every element appears three
+    times except for one, which appears exactly once. Find the single
+    element and return it.
+
+Thoughts Before Coding
+    - We will need a way to keep track each its element and also
+      its associated frequency
+    - We can create a HashMap to keep track of element and frequency
+        - x -> frequency
+    - Then the element with a frequency of 1 will be our result
+
+Answer
+    - Create a HashMap 'map' to keep track of each element and frequency
+    - Iterate through the elements of the input array, denoted as 'x'
+        - Increment frequency of 'x' inside 'map'
+    - Iterate through the keys of 'map', denoted as 'x'
+        - If 'map.get(x)' is equal to 1
+            - Return 'x'
+    - Return -1
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n) + O(n / 3) = O(n), where 'n' is the length of the input array
+        - O(n), finding frequency of elements
+        - O(n / 3), finding the single number
+    - Space Complexity = O(n / 3) = O(n), where 'n' is the length of the input array
+        - O(n / 3), 'map'
