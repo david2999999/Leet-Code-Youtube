@@ -1,0 +1,43 @@
+Question
+    Given a non-empty array of integers nums, every element appears
+    twice except for one. Find that single one.
+
+    Follow up: Could you implement a solution with a linear runtime
+    complexity and without using extra memory?
+
+Thoughts Before Coding
+    - Lets go through the straight forward approach
+        - We will need a quick way to determine if we have already seen an element or not
+        - We can create a HashSet to keep track of previously seen elements
+        - For each of the element 'x'
+            - We can check if 'x' has already appeared in our 'set' or not
+            - If 'x' is inside the 'set'
+                - Then it is a number that appeared twice
+                - We can remove 'x' from our 'set'
+            - Else
+                - Add 'x' to our 'set'
+        - The last element inside our 'set' after we finish iterating through all
+          of the elements will be our single numbers
+        - Time/Space Complexity = O(n)
+    - Follow up solution
+        - We will need to use the concept of 'XOR'
+            - 0 ^ 0 = 0
+            - 0 ^ 1 = 1
+            - 1 ^ 0 = 1
+            - 1 ^ 1 = 0
+        - x ^ x = 0
+        - 0 ^ y = y
+    - Example: [2, 2, 1]
+        - 2 ^ 2 = 0
+        - 0 ^ 1 = 1
+
+Answer
+    - Create a variable 'result' to keep track of our single number, initially 0
+    - Iterate through the elements inside the input array, denoted as 'x'
+        - Set 'result' to 'result ^ x'
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each element once
+    - Space Complexity = O(1)
