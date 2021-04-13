@@ -1,0 +1,49 @@
+Question
+    Given an integer n, return the number of structurally
+    unique BST's (binary search trees) which has exactly n
+    nodes of unique values from 1 to n.
+
+Thoughts Before Coding
+    - We are given n possible nodes
+        - For each of the nodes at index 'i', where 'i' is in between 1 -> n
+            - We can generate a root node with 'i'
+                - Then we can generate the 'left' subtrees of 'i' using 'i - 1' nodes
+                - Then we can generate the 'right' subtrees of 'i' using 'n - i' nodes
+            - Then how many BST can we generate with root 'i'?
+                - We will need to multiple 'left * right'
+                - For example
+                    - if we have 2 possible 'left' subtree and 3 possible 'right' subtree
+                    - If we pair up all of the possible subtrees
+                        - We get 2 x 3 BST which is rooted at 'i'
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - n, the current number of nodes
+        - What is the base case?
+            - if 'n' is equal to 0 OR equal to 1
+                - Return 1
+        - In each of the recursive call
+            - Create a variable 'trees' to keep track of the total number of BST
+            - Iterate through from '1 -> n', denoted as 'i'
+                - Recursively find the number of 'left' subtrees
+                    - n => i - 1
+                - Recursively find the number of 'right' subtrees
+                    - n => n - i
+                - Increment 'trees' by 'left x right'
+            - Return 'trees'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

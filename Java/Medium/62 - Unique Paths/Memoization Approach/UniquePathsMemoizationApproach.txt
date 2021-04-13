@@ -1,0 +1,65 @@
+Question
+    A robot is located at the top-left corner of a m x n grid
+    (marked 'Start' in the diagram below).
+
+    The robot can only move either down or right at any point in
+    time. The robot is trying to reach the bottom-right corner
+    of the grid (marked 'Finish' in the diagram below).
+
+    How many possible unique paths are there?
+
+Thoughts Before Coding
+    - The recursive approach is not efficient enough because of overlapping recursive calls
+        - we can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive calls
+            - We are trying to find the total number of unique 'ways' at the current 'm, n'
+            - This means we can cache 'm, n' with the total number of unique 'ways'
+
+Answer
+    - Create a 2D matrix 'memo' to cache previously calculated result
+        - The rows will 'm'
+        - The columns will be 'n'
+        - The values are total number of unique 'ways'
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - m, the current row
+            - n, the current column
+            - memo, cache
+        - What is the base case?
+            - If 'm' and 'n' is equal to 1
+                - Return 1
+            - If 'm' OR 'n' is equal to 0
+                - Return 0
+            - If 'memo[m][n]' is not equal to 0
+                - Return 'memo[m][n]'
+        - In each of the recursive call
+            - Recursively find the number of 'paths1' if we move leftward
+                - n => n - 1
+            - Recursively find the number of 'paths2' if we move upward
+                - m => m - 1
+            - Put 'paths1 + paths2' at 'memo[m][n]'
+            - Return 'memo[m][n]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(m*n), where m,n are the two input values
+        - O(m*n), there are a total of 'm*n' possible states
+    - Space Complexity = O(m*n) + O(m+n) = O(m*n),  where m,n are the two input values
+        - O(m*n), 'memo' matrix
+        - O(m + n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

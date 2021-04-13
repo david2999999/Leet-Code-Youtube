@@ -1,0 +1,85 @@
+Question
+    There is an integer array nums sorted in non-decreasing order
+    (not necessarily with distinct values).
+
+    Before being passed to your function, nums is rotated at an
+    unknown pivot index k (0 <= k < nums.length) such that the
+    resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0],
+    nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,4,
+    4,5,6,6,7] might be rotated at pivot index 5 and become [4,5,6,
+    6,7,0,1,2,4,4].
+
+    Given the array nums after the rotation and an integer target,
+    return true if target is in nums, or false if it is not in nums.
+
+Thoughts Before Coding
+    - The brute force approach will be to perform a single iteration through the input array
+        - This approach will cost us O(n) time complexity
+    - We should note that we are searching inside a sorted and rotated array
+        - When searching inside a sorted array
+            - The optimized approach is to use binary search
+            - We just have to handle the rotated portion of the input array
+    - Lets have three pointers 'left, mid, right'
+        - If 'nums[mid]' is greater than 'nums[left]'
+            - This means the left side is sorted in ascending order
+        - If 'nums[mid]' is less than 'nums[right]'
+            - This means the right side is sorted in ascending order
+        - Else
+            - We will first search leftward
+                - If we have failed to find the 'target', we will search rightward
+
+Answer
+    - Implement a recursive binary search approach
+        - What parameters do we need?
+            - left, the left pointer, initially 0
+            - right, the right pointer, initially 'nums.length - 1'
+            - nums, input array
+            - target, the input target
+        - What is the base case?
+            - If 'left' is greater than 'right'
+                - Return false
+        - In each of the recursive call
+            - Calculate 'mid'
+                - mid = left + (right - left) / 2
+            - If 'nums[mid]' is equal to 'target'
+                - Return true
+            - If 'nums[left]' is less than 'nums[mid]'
+                - If 'target' is within range from 'nums[left]' and 'nums[mid]'
+                    - Return the recursive result of searching leftward
+                        - right => mid - 1
+                - Else
+                    - Return the recursive result of searching rightward
+                        - left => mid + 1
+            - Else if 'nums[mid]' is less than 'nums[right]'
+                - If 'target' is within range from 'nums[mid]' and 'nums[right]'
+                    - Return the recursive result of searching rightward
+                        - left => mid + 1
+                - Else
+                    - Return the recursive result of searching leftward
+                        - right => mid - 1
+            - Else
+                - Recursively search the left side first
+                    - right => mid - 1
+                - If the recursive result is true
+                    - Return true
+                - Return the recursive result of searching right side
+                    - left => mid + 1
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(logn), where n is the length of the input array
+        - O(logn), binary search
+            - Worst case O(n)
+    - Space Complexity = O(logn), where n is the length of the input array
+         - O(logn), recursive call stack memory
+             - Worst case O(n)
+
+
+
+
+
+
+
+
+
+
+

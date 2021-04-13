@@ -1,0 +1,77 @@
+Question
+    A message containing letters from A-Z can be encoded into numbers using the
+    following mapping:
+        'A' -> "1"
+        'B' -> "2"
+        ...
+        'Z' -> "26"
+
+    To decode an encoded message, all the digits must be grouped then mapped back
+    into letters using the reverse of the mapping above (there may be multiple ways).
+    For example, "11106" can be mapped into:
+        - "AAJF" with the grouping (1 1 10 6)
+        - "KJF" with the grouping (11 10 6)
+
+    Note that the grouping (1 11 06) is invalid because "06" cannot be mapped into 'F' since "6" is different from "06".
+
+    Given a string s containing only digits, return the number of ways to decode it.
+
+    The answer is guaranteed to fit in a 32-bit integer.
+
+Thoughts Before Coding
+    - We will be first implementing a brute force recursive approach
+        - For each of the index 'i' inside our input string
+            - We have two choices
+                - We can either decode 1 digit or decode 2 digit
+            - We will want to find the total number of ways to decode from both choices
+    - When we decode 1 digit
+        - We have to make sure the digit is within the range of 1 -> 9
+    - When we decode 2 digits
+        - We have to make sure the value is within the range of 10 -> 26
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - i, our current index we are decoding
+            - s, the input string
+        - What is the base case?
+            - If 'i' is out of bound, we have found 1 way to decode
+                - Return 1
+        - In each of the recursive call
+            - Create a variables 'ways', initially 0
+            - Create a variable 'num1', which will be the numeric value of the character at index 'i'
+            - Create a variable 'num2', the number if we decode two digits
+                - If 'i' is not at the last index
+                    - Retrieve the two digits 'c' and 'd' from indices 'i' and 'i + 1'
+                    - Set 'num2' to the numeric value of 'c * 10 + d'
+                - Else
+                    - Set 'num2' to 0
+            - If 'num1' is greater than or equal to 1 AND less than or equal to 9
+                - Recursively find the numbers of ways 'x' from 'i + 1'
+                    - i => i + 1
+                - Increment 'ways' by 'x'
+            - If 'num2' is within the range of '10 -> 26'
+                - Recursively find the numbers of ways 'y' from 'i + 2'
+                    - i => i + 2
+                - Increment 'ways' by 'y'
+            - Return 'ways'
+    - This approach is not efficient enough and will result in "TLE" error
+
+What is Time and Space Complexity?
+    - Time Complexity = O(2^n), where 'n' is the length of the input string
+        - O(2^n), each recursive call has 2 choices with a depth of 'n'
+    - Space Complexity = O(n), where 'n' is the length of the input string
+        - O(n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+

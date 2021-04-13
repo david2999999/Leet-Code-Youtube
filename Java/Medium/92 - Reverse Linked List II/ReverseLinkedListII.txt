@@ -1,0 +1,63 @@
+Question
+    Given the head of a singly linked list and two integers left and
+    right where left <= right, reverse the nodes of the list from
+    position left to position right, and return the reversed list.
+
+Thoughts Before Coding
+    - We will be keeping track of 2 lists
+        - One list will be the resulting list
+        - One list will be the reverse list
+    - We will need a way to keep track of the label of each node, while we will denote as 'i'
+        - if 'i' is less than 'left' OR greater than 'right'
+            - We can append the current node to our 'result' list
+        - If 'i' is between 'left -> right'
+            - We have to add the current node to the reverse list
+    - How can we determine when we can append the reverse list into our resulting list?
+        - If 'i + 1' is greater than 'right'
+            - We can append our reverse list into our resulting list
+
+Answer
+    - Create the following variables
+        - sHead, sentinel head of the resulting list
+        - sTail, sentinel tail of the resulting list, initially 'sHead'
+        - rHead, head of the reverse list, initially null
+        - rTail, tail of the reverse list, initially null
+        - node, our current location inside input list, initially 'head'
+        - i, our current label
+    - While 'node' is not equal to null
+        - Create a variable 'next' and set it to 'node.next'
+        - Set 'node.next' to null
+        - Increment 'i'
+        - If 'i' is less than 'left' OR greater than 'right'
+            - Set 'sTail.next' to 'node'
+            - Set 'sTail' to 'node'
+        - Else
+            - If 'rTail' is equal to null
+                - Set 'rTail' to 'node'
+            - Set 'node.next' to 'rHead'
+            - Set 'rHead' to 'node'
+            - If 'i + 1' is greater than 'right'
+                - Set 'sTail.next' to 'rHead'
+                - Set 'sTail' to 'rTail'
+        - Set 'node' to 'next'
+    - Return 'sHead.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes in the input list
+        - O(n), visit each node once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

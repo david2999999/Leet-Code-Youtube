@@ -1,0 +1,58 @@
+Question
+    There are n gas stations along a circular route, where the amount of gas
+    at the ith station is gas[i].
+
+    You have a car with an unlimited gas tank and it costs cost[i] of gas to
+    travel from the ith station to its next (i + 1)th station. You begin the
+    journey with an empty tank at one of the gas stations.
+
+    Given two integer arrays gas and cost, return the starting gas station's
+    index if you can travel around the circuit once in the clockwise direction,
+    otherwise return -1. If there exists a solution, it is guaranteed
+    to be unique
+
+Thoughts Before Coding
+    - The brute force approach will be to perform a nested 'for' loop
+      to test out all of the starting indices
+        - This approach will cost us O(n^2) time complexity
+    - We will need to optimize the brute force approach
+        - In the brute force approach
+            - For each of the starting index 'start'
+                - If we have failed to go around the circuit at 'i'
+                    - We will need to start again from 'start + 1'
+        - Instead of going backwards to 'start + 1'
+            - We can save some information
+        - If we are currently index 'i'
+            - We can get to the next station if
+                - current gas - cost[i] is greater than or equal to 0
+        - If we can not get to the next station at 'i + 1'
+            - We can save the amount of 'deficit' gas that we need
+                - deficit = cost - current gas tank
+            - Then we can have our starting index start from 'i + 1'
+        - After going to the last index
+            - If our remaining amount of gas, which we can call 'surplus'
+              is greater than or equal to 'deficit'
+                - This means we can go around the circuit once
+
+Answer
+    - Create the following variables
+        - start, keeps track of starting index, initially be 0
+        - surplus, the amount of gas in our current tank
+        - deficit, the amount of gas that we need
+    - Iterate through the indices of 'gas', denoted as 'i'
+        - Increment 'surplus' by 'gas[i]'
+        - If 'surplus' is greater than or equal to 'cost[i]'
+            - Decrement 'surplus' by 'cost[i]'
+        - Else
+            - Increment 'deficit' by 'cost[i] - surplus'
+            - Set 'start' to 'i + 1'
+            - Reset 'surplus' to 0
+    - If 'surplus' is greater than or equal to 'deficit'
+        - Return 'start'
+    - Else
+        - Return -1
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(1)

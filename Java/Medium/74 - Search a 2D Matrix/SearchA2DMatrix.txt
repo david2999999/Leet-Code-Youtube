@@ -1,0 +1,63 @@
+Question
+    Write an efficient algorithm that searches for a value in an m x n matrix.
+    This matrix has the following properties:
+
+    - Integers in each row are sorted from left to right.
+    - The first integer of each row is greater than the last integer of
+        the previous row.
+
+    Constraints:
+        - m == matrix.length
+        - n == matrix[i].length
+        - 1 <= m, n <= 100
+        - -10^4 <= matrix[i][j], target <= 10^4
+
+Thoughts Before Coding
+    - The brute force approach will be to perform a single iteration through
+      the input matrix
+    - A better approach is to start from the top right corner of the input matrix
+        - This is because
+            - If our 'target' value is less than the current cell
+                - Since the values on the left side is always smaller
+                    - We will want to search leftward
+                - The values below us are larger
+                    - So, we should not search downward
+            - If our 'target' value is greater than the current cell
+                - Since the values below us are always larger
+                    - We will search downward
+                - The values to the left are all smaller
+                    - So, we should note search leftward
+
+Answer
+    - Create two variables
+        - r, the first row, initially 0
+        - c, the last column, initially last column
+    - While 'r' is not out of bound, AND 'c' is greater than or equal to 0
+        - If 'matrix[r][c]' is equal to 'target'
+            - Return true
+        - Else if 'matrix[r][c]' is smaller than 'target'
+            - Set 'r' to 'r + 1'
+        - Else ('matrix[r][c]' is greater than 'target')
+            - Set 'c' to 'c - 1'
+    - Return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(m + n), where m,n are the number of rows and column
+        - O(m + n), the only direction is leftward + downward
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

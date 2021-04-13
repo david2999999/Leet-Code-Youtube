@@ -1,0 +1,97 @@
+Question
+    Given n non-negative integers a1, a2, ..., an , where each represents
+    a point at coordinate (i, ai). n vertical lines are drawn such that
+    the two endpoints of the line i is at (i, ai) and (i, 0). Find two lines,
+    which, together with the x-axis forms a container, such that the
+    container contains the most water.
+
+    Notice that you may not slant the container.
+
+    Constraints:
+        - n == height.length
+        - 2 <= n <= 3 * 10^4
+        - 0 <= height[i] <= 3 * 10^4
+
+Thoughts Before Coding
+    - We will want to start with the vertical lines that will allow
+      us to generate the most water first
+        - The pair that we should start out with should be the farthest
+          apart from each other
+            - This will allow us to maximize our width
+    - This means we can implement a two pointer approach
+        - We will keep track of the indices of our current left and
+          right boundaries which are our vertical lines
+        - Lets denote the indices of our left and right boundary
+          as 'i' and 'j'
+    - In each of the iteration
+        - We will want to find the current area between the two vertical
+          lines
+            - area = min(height[i], height[j]) * (j - i)
+        - After processing the current pair
+            - We would want to move the pointer with the shorter height
+
+Answer
+    - Create the following variables
+        - i, the current left boundary, initially 0
+        - j, the current right boundary, initially 'height.length - 1'
+        - max, max area
+    - While 'i' is less than 'j'
+        - Find the 'area' at the current container
+            - area = min(height[i], height[j]) * (j - i)
+        - Update 'max' if 'area' is greater
+        - If 'height[i]' is less than 'height[j]'
+            - increment 'i'
+        - Else
+            - Decrement 'j'
+    - Return 'max'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), two pointer approach
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

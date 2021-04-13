@@ -1,0 +1,50 @@
+Question
+    A robot is located at the top-left corner of a m x n grid
+    (marked 'Start' in the diagram below).
+
+    The robot can only move either down or right at any point in
+    time. The robot is trying to reach the bottom-right corner
+    of the grid (marked 'Finish' in the diagram below).
+
+    How many possible unique paths are there?
+
+Thoughts Before Coding
+    - In the 2D bottom up approach
+        - In each of the iteration
+            - We are only relying on values from rows 'i' and 'i - 1'
+            - This means we can create an array to represent our 2D matrix
+                - In each of the iteration
+                    - We will be updating the values from the previous row iteration
+
+Answer
+    - Create an array 'ways' to keep track of the total
+        number of unique ways
+    - Iterate through from 1 -> m, denoted as 'i'
+        - Iterate through from 1 -> n, denoted as 'j'
+            - If 'i' and 'j' is equal to 1
+                - Set 'ways[j]' to 1
+                - continue to next iteration
+            - Set 'ways[j]' to the sum of 'ways[j - 1] + ways[j]'
+    - Return 'ways[n]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(mn), where m,n are the values of the two input numbers
+        - O(mn), nested 'for' loop
+    - Space Complexity = O(n), where n is the number of columns
+        - O(n), 'ways' array
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

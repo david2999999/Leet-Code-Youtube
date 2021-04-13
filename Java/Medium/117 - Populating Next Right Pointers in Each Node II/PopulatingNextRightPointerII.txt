@@ -1,0 +1,83 @@
+Question
+    You are given a perfect binary tree where all leaves are on the
+    same level, and every parent has two children. The binary tree
+    has the following definition:
+
+    struct Node {
+        int val;
+        Node *left;
+        Node *right;
+        Node *next;
+    }
+
+    Populate each next pointer to point to its next right node.
+    If there is no next right node, the next pointer should be set to NULL.
+
+    Initially, all next pointers are set to NULL.
+
+    Follow up:
+        - You may only use constant extra space.
+        - Recursive approach is fine, you may assume implicit stack
+          space does not count as extra space for this problem.
+
+Thoughts Before Coding
+    - We will be implementing a level order traversal
+        - For each of the node 'x'
+            - We will want the children nodes of 'x'
+            - We will need to keep track of the previous children node 'prev' to connect
+              to the current children nodes of 'x'
+                - If 'x.right' is not null
+                    - We will want to set 'prev.next' to 'x.right'
+                - This case will also apply to 'x.left'
+                - Then we can traverse rightward to 'x.next'
+
+Answer
+    - Create a variable 'node' to keep track of our current location inside the input tree
+        - Initially 'root'
+    - While 'node' is not equal to 'null'
+        - Create the following variables
+            - left, the leftmost node on the next level
+            - prev, the previous child node
+            - x, our current node at the level
+        - While 'x' is not equal to null
+            - If 'x.left' is not null
+                - If 'left' is equal to 'null'
+                    - Set 'left' to 'x.left'
+                - If 'prev' is not equal to null
+                    - Set 'prev.next' to 'x.left'
+                    - Set 'prev' to 'x.left'
+                - Else
+                    - Set 'prev' to 'x.left'
+            - If 'x.right' is not null
+                - If 'left' is equal to 'null'
+                    - Set 'left' to 'x.right'
+                - If 'prev' is not equal to null
+                    - Set 'prev.next' to 'x.right'
+                    - Set 'prev' to 'x.right'
+                - Else
+                    - Set 'prev' to 'x.right'
+            - Set 'x' to 'x.next'
+        - Set 'node' to 'left'
+    - Return 'root'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes in the input tree
+        - O(n), visit each node once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

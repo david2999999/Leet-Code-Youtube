@@ -1,0 +1,60 @@
+Question
+    Given the root of a binary tree, return the zigzag level
+    order traversal of its nodes' values. (i.e., from left
+    to right, then right to left for the next level and
+    alternate between).
+
+Thoughts Before Coding
+    - Lets first go over a regular level order traversal
+        - In the level order traversal
+            - We created a 'queue' to keep track of our nodes
+            - In each of the iteration
+                - The size of the 'queue' determines the number of nodes at the current level
+            - The direction that we always go is 'left -> right'
+        - If we are currently moving left -> right
+            - If we are adding node values to the end of the list
+                - We are essentially 'left -> right'
+            - If we are adding node values to the front of the list
+                - We are essentially 'right -> left'
+
+Answer
+    - Lets validate the input parameter
+        - if 'root' is null
+            - Return an empty
+    - Create a list 'result' to keep track of all node values
+    - Create a 'queue' to implement our level order traversal
+    - Create a boolean variable 'isRight', initially true
+    - Add 'root' to 'queue'
+    - While 'queue' is not empty
+        - Create a linked list 'values' to keep track of the node values at the current level
+        - Retrieve the 'size' of 'queue'
+        - Iterate through the indices from '0 -> size - 1'
+            - Poll a 'node' from 'queue'
+            - If 'isRight'
+                - Add 'node.val' to 'values'
+            - Else
+                - Add 'node.val' to the front of 'values'
+            - If 'node.left' is not null
+                - Add 'node.left' to 'queue'
+            - If 'node.right' is not null
+                - Add 'node.right' to 'queue'
+        - Add 'values' to 'result'
+        - Set 'isRight' to '!isRight'
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(2 * n) = O(n), where n is the number of nodes
+        - O(2 * n), result list + queue
+
+
+
+
+
+
+
+
+
+
+

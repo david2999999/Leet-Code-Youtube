@@ -1,0 +1,63 @@
+Question
+    Given a triangle array, return the minimum path sum from top to bottom.
+
+    For each step, you may move to an adjacent number of the row below. More formally, if you are on index i
+    on the current row, you may move to either index i or index i + 1 on the next row.
+
+    Constraints:
+        - 1 <= triangle.length <= 200
+        - triangle[0].length == 1
+        - triangle[i].length == triangle[i - 1].length + 1
+        - -10^4 <= triangle[i][j] <= 10^4
+
+Thoughts Before Coding
+    - In the recursive approach
+        - The solution is not efficient enough due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the minimum path 'sum' at the current 'r, c'
+            - This means we can cache 'r, c' with 'sum'
+
+Answer
+    - Create a 2D matrix 'memo' to cache previously calculated results
+        - The rows represent 'r'
+        - The columns represent 'c'
+        - The values represent minimum path 'sum'
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - r, current row
+            - c, current column
+            - triangle, input matrix
+            - memo, cache
+        - What is the base case?
+            - If 'r' is at the last row
+                - Return 'triangle.get(r).get(c)'
+            - If 'memo[r][c]' is not equal to 0
+                - Return 'memo[r][c]'
+        - In each of the recursive call
+            - Recursively find the 'sum1' of picking the value at (r + 1, c)
+                - r => r + 1
+            - Recursively find the 'sum2' of picking the value at (r + 1, c + 1)
+                - r => r + 1
+                - c => c + 1
+            - Put 'min(sum1, sum2) + triangle.get(r).get(c)' inside 'memo[r][c]'
+            - Return 'memo[r][c]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(m*n), where 'm,n' are the number of rows and columns
+        - O(m*n), there are 'm*n' possible states with 'r, c'
+    - Space Complexity = O(m*n) + O(m) = O(m*n), where 'm,n' are the number of rows and columns
+        - O(m*n), memo
+        - O(m), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+

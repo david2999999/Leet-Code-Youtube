@@ -1,0 +1,31 @@
+Question
+    Given the root of a binary tree, return the inorder
+    traversal of its nodes' values.
+
+Thoughts Before Coding
+    - We will be implementing the recursive inorder traversal
+        - The direction of inorder traversal is 'left -> root -> right'
+
+Answer
+    - Create a list 'result' to keep track of all node values
+    - Implement the recursive inorder traversal
+        - What parameters do we need?
+            - node, our current location
+            - result, list of all node values
+        - What is the base case?
+            - if 'node' is null
+                - Return from the recursive call
+        - In each of the recursive call
+            - Recursively traverse to left subtree
+                - node => node.left
+            - Add 'node.val' to 'result'
+            - Recursively traverse to right subtree
+                - node => node.right
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes in the input tree
+        - O(n), visit each node once
+    - Space Complexity = O(h) + O(n) = O(n), where 'n' is the number of nodes in the input tree and h is the height of the input tree
+        - O(h), recursive call stack memory
+        - O(n), result list

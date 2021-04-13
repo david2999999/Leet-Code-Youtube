@@ -1,0 +1,73 @@
+Question
+    Determine if a 9 x 9 Sudoku board is valid. Only the filled
+    cells need to be validated according to the following rules:
+
+    - Each row must contain the digits 1-9 without repetition.
+    - Each column must contain the digits 1-9 without repetition.
+    - Each of the nine 3 x 3 sub-boxes of the grid must contain
+      the digits 1-9 without repetition.
+
+    Note:
+        - A Sudoku board (partially filled) could be valid but is
+            not necessarily solvable.
+
+        - Only the filled cells need to be validated according to
+            the mentioned rules.
+
+Thoughts Before Coding
+    - We will need a quick way to determine if a value has appeared at the current 'row', 'column'
+      and 'sub-box'
+        - We can create a string representation of each of the parts to be stored inside a HashSet
+          for quick lookup
+            - If we are currently at 'r, c' with the value 'x'
+                - String representation of row = (row)-(row number)#(x)
+                - String representation of col = (co)-(col number)#(x)
+                - String representation of sub-box
+                    - We can use division
+                        - We will determine the row using 'r / 3'
+                        - Then determine the column using 'c / 3'
+                    - (box)-(r/3)-(c/3)#(x)
+
+Answer
+    - Create a HashSet 'seen' to keep track of the string representations
+    - Iterate through the rows and columns of 'board', denoted as 'r, c'
+        - If 'board[r][c]' is '.'
+             - continue to next iteration
+        - Generate the string representation 'x' for 'r'
+            - x = (row)-(r)#(board[r][c])
+            - If 'x' is already contained inside 'seen'
+                - Return false
+            - Add 'x' to 'seen'
+        - Generate the string representation 'y' for 'c'
+            - y = (col)-(c)#(board[r][c])
+            - If 'y' is already contained inside 'seen'
+                - Return false
+            - Add 'y' to 'seen'
+        - Generate the string representation 'z' for sub-box at 'r, c'
+            - z = (box)-(r/3)-(c/3)#(board[r][c])
+            - If 'z' is already contained inside 'seen'
+                - Return false
+            - Add 'z' to 'seen'
+    - Return true
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(mn), where m,n are the total number of rows and columns
+        - O(mn), visit each cell once
+    - Space Complexity = O(3 mn) = O(mn), where m,n are the total number of rows and columns
+        - O(3 mn), 3 string representation for each cell
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

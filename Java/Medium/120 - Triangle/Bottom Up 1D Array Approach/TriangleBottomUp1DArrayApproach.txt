@@ -1,0 +1,55 @@
+Question
+    Given a triangle array, return the minimum path sum from top to bottom.
+
+    For each step, you may move to an adjacent number of the row below. More formally, if you are on index i
+    on the current row, you may move to either index i or index i + 1 on the next row.
+
+    Constraints:
+        - 1 <= triangle.length <= 200
+        - triangle[0].length == 1
+        - triangle[i].length == triangle[i - 1].length + 1
+        - -10^4 <= triangle[i][j] <= 10^4
+
+Thoughts Before Coding
+    - In the 2D bottom up approach
+        - In each of the iteration
+            - We are only relying on values from the row 'r + 1'
+        - This means we can create an array to represent our 2D matrix
+            - In each of the row iteration
+                - We will be update the values from the previous iteration
+
+Answer
+    - Create an array 'minSum' to keep track of the minimum path sum
+    - iterate through the indices from 'triangle.size() - 1 -> 0', denoted as 'r'
+        - Create a variable 'prev' to keep track of the previous value at 'r + 1, c + 1'
+            - If 'r' is not at the last row
+                - Set 'prev' to 'minSum[r + 1]'
+            - Else
+                - Set 'prev' to 0
+        - Iterate through the column from 'r -> 0', denoted as 'c'
+            - If 'r' is equal to the last row
+                - Set 'prev' to 'minSum[c]'
+                - Place 'triangle.get(r).get(c)' at 'minSum[c]'
+                - continue to next iteration
+            - Create a variable 'cur' and set it to 'minSum[c]'
+            - Pick the smaller value 'x' between 'cur' and 'prev'
+            - Place 'x' at 'minSum[c]'
+            - Increment 'minSum[c]' by 'triangle.get(r).get(c)'
+            - Set 'prev' to 'cur'
+    - Return 'minSum[0]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n^2), where 'n' is the number of rows
+        - O(n^2), nested 'for' loop
+    - Space Complexity = O(n), where 'n' is the number of rows
+        - O(n), 'minSum' array
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+Question
+    You are given a perfect binary tree where all leaves are on the
+    same level, and every parent has two children. The binary tree
+    has the following definition:
+
+    struct Node {
+        int val;
+        Node *left;
+        Node *right;
+        Node *next;
+    }
+
+    Populate each next pointer to point to its next right node.
+    If there is no next right node, the next pointer should be set to NULL.
+
+    Initially, all next pointers are set to NULL.
+
+    Follow up:
+        - You may only use constant extra space.
+        - Recursive approach is fine, you may assume implicit stack
+          space does not count as extra space for this problem.
+
+Thoughts Before Coding
+    - We will be implementing a level order traversal
+        - For each of the node 'x', we will first want to connect the next pointers of its
+          children nodes
+            - 'x.left.next' to 'x.right'
+        - We will also need to handle the case where the right child of 'x' needed to be
+          connected to the left child of 'x.next'
+            - 'x.right.next' to 'x.next.left'
+
+Answer
+    - Lets validate the input parameter
+        - if 'root' is null
+            - Return null
+    - Create a variable 'node' to keep track of our current starting position at each level, initially
+      'root'
+    - While 'node.left' is not null
+        - Create two variables
+            - left, set this 'node.left'
+            - x, our current node at the current level
+        - While 'x' is not null
+            - Set 'x.left.next' to 'x.right'
+            - If 'x.next' is not null
+                - Set 'x.right.next' to 'x.next.left'
+            - Set 'x' to 'x.next'
+        - Set 'node' to 'left'
+    - Return 'root'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+Question
+    Given a m x n grid filled with non-negative numbers, find a path
+    from top left to bottom right, which minimizes the sum of all numbers
+    along its path.
+
+    Note: You can only move either down or right at any point in time.
+
+    Constraints:
+        - m == grid.length
+        - n == grid[i].length
+        - 1 <= m, n <= 200
+        - 0 <= grid[i][j] <= 100
+
+Thoughts Before Coding
+    - Lets convert the top down memoization to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached the 'r, c' with the minimum path sum 'minSum'
+                - This means we can create a 2D matrix 'minSum' to keep track of the minimum path sum
+                  for all combinations of 'r, c'
+    - What are the default values inside 'minSum' matrix?
+        - When 'r, c' is at the bottom right corner
+            - The default value will be 'grid[r][c]'
+
+Answer
+    - Create a 2D matrix 'minSum' to keep track of the minimum path sum for all combinations of 'r, c'
+    - Iterate through the indices from 'grid.length - 1 -> 0', denoted as 'r'
+        - Iterate through the indices from 'grid[r].length - 1 -> 0', denoted as 'c'
+            - if 'r' and 'c' is at the bottom right corner
+                - Set 'minSum[r][c]' to 'grid[r][c]'
+                - continue to next iteration
+            - Set 'minSum[r][c]' to 'Integer.MAX_VALUE'
+            - If 'r' is not at the last row
+                - Update 'minSum[r][c]' if 'minSum[r + 1][c] + grid[r][c]' is smaller
+            - If 'c' is not at the last column
+                - Update 'minSum[r][c]' if 'minSum[r][c + 1] + grid[r][c]' is smaller
+    - Return 'minSum[0][0]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(mn), where m,n are number of rows and columns
+        - O(mn), nested 'for' loop
+    - Space Complexity = O(mn), where m,n are number of rows and columns
+        - O(mn), 'minSum' matrix
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,73 @@
+Question
+    Given strings s1, s2, and s3, find whether s3 is formed by an interleaving of s1 and s2.
+
+    An interleaving of two strings s and t is a configuration where they are
+    divided into non-empty substrings such that:
+        - s = s1 + s2 + ... + sn
+        - t = t1 + t2 + ... + tm
+        - |n - m| <= 1
+
+    The interleaving is s1 + t1 + s2 + t2 + s3 + t3 + ... or t1 + s1 + t2 + s2 + t3 + s3 + ...
+
+    Note: a + b is the concatenation of strings a and b.
+
+    Constraints:
+        - 0 <= s1.length, s2.length <= 100
+        - 0 <= s3.length <= 200
+        - s1, s2, and s3 consist of lower-case English letters.
+
+Thoughts Before Coding
+    -  We will need a way to keep track of our current location inside 's1' and 's2'
+        - We can have two pointers 'i' and 'j' to indicate our current location inside 's1' and
+          's2' respectively
+        - Then we can find our current location inside 's3' using 'i + j'
+        - In each of the recursive call
+            - We have two choices
+                - If the current character at index 'i' inside 's1' is equal to the character
+                  at index 'i + j' inside 's3'
+                    - Then we can move 'i' forward
+                - If the current character at index 'j' inside 's2' is equal to the character
+                  at index 'i + j' inside 's3'
+                    - Then we can move 'j' forward
+            - We will check if we can interleave the strings using these 2 choices
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - s1, input string
+            - s2, input string
+            - s3, input string
+            - i, our current location inside 's1'
+            - j, our current location inside 's2'
+        - What is the base case?
+            - If 'i + j' is greater than the length of 's3'
+                - Return false
+            - If 'i + j' is equal to the length of 's3'
+                - Return true if 'i' is after the last character of 's1' and 'j' is
+                  after the last character of 's2'
+                - Else, return false
+        - In each of the recursive calls
+            - If 'i' is not out of bound AND the current character at index 'i' inside 's1' is
+              equal to the character at index 'i + j' inside 's3'
+                - Recursively check if we can interleave the strings by moving 'i' forward
+                    - i => i + 1
+                - Return true if the recursive call is true
+            - If 'j' is not out of bound AND the current character at index 'j' inside 's2' is
+              equal to the character at index 'i + j' inside 's3'
+                - Recursively check if we can interleave the strings by moving 'j' forward
+                    - j => j + 1
+                - Return true if the recursive call is true
+            - Return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2^(m + n)), where m,n are the length of the two input strings
+        - O(2^(m + n)), each recursive call has 2 choices with a depth of 'm + n'
+    - Space Complexity = O(m + n), where m,n are the length of the two input strings
+        - O(m + n), recursive call stack memory
+
+
+
+
+
+
+

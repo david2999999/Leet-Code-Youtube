@@ -1,0 +1,63 @@
+Question
+    Given an m x n matrix. If an element is 0, set its entire row
+    and column to 0. Do it in-place.
+
+    Follow up:
+        - A straight forward solution using O(mn) space is probably a bad idea.
+        - A simple improvement uses O(m + n) space, but still not the best
+          solution.
+        - Could you devise a constant space solution?
+
+Thoughts Before Coding
+    - We will be implementing a constant space approach
+        - We will be using the first row and first column to indicate if we are suppose to fill
+          the row/column with 0
+            - If the cell at 'matrix[r][c]' is equal to 0
+                - Set 'matrix[r][0]' to 0
+                - Set 'matrix[0][c]' to 0
+        - Before we start using the first row and column
+            - We will first need to check if there is a zero inside first row and column
+            - We can create two variables to indicate this side case
+
+Answer
+    - Create two variables
+        - rowHasZero, boolean variable to indicate if the first row has zeros
+        - colHasZero, boolean variable to indicate if the first column has zeros
+    - Iterate through the columns, denoted as 'c'
+        - If 'matrix[0][c]' is equal to 0
+            - Set 'rowHasZero' to true
+            - break from the loop
+    - Iterate through the rows, denoted as 'r'
+        - If 'matrix[r][0]' is equal to 0
+            - set 'colHasZero' to true
+            - break from the loop
+    - Iterate through the rows from 1 -> last row, denoted as 'r'
+        - Iterate through the columns from 1 -> last col, denoted as 'c'
+            - If 'matrix[r][c]' is equal to 0
+                - Set 'matrix[r][0]' to 0
+                - Set 'matrix[0][c]' to 0
+    - Iterate through the columns from 1 -> last col, denoted as 'c'
+        - If 'matrix[0][c]' is equal to 0
+            - Fill all of the cells inside column 'c' to 0
+    - Iterate through the rows, denoted as 'r'
+        - If 'matrix[r][0]' is equal to 0
+            - Fill all of the cells inside row 'r' to 0
+    - If 'rowHasZero' is true
+        - Fill the first row with 0
+    - If 'colHasZero' is true
+        - Fill the first column with 0
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2 * mn) = O(mn), where m,n are the number of rows and column
+        - O(2 * mn), two iteration
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+

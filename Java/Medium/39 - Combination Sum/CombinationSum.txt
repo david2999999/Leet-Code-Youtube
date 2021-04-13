@@ -1,0 +1,66 @@
+Question
+    Given an array of distinct integers candidates and a target integer target,
+    return a list of all unique combinations of candidates where the chosen
+    numbers sum to target. You may return the combinations in any order.
+
+    The same number may be chosen from candidates an unlimited number of times.
+    Two combinations are unique if the frequency of at least one of the chosen
+    numbers is different.
+
+    It is guaranteed that the number of unique combinations that sum up to
+    target is less than 150 combinations for the given input.
+
+Thoughts Before Coding
+    - We will be implementing a recursive backtracking approach
+        - For each of the starting index 'i'
+            - We will be scanning forward from 'i -> end of array', denoted as 'j' to find
+              an element 'x' to be included in our combination
+                - We are only allowed to pick elements 'x' that are less
+                  than or equal to 'target'
+                - After picking 'x' to be added in our combination
+                    - we will continue our search for the elements for 'target - x'
+                - After accounting 'x'
+                    - We will backtrack our steps by removing 'x'
+                    - This will allow us to give space to the next element and also
+                      finding the next combination
+        - When 'target' reaches 0
+            - We have found a valid combination
+
+Answer
+    - Create a list 'result' to keep track of all combinations
+    - Implement the recursive backtracking approach
+        - What parameters do we need?
+            - i, the current starting index
+            - candidates, input array
+            - target, our current target
+            - comb, our current combination
+            - result, list of all combinations
+        - What is the base case?
+            - When 'target' is equal to 0
+                - Add a copy of 'comb' to 'result'
+                - Return from the recursive call
+        - In each of the recursive call
+            - Iterate through the elements from 'i -> end of the array', denoted as 'j'
+                - if 'candidates[j]' is greater than 'target'
+                    - continue to next iteration
+                - Add 'candidates[j]' to 'comb'
+                - recursively find the rest of the combination
+                    - i => j
+                    - target => target - candidates[j]
+                - Remove the last element from 'comb'
+    - Return 'result'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

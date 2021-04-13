@@ -1,0 +1,52 @@
+Question
+    Given a triangle array, return the minimum path sum from top to bottom.
+
+    For each step, you may move to an adjacent number of the row below. More formally, if you are on index i
+    on the current row, you may move to either index i or index i + 1 on the next row.
+
+    Constraints:
+        - 1 <= triangle.length <= 200
+        - triangle[0].length == 1
+        - triangle[i].length == triangle[i - 1].length + 1
+        - -10^4 <= triangle[i][j] <= 10^4
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached 'r, c' with the minimum path sum 'minSum'
+                - This means we can create a 2D matrix 'minSum' to keep track of the minimum
+                  path sum for all combinations of 'r, c'
+    - What are the default values inside the 'minSum' matrix?
+        - When 'r' is at the last row
+            - We only have 1 element left
+                - This means we can place the last element at 'minSum[r][c]'
+
+Answer
+    - Create a 2D matrix 'minSum' to keep track of the minimum
+      path sum for all combinations of 'r, c'
+    - iterate through the indices from 'triangle.size() - 1 -> 0', denoted as 'r'
+        - Iterate through the column from 'r -> 0', denoted as 'c'
+            - If 'r' is equal to the last row
+                - Place 'triangle.get(r).get(c)' at 'minSum[r][c]'
+                - continue to next iteration
+            - Pick the smaller value 'x' between 'minSum[r + 1][c]' and 'minSum[r + 1][c + 1]'
+            - Place 'x' at 'minSum[r][c]'
+            - Increment 'minSum[r][c]' by 'triangle.get(r).get(c)'
+    - Return 'minSum[0][0]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n^2), where 'n' is the number of rows
+        - O(n^2), nested 'for' loop
+    - Space Complexity = O(n^2), where 'n' is the number of rows
+        - O(n^2), 'minSum' matrix
+
+
+
+
+
+
+
+
+
+

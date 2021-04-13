@@ -1,0 +1,58 @@
+Question
+    Given a string s, return the longest palindromic substring in s.
+
+    Constraints:
+        - 1 <= s.length <= 1000
+        - s consist of only digits and English letters (lower-case and/or upper-case)
+
+Thoughts Before Coding
+    - A palindromic string is a string that can be read the same way
+     forwards and backwards
+        - This means if we expand outward from the center of the string
+        - The pairs of characters will be the same
+    - For each of the index 'i'
+        - We have two choices
+            - We can expand outward from 'i' (odd number of character)
+            - Expand outward from 'i' and 'i + 1' (even number of characters)
+    - We will want to keep track of the longest palindromic substring and also
+      the starting index of the substring
+
+Answer
+    - Create the following variables
+        - maxLength, maximum number of palindromic substring
+        - start, the starting index of the substring, initially -1
+    - Iterate through the indices of 's', denoted as 'i'
+        - Find the length of the palindromic substring 'length1' if we
+          expand from 'i'
+        - Find the length of the palindromic substring 'length2' if we
+          expand from 'i' and 'i + 1'
+        - We will take the larger value between 'length1' and 'length2', which
+          we will denote as 'length'
+        - If 'length' is greater than 'maxLength'
+            - Update 'maxLength' to 'length'
+            - Update 'start' to 'i - (length - 1) / 2'
+    - Return a substring from 'start -> start + maxLength - 1'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n* (2 * n)) + O(k) = O(n^2), where 'n' is the length of
+      the input string and 'k' is the length of the resulting substring
+        - O(n* (2 * n)), for each of the index 'i'
+            - We expand outward twice to find 'even/odd' palindromic substrings
+        - O(k), result substring
+    - Space Complexity = O(k), where 'k' is the length of the resulting substring
+        - O(k), generate result substring
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

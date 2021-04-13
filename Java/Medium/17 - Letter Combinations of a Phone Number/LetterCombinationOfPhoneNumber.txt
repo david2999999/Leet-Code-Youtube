@@ -1,0 +1,68 @@
+Question
+    Given a string containing digits from 2-9 inclusive,
+    return all possible letter combinations that the number
+    could represent. Return the answer in any order.
+
+    A mapping of digit to letters (just like on the
+    telephone buttons) is given below. Note that 1 does
+    not map to any letters.
+
+    Constraints:
+        - 0 <= digits.length <= 4
+        - digits[i] is a digit in the range ['2', '9'].
+
+Thoughts Before Coding
+    - We can implement a recursive backtracking approach
+        - For each of the digit 'd' at index 'i'
+            - We will retrieve the characters/mappings associated with
+              the letter 'd'
+            - Then for each of the character 'c'
+                - We can append 'c' to our running string
+                - After we have processed 'c'
+                    - We can backtrack our steps by removing 'c' from
+                      our current string
+                    - Then will allow us to create space for the
+                      next character mapping
+
+Answer
+    - Lets validate the input parameter
+        - if 'digits' is empty
+            - Return an empty list
+    - Create a list 'result' to keep track of all letter combinations
+    - Implement the recursive backtracking approach
+        - What parameters do we need?
+            - i, the current index
+            - str, StringBuilder to keep track of the current letter combination
+            - result, list of all letter combinations
+            - digits, the input string
+        - What is the base case?
+            - If 'i' is out of bound, we have processed all of the digits
+                - Add a string represent of 'str' to 'result'
+                - return from our recursive call
+        - In each of the recursive call
+            - retrieve the digit 'd' at index 'i' inside 'digits'
+            - Iterate through the mappings of 'd', denoted as 'c'
+                - Append 'c' to 'str'
+                - Recursively find the rest of the combination
+                    - i => i + 1
+                - Remove the character 'c' from 'str'
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(3^m * 4^n), where m is the number of digits with '3' mappings
+       and 'n' is the number of digits with '4' mappings
+        - O(3^m * 4^n), recursive backtracking approach
+    - Space Complexity = O(3^m * 4^n) + O(m + n) = O(3^m * 4^n), where m is the number of digits with '3' mappings
+        and 'n' is the number of digits with '4' mappings
+        - O(3^m * 4^n), 'result' list
+        - O(m + n), recursive call stack memory
+
+
+
+
+
+
+
+
+
+

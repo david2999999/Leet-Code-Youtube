@@ -1,0 +1,69 @@
+Question
+    Given the head of a linked list, remove the nth node
+    from the end of the list and return its head.
+
+    Follow up: Could you do this in one pass?
+
+    Constraints:
+        - The number of nodes in the list is sz.
+        - 1 <= sz <= 30
+        - 0 <= Node.val <= 100
+        - 1 <= n <= sz
+
+Thoughts Before Coding
+    - The node that we are trying to remove is at 'n' from the end of the list
+        - The node that we are trying to reach is at 'n + 1' from the end of the list
+    - Lets denote 'n + 1' as 'm' and the length of the list as 'k'
+        - The node is located at 'm' from the end of the list
+        - The node is locate at 'k - m + 1' from the start of the list
+    - We can implement a two pointer approach
+        - One pointer 'fast' will first move forward 'm' steps
+        - After 'fast' moved 'm' steps
+            - The 'slow' moves in the same pace as 'fast' until 'fast' reaches
+              to 'null' node
+            - The distance between 'fast' and 'slow' is equal to 'm'
+                - Then when 'fast' reaches 'k + 1'
+                    - The 'slow' pointer will be at 'k + 1 - m' from the start
+                      of the list
+    - Then we can disconnect 'target' node using 'slow' pointer
+
+Answer
+    - Create the following variables
+        - sHead, sentinel head
+        - slow, initially 'sHead'
+        - fast, initially 'sHead'
+    - Set 'sHead.next' to 'head'
+    - Iterate through the indices from '0 -> n', denoted as 'i'
+        - Set 'fast' to 'fast.next'
+    - While 'fast' is not null
+        - Set 'fast' to 'fast.next'
+        - Set 'slow' to 'slow.next'
+    - Set 'slow.next' to 'slow.next.next'
+    - Return 'sHead.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(k), where 'k' is the length of the input list
+        - O(k), visit each node once
+    - Space Complexity = O(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+Question
+    Given a triangle array, return the minimum path sum from top to bottom.
+
+    For each step, you may move to an adjacent number of the row below. More formally, if you are on index i
+    on the current row, you may move to either index i or index i + 1 on the next row.
+
+    Constraints:
+        - 1 <= triangle.length <= 200
+        - triangle[0].length == 1
+        - triangle[i].length == triangle[i - 1].length + 1
+        - -10^4 <= triangle[i][j] <= 10^4
+
+Thoughts Before Coding
+    - We will be implementing a brute force recursive approach
+        - For each of the cell (r, c)
+            - If we pick the value at the current cell
+                - We have two choices in the next row
+                    - The two choices are (r + 1, c) and (r + 1, c + 1)
+            - We will want to pick the choice that will give us the smaller sum
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - r, current row
+            - c, current column
+            - triangle, input matrix
+        - What is the base case?
+            - If 'r' is at the last row
+                - Return 'triangle.get(r).get(c)'
+        - In each of the recursive call
+            - Recursively find the 'sum1' of picking the value at (r + 1, c)
+                - r => r + 1
+            - Recursively find the 'sum2' of picking the value at (r + 1, c + 1)
+                - r => r + 1
+                - c => c + 1
+            - Return 'min(sum1, sum2) + triangle.get(r).get(c)
+    - This approach is not efficient enough due to overlapping recursive calls
+        - We can optimize this solution using memoization
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2^r), where 'r' is the number of rows
+        - O(2^r), each recursive call has 2 choices and a depth of 'r'
+    - Space Complexity = O(r), where 'r' is the number of rows
+        - O(r), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+

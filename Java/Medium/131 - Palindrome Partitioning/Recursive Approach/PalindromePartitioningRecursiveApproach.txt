@@ -1,0 +1,64 @@
+Question
+    Given a string s, partition s such that every substring of the partition
+    is a palindrome. Return all possible palindrome partitioning of s.
+
+    A palindrome string is a string that reads the same backward as forward.
+
+    Constraints:
+        - 1 <= s.length <= 16
+        - s contains only lowercase English letters.
+
+Thoughts Before Coding
+    - For each of the starting index 'i'
+        - We will want to find a palindrome from 'i -> j', where 'j >= i'
+        - After finding a palindrome from 'i -> j'
+            - We will want to find the palindrome partitions from 'j + 1'
+            - Then we can prepend the current palindrome to all of the
+               palindrome partitions from 'j + 1'
+    - How can we check if the current substring from 'i -> j' is a palindrome?
+        - We can implement a two pointer approach
+            - One pointer 'i' will be on the left side
+            - One pointer 'j' will be on the right side
+        - In each of the iteration
+            - We will be comparing the two characters at the indices before
+              moving both of the indices toward the center
+            - We will want to make sure the two characters are the same
+
+Answer
+    - Validate the input parameter
+        - If 's' is empty
+            - Return an empty list
+    - Implementing our recursive approach
+        - What parameters do we need?
+            - i, our current starting index, initially 0
+            - s, input string
+        - In each of the recursive call
+            - Create a list 'result' to hold palindrome partitions
+            - If 'i' is out of bound
+                - Add a empty list to 'result'
+                - Return 'result'
+            - Create a StringBuilder 'str' to keep track of the current substring
+            - Iterate through the indices from 'i -> end of string s', denoted as 'j'
+                - Append the current character at 'j' to 'str'
+                - If the current substring from indices 'i -> j' is a palindrome
+                    - Recursively find the 'partitions' from 'j + 1'
+                    - Iterate through the 'partitions', denoted as 'par'
+                        - Create a list 'partition'
+                        - Add a string representation of 'str' to 'partition'
+                        - Add all of 'par' to 'partition'
+                        - Add 'partition' to 'result'
+            - return 'result'
+
+
+
+
+
+
+
+
+
+
+
+
+
+

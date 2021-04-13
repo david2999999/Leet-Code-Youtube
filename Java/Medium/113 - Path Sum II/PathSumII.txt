@@ -1,0 +1,58 @@
+Question
+    Given the root of a binary tree and an integer targetSum, return all
+    root-to-leaf paths where each path's sum equals targetSum.
+
+    A leaf is a node with no children.
+
+Thoughts Before Coding
+    - We will be implementing a recursive backtracking approach
+        - We will need to keep track of our current node values in the path and also
+          the sum of the node values
+        - Then when we reach a leaf node (both of the children are null)
+             - We can check if our current sum is equal to the 'targetSum'
+             - if 'sum' is equal to 'targetSum'
+                - We will add the current path to the resulting list
+        - After we finish one path
+            - We can backtrack our steps by removing the last added node value in our current path
+                - This will allow us to take on a different path
+
+Answer
+    - Create a list 'result' to keep track of all paths that has a sum of 'targetSum'
+    - Implement a recursive backtracking approach
+        - What do we need?
+            - node, the current node we are visiting
+            - path, the current path
+            - sum, the current sum
+            - targetSum, input target sum
+            - result, list of all paths
+        - What is the base case?
+            - If 'node' is null
+                - Return from the recursive call
+        - In each of the recursive call
+            - Add 'node.val' to 'sum'
+            - Add 'node.val' to 'path'
+            - If 'node.left' is null AND 'node.right' is null AND 'sum' is equal to 'targetSum'
+                - Add a copy of 'path' to 'result'
+            - Recursively traverse to the left subtree
+                - node => node.left
+            - Recursively traverse to the right subtree
+                - node => node.right
+            - Remove the last element from 'path'
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), we visit each node once
+    - Space Complexity = O(2 * h), where 'h' is the height of the tree
+        - O(2 * h), recursive call stack memory and 'path' list
+
+
+
+
+
+
+
+
+
+
+

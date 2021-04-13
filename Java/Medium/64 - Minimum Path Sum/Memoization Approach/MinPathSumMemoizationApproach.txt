@@ -1,0 +1,57 @@
+Question
+    Given a m x n grid filled with non-negative numbers, find a path
+    from top left to bottom right, which minimizes the sum of all numbers
+    along its path.
+
+    Note: You can only move either down or right at any point in time.
+
+    Constraints:
+        - m == grid.length
+        - n == grid[i].length
+        - 1 <= m, n <= 200
+        - 0 <= grid[i][j] <= 100
+
+Thoughts Before Coding
+    - In the recursive approach
+        - It was very inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive call calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the minimum path 'sum' at the current 'r, c'
+            - This means we can cache 'r, c' with 'sum'
+
+Answer
+    - Create a 2D matrix 'memo' to cache previously calculated results
+        - The rows represent 'r'
+        - The columns represent 'c'
+        - The values represent minimum path 'sum'
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - r, the current row
+            - c, the current column
+            - grid, input grid
+            - memo, cache
+        - What is the base case?
+            - When 'r, c' is at the bottom right corner
+                - Return 'grid[r][c]'
+            - If 'memo[r][c]' is not equal to 0
+                - Return 'memo[r][c]'
+        - In each of the recursive call
+            - Create a variable 'minSum' to keep track of the minimum sum, initially 'Integer.MAX_VALUE'
+            - If 'r' is not at the last row
+                - Recursively find the 'sum1' if we move downward
+                    - r => r + 1
+                - Update 'minSum' if 'sum1 + grid[r][c]' is smaller
+            - If 'c' is not at the last column
+                - Recursively find the 'sum2' if we move rightward
+                    - c => c + 1
+                - Update 'minSum' if 'sum2 + grid[r][c]' is smaller
+            - Put 'minSum' at 'memo[r][c]'
+            - Return 'minSum'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(m*n), where m,n are the number of rows and columns
+        - O(m*n), there are 'm*n' possible states with 'r, c'
+    - Space Complexity = O(m + n) + O(m*n) = O(m*n), where m,n are the number of rows and columns
+        - O(m + n), recursive call stack memory
+        - O(m*n), 'memo' matrix

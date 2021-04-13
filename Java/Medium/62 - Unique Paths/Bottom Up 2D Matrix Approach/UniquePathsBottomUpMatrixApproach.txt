@@ -1,0 +1,55 @@
+Question
+    A robot is located at the top-left corner of a m x n grid
+    (marked 'Start' in the diagram below).
+
+    The robot can only move either down or right at any point in
+    time. The robot is trying to reach the bottom-right corner
+    of the grid (marked 'Finish' in the diagram below).
+
+    How many possible unique paths are there?
+
+Thoughts Before Coding
+    - We will need to convert the memoization a bottom up approach
+        - Where do we start?
+            - In the memoization
+                - We have cached 'm, n' with the number of unique 'ways'
+                - This means we can create a 2D matrix 'ways' to keep track of the total
+                  number of unique ways for all combinations of 'm, n'
+    - What are the default values inside the 'ways' matrix?
+        - When 'm' AND 'n' is equal to 1
+            - We have 1 possible way
+        - When 'm' OR 'n' is equal to 0
+            - We have failed 1 way (number of ways is equal to 0)
+
+Answer
+    - Create a 2D matrix 'ways' to keep track of the total
+        number of unique ways for all combinations of 'm, n'
+    - Iterate through from 1 -> m, denoted as 'i'
+        - Iterate through from 1 -> n, denoted as 'j'
+            - If 'i' and 'j' is equal to 1
+                - Set 'ways[i][j]' to 1
+                - continue to next iteration
+            - Set 'ways[i][j]' to the sum of 'ways[i][j - 1] + ways[i - 1][j]'
+    - Return 'ways[m][n]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(mn), where m,n are the values of the two input numbers
+        - O(mn), nested 'for' loop
+    - Space Complexity = O(mn), where m,n are the values of the two input numbers
+        - O(mn), 'ways' matrix
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+Question
+    Given an integer array nums of unique elements, return all possible
+    subsets (the power set).
+
+    The solution set must not contain duplicate subsets. Return the
+    solution in any order.
+
+    Constraints:
+        - 1 <= nums.length <= 10
+        - -10 <= nums[i] <= 10
+        - All the numbers of nums are unique.
+
+Thoughts Before Coding
+    - We will be implementing a recursive backtracking approach
+        - For each of the element 'x' at index 'i'
+            - After adding 'x' to our current subset
+                - We will want to continue our search for more elements from 'i + 1'
+            - After accounting for 'x', we will want to backtrack of steps
+                - This can be done by removing last element from our current subset
+        - Since we want to find all possible subsets
+            - In each of the recursive call
+                - We will want to add the current subset into our resulting list
+
+Answer
+    - Create a list of list 'result'
+    - Implement the recursive backtracking approach
+        - What parameters do we need?
+            - i, our current starting index that we are searching from, initially 0
+            - nums, the input
+            - subset, current subset
+            - result, list of all subsets
+        - Each of the recursive call
+            - Add a copy of 'subset' to 'result'
+            - Iterate through the indices from 'i -> nums.length - 1', denoted as 'j'
+                - Add 'nums[j]' to 'subset'
+                - Recursively find the rest of the elements
+                    - i => j + 1
+                - Remove the last element from 'subset'
+    - Return 'result'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

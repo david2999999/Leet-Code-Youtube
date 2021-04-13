@@ -1,0 +1,81 @@
+Question
+    Given an m x n board and a word, find if the word exists in the grid.
+
+    The word can be constructed from letters of sequentially adjacent cells,
+    where "adjacent" cells are horizontally or vertically neighboring. The same
+    letter cell may not be used more than once.
+
+    Constraints:
+        - m == board.length
+        - n = board[i].length
+        - 1 <= m, n <= 200
+        - 1 <= word.length <= 103
+        - board and word consists only of lowercase and uppercase English letters.
+
+Thoughts Before Coding
+    - for each of the cell at 'r, c'
+        - We will want to implement a recursive backtracking approach to find the word
+            - We will need to keep track of our current index 'i' inside 'word'
+        - In each of the recursive call
+            - We are allowed to go in 4 different directions (up, down, left, right)
+            - We should note that we are not allowed to use the same cell twice
+                - This means we will need to mark previously seen cells
+                - This can be done by placing a '#' at the cell
+            - If we have failed to find the 'word' inside a path
+                - We will want to backtrack our steps
+                - This can be done by place the original character 'c' back into the cell and then
+                  take a different path to find the word
+
+Answer
+    - Iterate through the rows and columns of 'board', denoted as 'r, c'
+        - Implement the recursive backtracking approach
+            - What parameters do we need?
+                - r, the current row
+                - c, the current column
+                - i, our current index inside 'word'
+                - board, input board
+                - word, input word
+            - What is the base case?
+                - If 'i' is out of bound
+                    - Return true
+                - If 'r,c' is out of bound OR the current character inside 'board[r][c]' is not equal
+                  to the character at index 'i' inside 'word'
+                    - Return false
+            - In each of the recursive call
+                - Create a variable 'ch' and set it to 'board[r][c]'
+                - Set 'board[r][c]' to '#'
+                - Iterate through the 4 directions, denoted as 'd'
+                    - Recursively find the rest of the characters
+                        - r => r + d[0]
+                        - c => c + d[1]
+                        - i => i + 1
+                    - If the recursive call is true
+                        - Return true
+                - Set 'board[r][c]' to 'ch'
+                - Return false
+        - If the recursive call is true
+            - Return true
+    - Return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n * 3^k), where n is the total number of cells and 'k' is the length of the word
+        - O(n * 3^k), for each of the cells, we implemented a recursive backtracking approach
+            - Each recursive call has up to 3 choices and a depth of 'k'
+    - Space Complexity = O(k), where k is the length of the word
+        - O(k), recursive call stack memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

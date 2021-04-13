@@ -1,0 +1,71 @@
+Question
+    Given a collection of candidate numbers (candidates) and a target
+    number (target), find all unique combinations in candidates where the candidate numbers sum to target.
+
+    Each number in candidates may only be used once in the combination.
+
+    Note: The solution set must not contain duplicate combinations.
+
+    Constraints:
+        - 1 <= candidates.length <= 100
+        - 1 <= candidates[i] <= 50
+        - 1 <= target <= 30
+
+Thoughts Before Coding
+    - We will be implementing a recursive backtracking approach
+        - For each of the starting index 'i'
+            - We will to scan forward from 'i -> end of the input array', denoted as index 'j'
+              to find an element 'x' to be included in our combination
+            - We can only add values of 'x', where 'x' is less than or equal to 'target'
+            - After adding 'x' to our combination
+                - We will continue our search from index 'j + 1' for the combination of 'target - x'
+            - After accounting for 'x'
+                - We will backtrack our steps by removing 'x' from our combination
+                - This will give space to the next element and also allow us to find
+                  the next combination
+    - How can we avoid duplicate combinations?
+        - If we are currently looking a element for index 'k' in our combination
+            - If we found an element 'x' and we added 'x' to our combination
+            - After accounting for 'x'
+                - We will want to skip all future occurrences of 'x' for the index 'k'
+        - This means we will need to sort the input array in ascending order
+            - This will group duplicate elements together and allow us to quickly
+              determine if the current element is equal to the previous element
+
+Answer
+    - Create a list 'result' to keep track of all combinations
+    - Sort input array in ascending order
+    - Implement our recursive backtracking approach
+        - What parameters do we need?
+            - i, current starting index
+            - candidates, input array
+            - target, current target
+            - comb, our current combination
+            - result, list of all combinations
+        - What is the base case?
+            - If 'target' is equal to 0
+                - Add a copy of 'comb' to 'result'
+        - In each of the recursive call
+            - Iterate through from 'i -> end of the array', denoted as 'j'
+                - If 'candidates[j]' is greater than 'target' OR
+                  'j' is not equal to 'i' AND 'candidates[j]' is equal to 'candidates[j - 1]'
+                    - continue to next iteration
+                - Add 'candidates[j]' to 'comb'
+                - Recursively find the rest of the combination
+                    - i => j + 1
+                    - target => target - candidates[j]
+                - Backtrack our steps by removing last element from 'comb'
+    - Return 'result'
+
+
+
+
+
+
+
+
+
+
+
+
+

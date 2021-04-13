@@ -1,0 +1,65 @@
+Question
+    Given a matrix consists of 0 and 1, find the distance of the nearest
+    0 for each cell.
+
+    The distance between two adjacent cells is 1.
+
+Thoughts Before Coding
+    - The brute force approach is to perform a breath first search
+      from all of the cells which contains a '1'
+        - This approach will cost us O(n^2) time complexity because
+          the breath first search cost O(n)
+            - Then we perform each BFS on each cell which will give O(n^2)
+    - For each of the cell at 'r, c', which contains a '1'
+        - If the cell above row 'r - 1' is 'x' distance away from a 0
+            - Then we know the current cell is 'x + 1' distance away
+              from a 0
+        - But, we should note that this applies to all 4 directions
+            - Since, we want the minimum distance to a 0
+            - We will want to pick the minimum distance from all 4 directions
+
+Answer
+    - Create a 'distance' matrix, which will keep track of the
+      distances to the nearest 0
+        - We will first fill the 'distance' matrix with 10,000
+    - We will first find the minimum distance to the cell above and
+      to the left
+        - Iterate through from top left to bottom right, denoted as 'r, c'
+            - If 'matrix[r][c]' is equal to 0
+                - Set 'distance[r][c]' to 0
+                - continue to next iteration
+            - If 'r' is greater than 0, then we can find the minimum distance
+             to a 0 from the cell above up
+                - Update 'distance[r][c]' if 'distance[r - 1][c] + 1' is smaller
+            - If 'c' is greater than 0, then we can find the minimum distance
+             to a 0 from the cell to the left
+                - Update 'distance[r][c]' if 'distance[r][c - 1] + 1' is smaller
+    - We will find the minimum distance to the cell to the right and below
+        - Iterate through from bottom right to top left, denoted as 'r, c'
+            - If 'r' is not at the last row, then we can find the minimum distance
+             to a 0 from the cell below
+                - Update 'distance[r][c]' if 'distance[r + 1][c] + 1' is smaller
+            - If 'c' is not at the last column, then we can find the minimum distance
+             to a 0 from the cell to the right
+                - Update 'distance[r][c]' if 'distance[r][c + 1] + 1' is smaller
+    - Return 'distance'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(3*n) = O(n), where 'n' is the total number of cells
+        - O(3*n), fill 'distance' with max distance + 2 iterations
+    - Space Complexity = O(n), where 'n' is the total number of cells
+        - O(n), distance matrix
+
+
+
+
+
+
+
+
+
+
+
+
+
+

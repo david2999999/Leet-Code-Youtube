@@ -1,0 +1,82 @@
+Question
+    You are given two non-empty linked lists representing two non-negative
+    integers. The digits are stored in reverse order, and each of their
+    nodes contains a single digit. Add the two numbers and return the sum
+    as a linked list.
+
+    You may assume the two numbers do not contain any leading zero,
+    except the number 0 itself.
+
+    Constraints:
+        - The number of nodes in each linked list is in the range [1, 100].
+        - 0 <= Node.val <= 9
+        - It is guaranteed that the list represents a number that does
+          not have leading zeros.
+
+Thoughts Before Coding
+    - The digits inside the input nodes are in reverse order
+        - This means we can process the nodes from left -> right
+    - We can implement a two pointer approach
+        - One pointer 'l1' will be inside the first list
+        - One pointer 'l2' will be inside the second list
+    - In each of the iteration
+        - We will be finding the sum of the digits inside 'l1' and 'l2'
+        - A side case we have to consider is the 'carry'
+        - This means the 'sum' at the two nodes will be equal to
+            - sum = l1.val + l2.val + carry
+        - Then we will need to append 'sum % 10' to resulting list
+        - Then setting the 'carry' to 1 if 'sum' is greater than 9
+    - Another side case we have to handle is when the input list
+      are different lengths
+        - This means when we implement our two pointer approach
+            - One of the nodes may be equal to null
+            - For any 'null' nodes
+                - The default value will be equal to 0
+
+Answer
+    - Create a custom class 'Result' to keep track of the resulting linked
+      list
+        - There will be two fields
+            - head, the sentinel head of the result
+            - tail, the sentinel tail of the result, initially 'head'
+        - append(val)
+            - Create a new 'node' with 'val'
+            - Set 'tail.next' to 'node'
+            - Set 'tail' to 'node'
+    - Create a new instance of 'result'
+    - Create a variable 'carry', initially 0
+    - While 'l1' is not equal to null OR 'l2' is not equal to null
+        - Retrieve the current value 'n1' and 'n2'
+            - If 'l1' is null
+                - Set 'n1' to '0'
+            - If 'l2' is null
+                - Set 'n2' to '0'
+        - Find the 'sum' of the values
+            - sum = n1 + n2 + carry
+        - Append 'sum % 10' to 'result'
+        - Set 'carry' to 1 if 'sum' is greater than 9
+            - Else, set 'carry' to 0
+        - If 'l1' is not null
+            - Set 'l1' to 'l1.next'
+        - If 'l2' is not null
+            - Set 'l2' to 'l2.next'
+    - If 'carry' is greater than 0
+        - Append '1' to 'result'
+    - Return 'result.head.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is length of the longer list
+        - O(n), visit each node once
+    - Space Complexity = O(n), where 'n' is length of the longer list
+        - O(n), 'result' list
+
+
+
+
+
+
+
+
+
+
+

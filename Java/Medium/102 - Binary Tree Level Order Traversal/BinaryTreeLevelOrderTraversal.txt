@@ -1,0 +1,43 @@
+Question
+    Given the root of a binary tree, return the level order traversal of
+    its nodes' values. (i.e., from left to right, level by level).
+
+Thoughts Before Coding
+    - We will be implementing an iterative approach of level order traversal
+    - We can create a 'queue' to keep track of our nodes
+        - In each of the levels
+            - The size of the 'queue' will determine the number of nodes at the current level
+
+Answer
+    - Validate the input parameter
+        - if 'root' is null
+            - Return an empty list
+    - Create a list 'result' to keep track of all node values
+    - Create a 'queue' to implement level order traversal
+        - Add 'root' to 'queue'
+    - While 'queue' is not empty
+        - Create a list 'values' to keep track of the node values at the current level
+        - Retrieve the 'size' of the 'queue'
+        - Iterate through from '0 -> size - 1'
+            - Poll a 'node' from 'queue'
+            - Add 'node.val' to 'values'
+            - If 'node.left' is not null
+                - Add 'node.left' to 'queue'
+            - If 'node.right' is not null
+                - Add 'node.right' to 'queue'
+        - Add 'values' to 'result'
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where n is the number of nodes in the input tree
+        - O(n), visit each node once
+    - Space Complexity = O(2 * n) = O(n), where n is the number of nodes in the input tree
+        - O(2 * n), result list + queue
+
+
+
+
+
+
+
+

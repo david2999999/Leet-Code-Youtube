@@ -1,0 +1,56 @@
+Question
+    Given two integers n and k, return all possible combinations
+    of k numbers out of 1 ... n.
+
+    You may return the answer in any order.
+
+    Constraints:
+        - 1 <= n <= 20
+        - 1 <= k <= n
+
+Thoughts Before Coding
+    - We will be implementing a recursive backtracking approach
+        - We are only allowed to pick numbers from 1 -> n
+    - For each of the number 'x'
+        - After we have added 'x' to our current combination
+            - We will continue our search from 'x + 1'
+        - After accounting for 'x'
+            - We will want to backtrack our steps to find the next combination
+            - This means removing the last element 'x' from our current combination
+
+Answer
+    - Lets validate the input parameter
+        - If 'k' is greater than 'n'
+            - Return an empty list
+    - Create a list of lists 'result' to keep track of all combinations
+    - Implement our recursive backtracking approach
+        - What parameters do we need?
+            - i, the current start number (initially 1)
+            - n, the input value
+            - k, the input value
+            - comb, current combination
+            - result, list of all combinations
+        - What is the base case?
+            - When 'k' is equal to 0
+                - Add a copy of 'comb' to 'result'
+                - return from the recursive call
+        - In each of the recursive call
+            - Iterate through the elements from 'i -> n', denoted as 'x'
+                - Add 'x' to 'comb'
+                - Recursively find the rest of the combination
+                    - i => x + 1
+                    - k => k - 1
+                - Remove the last element from 'comb'
+    - Return 'result'
+
+
+
+
+
+
+
+
+
+
+
+
