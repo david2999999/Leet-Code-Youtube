@@ -1,0 +1,88 @@
+Question
+    A linked list of length n is given such that each node contains an
+    additional random pointer, which could point to any node in the list,
+    or null.
+
+    Construct a deep copy of the list. The deep copy should consist of
+    exactly n brand new nodes, where each new node has its value set to
+    the value of its corresponding original node. Both the next and random
+    pointer of the new nodes should point to new nodes in the copied list
+    such that the pointers in the original list and copied list represent
+    the same list state. None of the pointers in the new list should point
+    to nodes in the original list.
+
+    For example, if there are two nodes X and Y in the original list, where
+    X.random --> Y, then for the corresponding two nodes x and y in the copied
+    list, x.random --> y.
+
+    Return the head of the copied linked list.
+
+    The linked list is represented in the input/output as a list of n nodes.
+    Each node is represented as a pair of [val, random_index] where:
+
+    - val: an integer representing Node.val
+    - random_index: the index of the node (range from 0 to n-1) that the
+        random pointer points to, or null if it does not point to any node.
+
+    Your code will only be given the head of the original linked list.
+
+Thoughts Before Coding
+    - For each of the node 'x'
+        - We will want to create a 'clone' of 'x'
+        - Before connecting 'clone.next' with 'x.next'
+            - We will first want to clone 'x.next'
+        - Before connecting 'clone.random' with 'x.random'
+            - We will first want to clone 'x.random'
+    - A side case we have to handle is
+        - When accessing 'x.random'
+            - it may be a node that we have already cloned before due to loops
+        - We will need a way to keep track of previously cloned nodes
+            - We can create a HashMap to keep track of 'node -> clone'
+            - Then before cloning any node 'x'
+                - We will first check if 'x' already exist in the map or not
+
+Answer
+    - Implement a recursive approach
+        - What parameters do we need?
+            - node, the current node we are cloning
+            - map, HashMap to keep track of previously cloned nodes
+        - What is the base case?
+            - if 'node' is null
+                - Return null
+            - If 'map' contains 'node'
+                - Return 'map.get(node)'
+        - In each of the recursive call
+            - Create a 'clone' for 'node' using the value 'node.val'
+            - Put 'node' and 'clone' into 'map'
+            - Recursively clone 'node.next', which we call 'x'
+                - node => node.next
+                - Set 'clone.next' to 'x'
+            - Recursively clone 'node.random', which we call 'y'
+                - node => node.random
+                - Set 'clone.random' to 'y'
+            - Return 'clone'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes in the input list
+        - O(n), visit each node once
+    - Space Complexity = O(n) + O(n) = O(n), where 'n' is the number of nodes in the input list
+        - O(n), recursive call stack memory
+        - O(n), 'map'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
