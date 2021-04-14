@@ -1,0 +1,73 @@
+Question
+    Given a string s and a dictionary of strings wordDict,
+    return true if s can be segmented into a space-separated
+    sequence of one or more dictionary words.
+
+    Note that the same word in the dictionary may be reused
+    multiple times in the segmentation.
+
+Thoughts Before Coding
+    - Lets break this question down
+        - We will first need a quick way to determine if we have found a word inside
+          the dictionary
+            - Our initial thought can be creating a HashSet to store each of the words
+                - Then we can check if a word exists inside the 'set'
+                - But, this approach is not efficient enough because
+                  we need to generate a substring in order to check inside the 'set'
+            - A better approach is to use a 'Trie'
+                - This will allow us to check if a word exist inside the 'wordDict' without
+                  creating the substring
+        - For each of the starting index 'i'
+            - We will need to find a word from 'i -> j', where 'j >= i', that
+              exists inside the dictionary
+                - After we have found a word from 'i -> j', we will want
+                  to check if we can break up the input word starting from index 'j + 1'
+
+Answer
+    - Create a custom class 'TrieNode'
+        - There will be two fields
+            - children, HashMap to keep track of 'c -> TrieNode'
+            - isWord, boolean variable to determine if we have found a word
+    - Create our Trie 'root'
+        - Iterate through the input array 'wordDict', denoted as 'word'
+            - Create a variable 'node' and set it to 'root'
+            - Iterate through the indices of 'word', denoted as 'i'
+                - Retrieve the current character 'c' at index 'i' inside 'word'
+                - Put 'c' and a new TrieNode into 'node.children' if it does not exists
+                - Set 'node' to 'node.children.get(c)'
+            - Set 'node.isWord' to true
+    - Implement the recursive approach
+        - What parameters do we need?
+            - i, our current starting index that we checking from
+            - s, the input string
+            - root, the root of our 'Trie'
+        - What is the base case?
+            - If 'i' is out of bound
+                - Return true
+        - In each of the recursive call
+            - Create a variable 'node' to keep track of our current location
+              inside 'Trie', initially 'root'
+            - Iterate through the indices from 'i -> s.length() - 1', denoted as 'j'
+                - Retrieve the current character 'c' at index 'j' inside 's'
+                - If 'c' does not exists inside 'node.children'
+                    - break from the loop
+                - Set 'node' to 'node.children.get(c)'
+                - If 'node.isWord' is true
+                    - Recursively check if we can break the word starting from index 'j + 1'
+                        - i => j + 1
+                    - If the recursive call is true
+                        - Return true
+            - Return false
+        - This approach is not efficient enough due to overlapping recursive calls
+            - We can avoid overlapping recursive calls using memoization
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(w * k) + O(n^n), where 'w, k' are the number of words and the average
+      amount of characters inside each word. 'n' is the length of the input string
+        - O(w * k), creating 'Trie'
+        - O(n^n), in each of the recursive call, we iterate through up to 'n' indices
+            - Each index may have a recursive call with a depth of 'n'
+    - Space Complexity = O(w * k) + O(n), where 'w, k' are the number of words and the average
+      amount of characters inside each word. 'n' is the length of the input string
+        - O(w * k), Trie
+        - O(n), recursive call stack memory
