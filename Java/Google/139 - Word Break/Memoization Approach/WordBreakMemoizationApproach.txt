@@ -1,0 +1,69 @@
+Question
+    Given a string s and a dictionary of strings wordDict,
+    return true if s can be segmented into a space-separated
+    sequence of one or more dictionary words.
+
+    Note that the same word in the dictionary may be reused
+    multiple times in the segmentation.
+
+Thoughts Before Coding
+    - In the recursive approach
+        - The solution is not efficient enough due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are checking if we can break 'canBreak' at each starting index 'i'
+            - This means we can cache 'i' with 'canBreak'
+
+Answer
+    - Create a custom class 'TrieNode'
+        - There will be two fields
+            - children, HashMap to keep track of 'c -> TrieNode'
+            - isWord, boolean variable to determine if we have found a word
+    - Create our Trie 'root'
+        - Iterate through the input array 'wordDict', denoted as 'word'
+            - Create a variable 'node' and set it to 'root'
+            - Iterate through the indices of 'word', denoted as 'i'
+                - Retrieve the current character 'c' at index 'i' inside 'word'
+                - Put 'c' and a new TrieNode into 'node.children' if it does not exists
+                - Set 'node' to 'node.children.get(c)'
+            - Set 'node.isWord' to true
+    - Create a boolean array 'memo' to cache previously calculated results
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - i, our current starting index that we checking from
+            - s, the input string
+            - root, the root of our 'Trie'
+            - memo, cache
+        - What is the base case?
+            - If 'i' is out of bound
+                - Return true
+            - If 'memo[i]' is not equal to null
+                - Return 'memo[i]'
+        - In each of the recursive call
+            - Create a variable 'node' to keep track of our current location
+              inside 'Trie', initially 'root'
+            - Iterate through the indices from 'i -> s.length() - 1', denoted as 'j'
+                - Retrieve the current character 'c' at index 'j' inside 's'
+                - If 'c' does not exists inside 'node.children'
+                    - break from the loop
+                - Set 'node' to 'node.children.get(c)'
+                - If 'node.isWord' is true
+                    - Recursively check if we can break the word starting from index 'j + 1'
+                        - i => j + 1
+                    - If the recursive call is true
+                        - Put true at 'memo[i]'
+                        - Return true
+            - Put false at 'memo[i]'
+            - Return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(w * k) + O(n^2), where w,k are the number of words and characters inside each word inside
+      the dictionary, and 'n' is the length of the input string
+        - O(w * k), creating 'trie'
+        - O(n^2), 'n' possible states with 'i' and then we iterate through 'n' indices each
+    - Space Complexity = O(w * k) + O(n) + O(n) = O(w * k) + O(n), where w,k are the number of words and characters inside each word inside
+        the dictionary, and 'n' is the length of the input string
+        - O(w * k), trie
+        - O(n), 'memo'
+        - O(n), recursive call stack memory
