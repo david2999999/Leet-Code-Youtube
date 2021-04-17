@@ -1,0 +1,56 @@
+Question
+    Given a string s and a dictionary of strings wordDict,
+    return true if s can be segmented into a space-separated
+    sequence of one or more dictionary words.
+
+    Note that the same word in the dictionary may be reused
+    multiple times in the segmentation.
+
+Thoughts Before Coding
+    - In the memoization approach
+        - We have cached the starting index 'i' with 'canBreak'
+        - We can create an array 'canBreak' to keep track if we can break the input string at each
+         of the starting index 'i'
+    - What is the default value inside the 'canBreak' array?
+        - When 'i' is out of bound
+            - This means 'canBreak[i]' will be equal to true
+
+Answer
+    - Create a custom class 'TrieNode'
+        - There will be two fields
+            - children, HashMap to keep track of 'c -> TrieNode'
+            - isWord, boolean variable to determine if we have found a word
+    - Create our Trie 'root'
+        - Iterate through the input array 'wordDict', denoted as 'word'
+            - Create a variable 'node' and set it to 'root'
+            - Iterate through the indices of 'word', denoted as 'i'
+                - Retrieve the current character 'c' at index 'i' inside 'word'
+                - Put 'c' and a new TrieNode into 'node.children' if it does not exists
+                - Set 'node' to 'node.children.get(c)'
+            - Set 'node.isWord' to true
+    - Create our boolean array 'canBreak' to keep track if we can break the input string at each
+       of the starting index 'i'
+    - Iterate through the indices from 's.length() -> 0', denoted as 'i'
+        - If 'i' is equal to 's.length()'
+            - Set 'canBreak[i]' to true
+            - continue to next iteration
+        - Create a TrieNode 'node' to keep track of our current location inside Trie, initially 'root'
+        - Iterate through the indices from 'i -> s.length() - 1', denoted as 'j'
+            - Retrieve the current character 'c' at index 'j'
+            - If 'c' is not inside 'node.children'
+                - break out of the loop
+            - Set 'node' to 'node.children.get(c)'
+            - If 'node.isWord' is true AND 'canBreak[j + 1]' is true
+                - Set 'canBreak[i]' to true
+                - break from the loop
+    - Return 'canBreak[0]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(w * k) + O(n^2), where 'w,k' are the number of words and characters associated
+      with each word inside 'wordDict' and 'n' is the length of the input string
+        - O(w * k), creating 'trie'
+        - O(n^2), nested 'for' loops
+    - Space Complexity = O(w * k) + O(n), where 'w,k' are the number of words and characters associated
+      with each word inside 'wordDict' and 'n' is the length of the input string
+        - O(w * k), 'trie'
+        - O(n), 'canBreak' array
