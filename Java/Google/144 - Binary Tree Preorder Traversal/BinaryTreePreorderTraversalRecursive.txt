@@ -1,0 +1,32 @@
+Question
+    Given the root of a binary tree, return the preorder traversal of its nodes' values.
+
+Thoughts Before Coding
+    - We will be implementing a recursive approach
+    - Lets go over the direction of a preorder traversal
+        - Direction is 'root -> left -> right' subtree
+
+Answer
+    - Create a list 'values' to keep track of all of the node values
+    - Lets implement the recursive approach
+        - What parameters do we need?
+            - node, the current node we are visiting
+            - values, the list of all node values
+        - What is the base case?
+            - if 'node' is null
+                - Return from the recursive call
+        - In each of the recursive call
+            - Add 'node.val' to 'values'
+            - Recursively visit the left subtree
+                - node => node.left
+            - Recursively visit the right subtree
+                - node => node.right
+    - Return 'values'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes in the input tree
+        - O(n), visit each node once
+    - Space Complexity = O(n) + O(h) = O(n), where 'n' is the number of nodes in the input tree
+      and 'h' is the height of the tree
+        - O(n), 'values' list
+        - O(h), recursive call stack memory
