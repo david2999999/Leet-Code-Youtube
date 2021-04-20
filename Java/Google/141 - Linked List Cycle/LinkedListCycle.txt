@@ -1,0 +1,43 @@
+Question
+    Given head, the head of a linked list, determine if the linked list has
+    a cycle in it.
+
+    There is a cycle in a linked list if there is some node in the list
+    that can be reached again by continuously following the next pointer.
+    Internally, pos is used to denote the index of the node that tail's
+    next pointer is connected to. Note that pos is not passed as a parameter.
+
+    Return true if there is a cycle in the linked list. Otherwise, return false.
+
+    Follow up: Can you solve it using O(1) (i.e. constant) memory?
+
+Thoughts Before Coding
+    - We will be implementing Floyd's cycle detection algorithm
+    - The concept is
+        - We have two pointers 'fast' and 'slow'
+            - The 'fast' pointer moves forward 2 steps at a time
+            - The 'slow' pointer moves forward 1 step at a time
+        - Since the 'fast' pointer is always faster than the 'slow' pointer
+            - If the 'slow' pointer ever catches up to the 'fast' pointer
+                - We have found a cycle
+    - Does the 'fast' pointer ever skip over the 'slow' pointer?
+        - If the 'fast' pointer skips over the 'slow' at position 'i'
+            - The 'fast' pointer will be at position 'i + 1'
+            - The 'slow' pointer will be at position 'i'
+        - This means the 'slow' and 'fast' pointer must have met at position 'i - 1'
+
+Answer
+    - Create two variables
+        - slow, slow pointer, initially 'head'
+        - fast, fast pointer, initially 'head'
+    - While 'fast' and 'fast.next' is not null
+        - Set 'slow' to 'slow.next'
+        - Set 'fast' to 'fast.next.next'
+        - If 'slow' is equal to 'fast'
+            - Return true
+    - Return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes in the input list
+        - O(n), visit each node once with 'slow' pointer
+    - Space Complexity = O(1)
