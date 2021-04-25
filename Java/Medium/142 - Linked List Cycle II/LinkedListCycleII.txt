@@ -1,0 +1,60 @@
+Question
+    Given a linked list, return the node where the cycle begins.
+    If there is no cycle, return null.
+
+    There is a cycle in a linked list if there is some node in the list that
+    can be reached again by continuously following the next pointer.
+    Internally, pos is used to denote the index of the node that tail's
+    next pointer is connected to. Note that pos is not passed as a parameter.
+
+    Notice that you should not modify the linked list.
+
+Thoughts Before Coding
+    - Lets break this question down
+        - The first part is detecting the cycle
+            - We can use Floyd's cycle detection algorithm
+            - We can have two pointers, which is the 'slow' and 'fast' pointer
+                - The 'slow' pointer moves forward 1 step at a time
+                - The 'fast' pointer moves forward 2 steps at a time
+            - If the 'slow' pointer ever catches up to the 'fast' pointer
+                - This means there is a cycle
+        - The second part is finding the start of the cycle
+            - Lets indicate the distance between the start of the list
+              and the start of the cycle is equal to 'k'
+            - Lets indicate the length of the cycle is equal to 'n'
+            - When the 'slow' pointer reaches the start of the cycle
+                - This means the 'fast' pointer is 'k' steps into the cycle
+            - Since the 'fast' pointer catches up the 'slow' pointer 1 step
+              in each of the iteration
+                - The distance between the 'slow' and 'fast' pointer is 'n - k'
+                - This means when 'fast' pointer catches up to the 'slow' pointer,
+                    - They will be both 'n - k' steps into the cycle
+                    - Both of the pointers will need to take 'k' steps
+                      in order to reach the start of the cycle
+            - We can move 'slow' pointer back to the start of the list
+                - Then move both pointers forward 1 step at a time to
+                  reach the start of the cycle
+
+Answer
+    - Create two variables
+        - slow, slow pointer, moves 1 step at a time
+        - fast, fast pointer, moves 2 steps at a time
+    - While 'fast' and 'fast.next' is not equal to null
+        - Set 'slow' to 'slow.next'
+        - Set 'fast' to 'fast.next.next'
+        - If 'slow' is equal to 'fast'
+            - break out of the loop
+    - If 'fast' OR 'fast.next' is equal to null
+        - Return null
+    - Set 'slow' to 'head'
+    - While 'slow' is not equal to 'fast'
+        - Set 'slow' to 'slow.next'
+        - Set 'fast' to 'fast.next'
+    - Return 'slow'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n) + O(k) = O(n), where 'n' is the length of the input list
+      and 'k' is the number of steps to start of the cycle
+        - O(n), initial loop
+        - O(k), finding the start of the cycle
+    - Space Complexity = O(1)
