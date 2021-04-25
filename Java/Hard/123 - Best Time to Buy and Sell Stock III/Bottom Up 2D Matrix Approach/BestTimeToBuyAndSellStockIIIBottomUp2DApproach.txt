@@ -1,0 +1,63 @@
+Question
+    You are given an array prices where prices[i] is the price of a
+    given stock on the ith day.
+
+    Find the maximum profit you can achieve. You may complete at most two
+    transactions.
+
+    Note: You may not engage in multiple transactions simultaneously
+    (i.e., you must sell the stock before you buy again).
+
+    Constraints:
+        - 1 <= prices.length <= 10^5
+        - 0 <= prices[i] <= 10^5
+
+Thoughts Before Coding
+    - In the 3D bottom up matrix approach
+        - We are only relying on values from the rows 'i + 1'
+        - This means we can create a 2D matrix to represent our 3D matrix
+            - in each of the iteration
+                - We will be updating the values from the previous iteration
+
+Answer
+    - Create a 2D matrix 'maxProfit' to keep track of the maximum profit for all
+      for all combinations of 'i, state, t'
+        - The row represents 'state'
+        - The column represents 't'
+    - Iterate through the indices from 'prices.length - 1 -> 0', denoted as 'i'
+        - Iterate through the states from '1 -> 0', denoted as 'state'
+            - Iterate through the transactions from '1 -> 2', denoted as 't'
+                - If 'state' is equal to 0 (buy state)
+                    - Set 'maxProfit[state][t]' to the larger value between
+                        - maxProfit[1][t] - prices[i]
+                        - maxProfit[state][t]
+                - Else (sell state)
+                    - Set 'maxProfit[state][t]' to the larger value between
+                        - maxProfit[0][t - 1] + prices[i]
+                        - maxProfit[state][t]
+    - Return 'maxProfit[0][2]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n * 4) = O(n), where 'n' is the length of the input array
+        - O(n * 4), nested 'for' loop
+    - Space Complexity = O(2 * 3) = O(1)
+        - O(2 * 3), 'maxProfit' matrix
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+Question
+    Given the root of a binary tree, return
+    the postorder traversal of its nodes'
+    values.
+
+Thoughts Before Coding
+    - The direction of a postorder traversal is 'left -> right -> root'
+
+Answer
+    - Create a list 'values' to keep track of all node values
+    - Implement our recursive approach
+        - What parameters do we need?
+            - node, the current root node of the subtree
+            - values, the list of all node values
+        - What is the base case?
+            - If 'node' is equal to null
+                - Return from the recursive call
+        - In each of the recursive call
+            - Recursively traverse to the left subtree
+                - node => node.left
+            - Recursively traverse to the right subtree
+                - node => node.right
+            - Add 'node.val' to 'values'
+    - Return 'values'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes in the input tree
+        - O(n), visit each node once
+    - Space Complexity = O(n) + O(h) = O(n),where 'n' is the number of nodes in the input tree
+        and 'h' is the height of the input tree
+            - O(n), 'values' list
+            - O(h), recursive call stack memory
