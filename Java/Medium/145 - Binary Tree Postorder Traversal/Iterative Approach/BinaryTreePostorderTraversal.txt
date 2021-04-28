@@ -1,0 +1,42 @@
+Question
+    Given the root of a binary tree, return
+    the postorder traversal of its nodes'
+    values.
+
+Thoughts Before Coding
+    - The direction of a postorder traversal is 'left -> right -> root'
+    - We will need a way to mimic the recursive call stack memory
+        - We can create a 'stack' to keep track of our nodes
+    - We should note that we can traverse the tree in the following
+      direction 'root -> right -> left'
+        - How can we reverse the ordering of the node values?
+            - When we are performing our recursive postorder traversal
+                - We added node values to the end of the list
+            - if we add node values to the start of the list instead
+                - We will essentially reverse the ordering of
+                  the node values
+
+Answer
+    - If 'root' is null
+        - Return an empty list
+    - Create two variables
+        - stack, stack to implement iterative postorder traversal
+        - values, list of all node values
+    - Push 'root' into 'stack'
+    - While 'stack' is not empty
+        - Pop a 'node' from 'stack'
+        - Add 'node.val' to the start of 'values'
+        - If 'node.left' is not null
+            - Push 'node.left' into the 'stack'
+        - If 'node.right' is not null
+            - Push 'node.right' into the 'stack'
+    - Return 'values'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+      in the input tree
+        - O(n), visit each node once
+    - Space Complexity = O(n) + O(h) = O(n), where 'n' is the number of nodes
+        in the input tree and 'h' is the height of the input tree
+            - O(n), 'values' list
+            - O(h), 'stack'
