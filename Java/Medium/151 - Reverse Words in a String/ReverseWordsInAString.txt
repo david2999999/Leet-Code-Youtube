@@ -1,0 +1,50 @@
+Question
+    Given an input string s, reverse the order of the words.
+
+    A word is defined as a sequence of non-space characters.
+    The words in s will be separated by at least one space.
+
+    Return a string of the words in reverse order
+    concatenated by a single space.
+
+    Note that s may contain leading or trailing spaces or
+    multiple spaces between two words. The returned string
+    should only have a single space separating the words.
+    Do not include any extra spaces.
+
+Thoughts Before Coding
+    - Lets break the question down into parts
+        - The first part we need to handle is the leading and trailing spaces
+            - We can remove the spaces by using the 'trim' method
+        - The next part is splitting the input string by 1 or more spaces
+            - We can use the 'split' method and split the words by
+              1 or more spaces
+        - The next part is reversing the ordering of the words
+            - We now have an array of 'words'
+            - We can convert the array to a list, then we can
+              reverse the ordering of the words inside the list
+        - The last part is joining the words using a single space
+
+Answer
+    - Trim the input string 's'
+    - Split the input string into an array of 'words'
+        - Make sure to handle the case where there is 1 or more spaces
+    - Convert the array of words into a list
+    - Reverse the ordering of the words inside the list
+    - Return a string representation of the words inside the list
+      separated by a single space
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n) + O(n) + O(n) + O(n) + O(n) = O(n), where 'n'
+      is the length of the input string
+        - O(n), trim
+        - O(n), split the input string into an array of 'words'
+        - O(n), converting the words array into a list
+        - O(n), reverse ordering of list
+        - O(n), string representation of the 'list'
+    - Space Complexity = O(n) + O(n) + O(n) + O(n) = O(n), where 'n'
+       is the length of the input string
+        - O(n), trimmed string
+        - O(n), array of words
+        - O(n), list of words
+        - O(n), resulting string
