@@ -1,0 +1,55 @@
+Question
+    Suppose an array of length n sorted in ascending order
+    is rotated between 1 and n times. For example, the array
+    nums = [0,1,2,4,5,6,7] might become:
+        - [4,5,6,7,0,1,2] if it was rotated 4 times.
+        - [0,1,2,4,5,6,7] if it was rotated 7 times.
+
+    Notice that rotating an array [a[0], a[1], a[2], ..., a[n-1]]
+    1 time results in the array [a[n-1], a[0], a[1], a[2], ...,  a[n-2]].
+
+    Given the sorted rotated array nums of unique elements, return
+    the minimum element of this array.
+
+Thoughts Before Coding
+    - Lets first go over the brute force approach
+        - The brute force approach will be to iterate through
+          the input array once to find the minimum
+        - This will incur O(n) time complexity
+    - We should note that the input array is sorted in ascending order
+      and all of the elements are unique
+        - When finding an element inside a sorted array, the most optimal
+          way will be to use binary search
+    - We can implement a modified binary search
+        - For each of the 'mid' element
+            - we can check the leftmost element 'left' in our current boundary
+        - If 'mid' is greater than or equal to 'left'
+            - This means the left side is sorted in ascending order
+            - If 'mid' is less than or equal to 'right'
+                - This means the smallest element must be on the left
+                  side with 'mid' inclusive
+            - If 'mid' is greater than 'right'
+                - This means the smallest element must be on the right side
+        - If 'mid' is less than 'left'
+            - We must search the left side with 'mid' inclusive
+
+Answer
+    - Create the following variables
+        - left, our current left boundary, initially 0
+        - right, our current right boundary, initially 'nums.length - 1'
+    - While 'left' is less than 'right'
+        - Calculate the 'mid' index
+            - mid = left + (right - left) / 2
+        - If 'nums[mid]' is greater than or equal to 'nums[left]'
+            - If 'nums[mid]' is less than or equal to 'nums[right]'
+                - Set 'right' to 'mid'
+            - Else (nums[mid] is greater than 'nums[right]')
+                - Set 'left' to 'mid + 1'
+        - Else (nums[mid] is less than 'nums[left]')
+            - Set 'right' to 'mid'
+    - Return 'nums[left]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(logn), where 'n' is the length of the input array
+        - O(logn), binary search
+    - Space Complexity = O(1)
