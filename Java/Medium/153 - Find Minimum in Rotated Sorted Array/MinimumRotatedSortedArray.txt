@@ -13,39 +13,39 @@ Question
 
 Thoughts Before Coding
     - Lets first go over the brute force approach
-        - The brute force approach will be to iterate through
-          the input array once to find the minimum
-        - This will incur O(n) time complexity
-    - We should note that the input array is sorted in ascending order
-      and all of the elements are unique
-        - When finding an element inside a sorted array, the most optimal
-          way will be to use binary search
-    - We can implement a modified binary search
-        - For each of the 'mid' element
-            - we can check the leftmost element 'left' in our current boundary
-        - If 'mid' is greater than or equal to 'left'
-            - This means the left side is sorted in ascending order
-            - If 'mid' is less than or equal to 'right'
-                - This means the smallest element must be on the left
-                  side with 'mid' inclusive
-            - If 'mid' is greater than 'right'
-                - This means the smallest element must be on the right side
-        - If 'mid' is less than 'left'
-            - We must search the left side with 'mid' inclusive
+        - We can iterate through the input array once to find the minimum element
+        - This approach will cost us O(n) time complexity
+    - Lets implement a more optimized approach
+        - When search for an element inside a sorted array
+            - The most optimal way is to use binary search
+    - How can we implement a modified binary search for this problem?
+        - If we currently have 'mid' element
+            - We can compare the 'mid' element with the current leftmost
+              element 'left'
+                - if 'mid' is greater than or equal to 'left'
+                    - The left side must be sorted in ascending order
+                    - If 'mid' is less than or equal to 'right'
+                        - This means the smallest element must be
+                          located on the left side with mid inclusive
+                    - If 'mid' is greater than 'right'
+                        - This means the smallest element must
+                          be on the right side
+                - If 'mid' is less than 'left'
+                    - We will continue our search leftward with 'mid' inclusive
 
 Answer
-    - Create the following variables
+    - Create two variables
         - left, our current left boundary, initially 0
         - right, our current right boundary, initially 'nums.length - 1'
     - While 'left' is less than 'right'
-        - Calculate the 'mid' index
+        - Calculate 'mid' index
             - mid = left + (right - left) / 2
         - If 'nums[mid]' is greater than or equal to 'nums[left]'
             - If 'nums[mid]' is less than or equal to 'nums[right]'
                 - Set 'right' to 'mid'
-            - Else (nums[mid] is greater than 'nums[right]')
+            - Else ('nums[mid]' is greater than 'nums[right]')
                 - Set 'left' to 'mid + 1'
-        - Else (nums[mid] is less than 'nums[left]')
+        - Else ('nums[mid]' is less than 'nums[left]')
             - Set 'right' to 'mid'
     - Return 'nums[left]'
 

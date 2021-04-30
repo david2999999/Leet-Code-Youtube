@@ -1,0 +1,64 @@
+Question
+    Design a stack that supports push, pop, top, and
+    retrieving the minimum element in constant time.
+
+    Implement the MinStack class:
+        - MinStack() initializes the stack object.
+        - void push(val) pushes the element val onto the stack.
+        - void pop() removes the element on the top of the stack.
+        - int top() gets the top element of the stack.
+        - int getMin() retrieves the minimum element in the stack.
+
+Thoughts Before Coding
+    - A stack is a Last In First Out data structure
+        - The last element that is pushed into the stack will be
+          the first one to be popped out of the stack
+    - How can we store/find the minimum element?
+        - The brute force approach will be to perform a search on our stack
+            - This will require us to pop all of the elements out of the
+              stack and look for the minimum element
+                - We will need a buffer data structure to hold the elements
+                  the elements that we have popped out
+                - Then we can push the elements back into the stack after
+                  we have found the minimum element
+            - This approach is not efficient because we need to create
+              a buffer data structure to hold the elements, which
+              cost us O(n) space complexity
+            - This approach will cost us O(2 * n) = O(n) time complexity
+              due to the pop/push of the elements
+    - We can create another data structure to hold the minimum elements
+      instead?
+        - We can create another stack 'stack2' to hold our minimum elements
+            - This will allow us to retrieve the minimum element in O(1)
+              time complexity
+
+Answer
+    - MinStack()
+        - Initialize 2 stacks
+            - stack1, keeps track of the original elements
+            - stack2, keeps track of the minimum elements
+    - push(x)
+        - If 'stack2' is empty OR 'stack2.peek()' is greater than or equal to 'x'
+            - Push 'x' into 'stack2'
+        - Push 'x' into 'stack1'
+    - pop()
+        - Pop an element 'x' from 'stack1'
+        - If 'stack2.peek()' is equal to 'x'
+            - Pop an element from 'stack2'
+    - top()
+        - Return 'stack1.peek()'
+    - getMin()
+        - Return 'stack2.peek()'
+
+What is the Time and Space Complexity?
+    - MinStack()
+        - Space Complexity = O(2 * n) = O(n), where 'n' is the number of elements
+            - O(2 * n), 2 stacks
+    - push()
+        - Time Complexity = O(1)
+    - pop()
+        - Time Complexity = O(1)
+    - top()
+        - Time Complexity = O(1)
+    - getMin()
+        - Time Complexity = O(1)
