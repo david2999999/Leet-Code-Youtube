@@ -1,0 +1,52 @@
+Question
+    Given a string s, return the length of the longest
+    substring that contains at most two distinct characters.
+
+    Constraints:
+        - 1 <= s.length <= 10^4
+        - s consists of English letters.
+
+Thoughts Before Coding
+    - We are looking for the longest substring, where there are at most
+      two distinct characters
+        - Since, we are looking for a substring, we can implement a sliding
+          window approach
+        - We will have two pointers 'i' and 'j' to indicate the current boundaries
+          of our window
+            - The pointer 'j' will scan forward for more characters
+        - If the current window contains more two distinct characters
+            - We will need to shrink our window by moving pointer 'i'
+        - We will want to pick the window with the longest length
+    - How can we determine if our window contains at most two distinct characters?
+        - Our initial thought can be storing the characters in our current
+          window inside a HashSet
+            - Then the size of the set will determine the number of unique characters
+        - but, we should note that each character may have a frequency of more
+          than 1
+            - This means we need to keep track of character and also its
+              frequency
+        - We can create a HashMap to keep track of the unique characters
+          and also their frequency
+            - Then the size of the map will determine the number of unique characters
+
+Answer
+    - Create the following variables
+        - map, HashMap to keep track of character and frequency
+        - i, left boundary
+        - length, longest substring with at most two characters
+    - Iterate through the indices of the input string, denoted as 'j'
+        - Retrieve the current 'c' at the current index 'j'
+        - Increment the frequency of 'c' inside 'map'
+        - While 'map.size()' is greater than 2
+            - Retrieve the current character 'd' at index 'i'
+            - Decrement the frequency of 'd' inside 'map'
+            - If 'map.get(d)' is equal to 0
+                - Remove 'd' from 'map'
+            - Increment 'i'
+        - Update 'length' if 'j - i + 1' is greater
+    - Return 'length'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2 * n) = O(n), where 'n' is the number of characters in the input string
+        - O(2 * n), process each character at most twice
+    - Space Complexity = O(1)
