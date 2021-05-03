@@ -1,0 +1,29 @@
+Question
+    Given the heads of two singly linked-lists headA
+    and headB, return the node at which the two lists
+    intersect. If the two linked lists have no intersection
+    at all, return null.
+
+Thoughts Before Coding
+    - We are trying to find the intersection of two linked list
+        - We should note that the two input list may
+          have different length 'x' and 'y'
+    - We will want to start at the starting location where
+      the length of the lists are the same
+        - We will want to move forward the longer list by
+          the difference of the two lengths 'abs(x - y)'
+
+Answer
+    - Find the length 'x' and 'y' of the two input list
+    - determine the 'shorter' and 'longer' list using 'x' and 'y'
+    - Move forward 'longer' by 'abs(x - y)' steps
+    - While 'shorter' is not equal to null AND 'shorter' is not equal to 'longer'
+        - Set 'shorter' to 'shorter.next'
+        - Set 'longer' to 'longer.next'
+    - Return 'shorter'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2 * n) + O(n) = O(n), where 'n' is the longer list
+        - O(2 * n), finding length + moving forward 'abs' steps
+        - O(n), moving both pointers forward
+    - Space Complexity = O(1)
