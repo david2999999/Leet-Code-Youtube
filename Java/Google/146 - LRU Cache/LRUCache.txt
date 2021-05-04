@@ -1,0 +1,67 @@
+Question
+    Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
+
+    Implement the LRUCache class:
+        - LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
+        - int get(int key) Return the value of the key if the key exists, otherwise return -1.
+        - void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
+
+    Follow up:
+        - Could you do get and put in O(1) time complexity?
+
+Thoughts Before Coding
+    - The first method we want to implement is 'get(key)'
+        - A way to do this is to use a HashMap, where we can
+          keep track of the 'key, value' pairs
+    - The second method we want to implement is 'put(key, value)'
+        - Update the value associated with a 'key'
+            - This can also be done with the HashMap
+        - There is a side case we need to handle
+            - When the size of the 'map' exceeds the capacity
+                - We want to remove the LRU key
+            - We will need a way to model the 'key,value' as a list
+                -  The elements in the front of the list will be recently used
+                - The elements in the end of the list will be least recently used
+            - Then when we want to remove the LRU key
+                - We want to remove the element at the end of the list
+            - We can have a HashMap where we map 'key -> node (key, value)'
+        - What kind of list should we use?
+            - When we try to retrieve a key from the list using the 'get(key)'
+                - We want to remove the node and add the node to the start
+                  of the list
+            - We may need to remove the node in the middle of the list
+            - If we use a singly linked list
+                - The time complexity of removing a 'node' from singly linked
+                  list is O(n)
+                - If we want to remove node 'x' from the list
+                    - We will first need to find 'x.prev'
+            - If we use a doubly linked list
+                - We do not need to find the previous node
+                    - The moment we have access to 'x', we can
+                      remove 'x' from the list
+    - Now, lets bring everything together
+        - We will need a HashMap, where we map 'key -> doubly node (key, value)'
+        - The doubly linked list allow us to have a linear structure
+          so we can determine the least recently keys
+        - The first method we will implement is 'get(key)'
+            - We will check if the 'map' contains 'key'
+            - If the 'map' does contain the 'key', we can retrieve the value
+                - Then we want to move the 'node' associated with the key
+                  to start of the list
+        - The second method we will implement is 'put(key, value)'
+            - Our HashMap allows us to retrieve the node associated 'key'
+              and then update the value
+            - If the 'size' of the 'map' exceeds the capacity
+                - We can remove the node that is currently at the end of
+                  our doubly linked list
+
+
+
+
+
+
+
+
+
+
+
