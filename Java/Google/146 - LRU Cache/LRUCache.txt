@@ -55,7 +55,73 @@ Thoughts Before Coding
                 - We can remove the node that is currently at the end of
                   our doubly linked list
 
+Answer
+    - DoublyNode
+        - There will be 4 fields
+            - key, the key associated with the node
+            - value, the value associated with the node
+            - prev, the previous node
+            - next, the next node
+    - DoublyList
+        - Fields
+            - head, the sentinel head of the list
+            - tail, the sentinel tail of the list
+        - Constructor()
+            - Initialize 'head' and 'tail'
+            - Set 'head.next' to 'tail'
+            - Set 'tail.prev' to 'head'
+        - addFirst(node)
+            - Set 'node.prev' to 'head'
+            - Set 'node.next' to 'head.next'
+            - Set 'head.next.prev' to 'node'
+            - Set 'head.next' to 'node'
+        - remove(node)
+            - Set 'node.prev.next' to 'node.next'
+            - Set 'node.next.prev' to 'node.prev'
+            - Set 'node.next' to null
+            - Set 'node.prev' to null
+            - Return 'node'
+        - removeLast()
+            - Perform a 'remove' method on 'tail.prev'
+            - Return the node that we have removed
+    - LRUCache
+        - Fields
+            - map, HashMap to map 'key -> doubly node'
+            - nodes, doubly linked list
+            - capacity, input capacity
+        - constructor(capacity)
+            - Initialize 'map' and 'nodes'
+            - Initialize 'capacity'
+        - get(key)
+            - If 'map' does not contain 'key'
+                - Return -1
+            - Retrieve the 'node' associated with 'key'
+            - Remove 'node' from 'nodes'
+            - Add 'node' to start of the list
+            - Return 'node.value'
+        - put(key, value)
+            - If 'map' does not contain 'key'
+                - Create a 'node' with 'key, value'
+                - Put 'key' and 'node' into 'map'
+                - Add 'node' to the start of 'nodes'
+                - If 'map.size()' is greater than 'capacity'
+                    - Remove the 'lastNode' inside 'nodes'
+                    - Remove 'lastNode.key' from 'map'
+            - Else ('map' contains the key, we need to update value)
+                - Retrieve the 'node' associated with 'key'
+                - Remove 'node' from 'nodes'
+                - Add 'node' to the front of 'nodes'
+                - Set 'node.value' to 'value'
 
+What is the Time and Space Complexity?
+    - LRUCache
+        - Space Complexity = O(n) + O(n) = O(n), where 'n' is the capacity
+            - O(n), 'map'
+            - O(n), 'nodes' list
+    - get(key)
+        - Time Complexity = O(1)
+    - put(key, value)
+        - Time Complexity = O(1)
 
 
 
