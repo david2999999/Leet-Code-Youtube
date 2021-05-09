@@ -1,0 +1,53 @@
+Question
+    Given an array of integers nums containing n + 1
+    integers where each integer is in the range [1, n]
+    inclusive.
+
+    There is only one repeated number in nums,
+    return this repeated number.
+
+Thoughts Before Coding
+    - We are searching for the start node of a cycle
+      inside a list
+        - We can find the start node of a cycle using floyd's
+          cycle detection algorithm
+    - In the algorithm
+        - We will have two pointers 'slow' and 'fast' pointer
+            - The 'fast' pointers moves forward 2 steps at a time
+            - The 'slow' pointers moves forward 1 step at a time
+        - When the 'slow' catches up to the 'fast' pointers
+            - This means we are currently inside a cycle
+    - Lets first denote the length from start of the list
+      to the cycle is equal to 'k'
+        - Lets denote the length of the cycle is equal to 'n'
+    - When the 'slow' pointer reaches the start of the cycle
+        - The 'fast' pointer will already be 'k' steps into the cycle
+          which is a distance of 'n - k' steps away from the 'slow' cycle
+        - Since the 'fast' pointer always catches up to the slow pointer
+           1 step at a time
+            - The 'fast' pointer will catch up in 'n - k' steps
+        - This means when 'slow' is equal to 'fast' pointer
+            - They will both be 'n - k' steps into the cycle, which
+              is 'k' steps from the start of the cycle
+    - We can move the 'slow' pointer back to the start of the list
+        - Then move both pointers 1 step at a time
+        - When both of the pointers meet
+            - They will be both at the start of the cycle
+
+Answer
+    - Create two variables
+        - slow, moves 1 step at a time
+        - fast, moves 2 steps at a time
+    - Perform a do-while loop with 'slow != fast'
+        - Set 'slow' to 'nums[slow]'
+        - Set 'fast' to 'nums[nums[fast]]'
+    - set 'slow' to 0
+    - While 'slow' is not equal to 'fast'
+        - Set 'slow' to 'nums[slow]'
+        - Set 'fast' to 'nums[fast]'
+    - Return 'slow'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), two pointer approach
+    - Space Complexity = O(1)
