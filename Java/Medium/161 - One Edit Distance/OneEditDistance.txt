@@ -1,0 +1,57 @@
+Question
+    Given two strings s and t, return true if they are both
+    one edit distance apart, otherwise return false.
+
+    A string s is said to be one distance apart from a
+    string t if you can:
+
+    - Insert exactly one character into s to get t.
+    - Delete exactly one character from s to get t.
+    - Replace exactly one character of s with a different
+      character to get t.
+
+Thoughts Before Coding
+    - We will first need to determine the lengths 'x' and 'y' of the
+      two input string
+        - If the lengths has a difference of greater than 1
+            - Then we know it is not one edit distance apart
+    - if 'x' and 'y' are the same
+        - We will need to check if there is exactly 1 difference
+          between the two strings
+    - If 'x' and 'y' are different and has a difference of exactly one
+        - We will have two choices 'insert' and 'delete'
+        - We will want to check if there is exactly 1 modification
+          we can make
+
+Answer
+    - We will first validate the input parameter
+        - If the difference of the lengths of the two input string is greater
+          than 1
+            - Return false
+    - If both of the strings have the same length
+        - Create a variable 'diff' to keep track of the number of different characters
+        - Iterate through the indices of 's', denoted as 'i'
+            - If the current two characters at index 'i' are not the same
+                - Increment 'diff'
+        - Return true if 'diff' is equal to 1
+            - Else, return false
+    - Else, (difference of the lengths is exactly one)
+        - Create the following variables
+            - shorter, the shorter of the two input strings
+            - longer, the longer of the two input strings
+            - i, current index inside 'shorter'
+            - j, current index inside 'longer'
+        - While 'i' AND 'j' is not out of bound
+            - If the current two characters are not the same
+                - If 'i' and 'j' are not equal to each other
+                    - return false
+                - Increment 'j'
+            - Else
+                - Increment 'i'
+                - Increment 'j'
+        - Return true
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the longer string
+        - O(n), visit each index once
+    - Space Complexity = O(1)
