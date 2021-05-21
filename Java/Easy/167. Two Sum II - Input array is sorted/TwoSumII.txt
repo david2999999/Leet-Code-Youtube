@@ -1,0 +1,39 @@
+Question
+    Given an array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number.
+
+    Return the indices of the two numbers (1-indexed) as an integer array answer of size 2, where 1 <= answer[0] < answer[1] <= numbers.length.
+
+    The tests are generated such that there is exactly one solution. You may not use the same element twice.
+
+Thoughts Before Coding
+    - We can have two pointers to keep track of our current left and right boundaries
+        - One pointer 'i' will scan from left -> right
+        - One pointer 'j' will scan from right -> left
+    - In each of the iteration
+        - We can find the 'sum' at two indices
+            - If 'sum' is equal to target
+                - We have found the two numbers we need
+            - If 'sum' is less than 'target'
+                - We can increase the 'sum' by moving pointer 'i'
+            - If 'sum' is greater than 'target'
+                - We can decrease the 'sum' by moving pointer 'j'
+
+Answer
+    - Create two variables
+        - i, the left pointer, initially 0
+        - j, the right pointer, initially 'numbers.length - 1'
+    - While 'i' is less than 'j'
+        - Find the 'sum'
+            - sum = numbers[i] + numbers[j]
+        - If 'sum' is equal to 'target'
+            - Return { i + 1, j + 1 }
+        - Else if 'sum' is less than 'target'
+            - Increment 'i'
+        - Else
+            - Decrement 'j'
+    - Return an empty array if we have failed to find the two numbers
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(1)
