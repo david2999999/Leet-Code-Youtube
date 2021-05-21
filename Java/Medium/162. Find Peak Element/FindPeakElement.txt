@@ -1,0 +1,38 @@
+Question
+    A peak element is an element that is strictly greater than its neighbors.
+
+    Given an integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+
+    You may imagine that nums[-1] = nums[n] = -∞.
+
+    You must write an algorithm that runs in O(log n) time.
+
+Thoughts Before Coding
+    - The brute force approach will be to perform a single iteration through
+      the input array
+        - For each of the index 'i'
+            - We can check if 'i' is the peak by checking with its neighbors
+              at 'i - 1' and 'i + 1'
+    - For each of the index 'i'
+        - if 'nums[i]' is less than 'nums[i + 1]'
+            - The peak must be located on the right side from 'i + 1'
+        - If 'nums[i]' is greater than 'nums[i + 1]'
+            - The peak must be located on the left side from 'i'
+
+Answer
+    - Create the following variables
+        - left, the left boundary, initially 0
+        - right, the right boundary, initially 'nums.length - 1'
+    - While 'left' is less than 'right'
+        - Calculate 'mid'
+            - mid = left + (right - left) / 2
+        - If 'nums[mid]' is less than 'nums[mid + 1]'
+            - Set 'left' to 'mid + 1'
+        - Else
+            - Set 'right' to 'mid'
+    - Return 'left'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(logn), where 'n' is the length of the input array
+        - O(logn), binary search
+    - Space Complexity = O(1)
