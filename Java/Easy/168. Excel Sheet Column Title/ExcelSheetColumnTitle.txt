@@ -1,0 +1,36 @@
+Question
+    Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.
+
+Thoughts Before Coding
+    - We will be processing the letters from right -> left
+        - How can we retrieve the rightmost letter?
+            - We can use the modulus operator
+                - For example: x = 27
+                    - 27 % 26 = 1 = A
+        - After processing a letter
+            - How can we process the next letter?
+                - For example: x = 27
+                    - 27 / 26 = 1
+                - 1 % 26 = 1 = A
+        - The next part is how can we convert a digit 'y' to a letter?
+            - We will first need to decrement 'y' then convert
+              to a letter by adding 'A'
+                - (char)((1 - 1) + 'A') = (char) (0 + 'A') = 'A'
+
+Answer
+    - Create a StringBuilder 'str' to keep track of the letters
+    - While 'columnNumber' is greater than 0
+        - Decrement 'columnNumber'
+        - Find the 'rightMost' letter
+            - rightMost = (char)((columnNumber % 26) + 'A')
+        - Append 'rightMost' to 'str'
+        - Set 'columnNumber' to 'columnNumber / 26'
+    - Reverse ordering of characters inside 'str'
+    - return a string representation of 'str'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(logn) + O(logn) = O(logn), where 'n' is the input value
+        - O(logn), we process the input number by dividing it by 26 each time
+        - O(logn), reverse ordering
+    - Space Complexity = O(logn), where 'n' is the input value
+        - O(logn), StringBuilder
