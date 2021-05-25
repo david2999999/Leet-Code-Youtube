@@ -1,0 +1,34 @@
+Question
+    Given an integer n, return the number of trailing zeroes in n!.
+
+    Follow up: Could you write a solution that works in logarithmic time complexity?
+
+Thoughts Before Coding
+    - Lets first find out what contributes to the trailing zeroes
+        - If we multiply a number by 10, we will get a trailing zero
+            - 10 is a multiple of 5 and 2
+            - This means any time we see a 5 and 2, we will get a trailing zero
+        - Since, the frequency of 5 is always lower than the frequency of 2
+            - All we need to keep track of is the frequency of 5
+    - How can we find the number of 5s inside 'n!'?
+        - We can use division
+            - For example: if our current number is 10
+                - 10 / 5 = 2
+                - 10! will get 2 trailing zeros
+    - A side we have to handle is multiples of 5 (25, 125, etc..)
+        - For example: the number 25 contributes to two 5s (5 x 5 = 25)
+        - This means we will need to account for multiples of 5s
+
+Answer
+    - Create the following variables
+        - zeroes, the number of trailing zeroes
+        - multiple, our current multiple of 5, initially 5
+    - While 'multiple' is less than or equal to 'n'
+        - Increment 'zeroes' by 'n / multiple'
+        - Multiply 'multiple' by 5
+    - Return 'zeroes'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(logn), where 'n' is the input value
+        - O(logn), we divide by multiples of 5 each time
+    - Space Complexity = O(1)
