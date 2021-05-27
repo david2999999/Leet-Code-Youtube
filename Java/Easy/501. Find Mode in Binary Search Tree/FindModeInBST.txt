@@ -1,0 +1,66 @@
+Question
+    Given the root of a binary search tree (BST) with duplicates, return all the
+    mode(s) (i.e., the most frequently occurred element) in it.
+
+    If the tree has more than one mode, return them in any order.
+
+    Assume a BST is defined as follows:
+        - The left subtree of a node contains only nodes with keys less than or equal
+          to the node's key.
+        - The right subtree of a node contains only nodes with keys greater than or
+          equal to the node's key.
+        - Both the left and right subtrees must also be binary search trees.
+
+Thoughts Before Coding
+    - Lets first go over a straight forward approach
+        - we are concerned with each node value and also their associated frequency
+        - This means we can create a HashMap, where we map
+          the node value -> frequency
+            - Then we can iterate through the map to find the mode
+            - This approach will cost us O(n) time complexity for the 'map'
+    - We will implement an approach that does not use extra space
+        - We will be using the characteristics of an inorder traversal
+        - When we perform an inorder traversal
+            - The node values will be visited in ascending order
+            - When the node values are in sorted order
+                - All of the duplicate values will be grouped together
+                - This will allow us to easily get the frequency
+                  of each node value
+
+Answer
+    - Create a custom class 'ModeHelper'
+        - There will be three fields
+            - mode, the current mode
+            - num, the current node value, initially null
+            - count, the frequency of 'num', initially 0
+    - Create a list 'modes' to keep track of all the modes
+    - Implement our recursive inorder traversal
+        - What parameters do we need?
+            - node, the current node we are visiting
+            - modes, list of all modes
+            - helper, custom class to keep track of 'mode, num, count'
+        - What is the base case?
+            - If 'node' is null
+                - Return from the recursive call
+        - In each of the recursive call
+            - Recursively traverse to left subtree
+                - node => node.left
+            - If 'helper.num' is null OR 'helper.num' is not equal to 'node.val'
+                - Set 'helper.num' to 'node.val'
+                - Set 'helper.count' to '0'
+            - Increment 'helper.count'
+            - If 'helper.count' is greater than 'helper.mode'
+                - Clear 'modes'
+                - Add 'helper.num' to 'modes'
+                - Update 'helper.mode' to 'helper.count'
+            - Else if 'helper.count' is equal to 'helper.mode'
+                - Add 'helper.num' to 'modes'
+            - Recursively traverse to right subtree
+                - node => node.right
+    - Return an array representation of 'modes'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(1), not accounting for recursive call stack memory
+      and not accounting for the resulting modes
