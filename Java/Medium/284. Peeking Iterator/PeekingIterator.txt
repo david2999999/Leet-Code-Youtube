@@ -1,0 +1,59 @@
+Question
+    Design an iterator that supports the peek operation on a list in addition to the hasNext and the next operations.
+
+    Implement the PeekingIterator class:
+        - PeekingIterator(int[] nums) Initializes the object with the given integer array nums.
+        - int next() Returns the next element in the array and moves the pointer to the next element.
+        - bool hasNext() Returns true if there are still elements in the array.
+        - int peek() Returns the next element in the array without moving the pointer.
+
+Thoughts Before Coding
+    - Lets first go over what is an iterator
+        - We can represent our iterator as an index 'i' in an array
+        - When we invoke the 'next' method
+            - We have to return the element at index 'i' then increment 'i'
+        - When we invoke the 'hasNext' method
+            - We will check if 'i' is out of bound or not
+        - When we invoke the 'peek' method
+            - We will return the element at index 'i' without incrementing 'i'
+    - The iterator that we given in our constructor only has 2 methods
+        - it only has 'next' and 'hasNext'
+    - When we perform a 'peek' operation
+        - We have to return the element at index 'i' and HAVE TO MOVE OUR POINTER
+          TO 'i + 1'
+          - But, when we want to invoke the 'next' method
+            - We have to return the element at index 'i'
+            - This means we should save the element at index 'i'
+
+Answer
+    - Fields that we need
+        - iterator, the input iterator
+        - saved, saved value, initially null
+    - Constructor(iterator)
+        - Initialize 'iterator' in our class
+    - peek()
+        - If 'saved' is not null
+            - Return 'saved'
+        - Set 'saved' to 'iterator.next()'
+        - Return 'saved'
+    - next()
+        - If 'saved' is not null
+            - Create a variable 'copy' and set it to 'saved'
+            - Set 'saved' to 'null'
+            - Return 'copy'
+        - Return 'iterator.next()'
+    - hasNext()
+        - If 'saved' is not null OR 'iterator.hasNext()'
+            - Return true
+        - Else
+            - Return false
+
+What is the Time and Space Complexity?
+    - PeekingIterator
+        - Space Complexity = O(1)
+    - peek()
+        - Time Complexity = O(1)
+    - next()
+        - Time Complexity = O(1)
+    - hasNext()
+        - Time Complexity = O(1)
