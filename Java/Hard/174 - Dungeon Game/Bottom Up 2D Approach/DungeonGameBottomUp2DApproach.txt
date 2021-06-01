@@ -1,0 +1,57 @@
+Question
+    The demons had captured the princess and imprisoned her in the bottom-right corner of a dungeon.
+    The dungeon consists of m x n rooms laid out in a 2D grid. Our valiant knight was initially positioned in the
+    top-left room and must fight his way through dungeon to rescue the princess.
+
+    The knight has an initial health point represented by a positive integer. If at any point his health point
+    drops to 0 or below, he dies immediately.
+
+    Some of the rooms are guarded by demons (represented by negative integers), so the knight loses health upon
+    entering these rooms; other rooms are either empty (represented as 0) or contain magic orbs that increase the knight's
+    health (represented by positive integers).
+
+    To reach the princess as quickly as possible, the knight decides to move only rightward or downward in each step.
+
+    Return the knight's minimum initial health so that he can rescue the princess.
+
+    Note that any room can contain threats or power-ups, even the first room the knight enters and the bottom-right
+    room where the princess is imprisoned.
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - in the memoization approach
+                - We have cached 'r, c' with the minimum amount of hp the
+                  knight can have 'minHealth'
+            - This means we can create a 2D matrix 'minHealth' to keep
+              track of the amount of health for all combinations of 'r, c'
+
+Answer
+    - Create a 2D matrix 'minHealth'
+        - The rows represent 'r'
+        - The columns represent 'c'
+        - The values represent 'minHealth'
+    - Lets denote 'm, n' as the number of rows and columns
+    - Iterate through from 'm -> 0', denoted as 'r'
+        - Iterate through from 'n -> 0', denoted as 'c'
+            - If 'r, c' is equal to 'm - 1, n' OR 'r, c' is equal to 'm, n - 1'
+                - Set 'minHealth[r][c]' to 1
+                - continue to next iteration
+            - If 'r' is greater than or equal to 'm' OR
+                 'c' is greater than or equal to 'n'
+                - Set 'minHealth[r][c]' to Integer.MAX_VALUE
+                - Continue to next iteration
+            - Set 'minHealth[r][c]' to the smaller value between
+                - 'minHealth[r][c + 1]', going rightward
+                - 'minHealth[r + 1][c]', going downward
+            - In order to account for the current cell
+                - Decrement 'minHealth[r][c]' by 'dungeon[r][c]'
+            - If 'minHealth[r][c]' is less than or equal to 0
+                - Set 'minHealth[r][c]' to 1
+    - Return 'minHealth[0][0]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(mn), where 'm,n' are the number of rows and columns
+        - O(mn), nested 'for' loops
+    - Space Complexity = O(mn), where 'm,n' are the number of rows and columns
+        - O(mn), 'minHealth' matrix
