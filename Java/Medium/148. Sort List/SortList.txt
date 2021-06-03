@@ -1,0 +1,82 @@
+Question
+    Given the head of a linked list, return the list after sorting it in
+    ascending order.
+
+Thoughts Before Coding
+    - We will be implementing a merge sort for this problem
+        - How can we implement merge sort?
+            - If we are given a list 'x'
+                - We will first want to break it in half
+                - Then we can sort the lower half and sort the upper half
+                  before merging them into a sorted list
+        - How can we find the head of the upper half?
+            - We can implement a two pointer approach
+                - one pointer 'slow' will move 1 step at a time
+                - one pointer 'fast' will move 2 steps at a time
+            - When the 'fast' pointer reaches the end of the list
+                - The 'slow' pointer will reach the center of the list
+            - We should also make sure to disconnect the upper half
+              from the lower half
+                - This can be done by keeping track of the previous node of 'slow'
+        - How can we merge two sorted list?
+            - We can also implement two pointer approach
+                - One pointer will be in 1 list
+                - One pointer will be in the other list
+            - In each of the iteration
+                - We will add the node with the smaller value to our
+                  resulting list
+
+Answer
+    - Implement the recursive merge sort
+        - What parameters do we need?
+            - head, the head of the lower half
+        - What is the base case?
+            - If 'head' is equal to null OR 'head.next' is equal to null
+                - Return 'head'
+        - In each of the recursive call
+            - Find the 'head2' of the upper half
+                - Create a method to find the head of the upper half
+                    - What parameters do we need?
+                        - head, the head of the lower half
+                    - In the method
+                        - Create the following variables
+                            - slow, the slow pointer, moves 1 step at a time
+                            - fast, the fast pointer, moves 2 steps at a time
+                            - prev, the previous node of 'slow'
+                        - While 'fast' AND 'fast.next' is not equal to null
+                            - Set 'prev' to 'slow'
+                            - Set 'slow' to 'slow.next'
+                            - Set 'fast' to 'fast.next.next'
+                        - Set 'prev.next' to null
+                        - Return 'slow', which is the head of the upper half
+            - Recursively sort the lower half
+                - head => head
+            - Recursively sort the upper half
+                - head => head2
+            - Merge the two sorted list
+                - Create a method for the merge
+                    - What parameters do we need?
+                        - left, the head of the lower half
+                        - right, the head of the upper half
+                    - In the method
+                        - Create the following variables
+                            - sHead, the sentinel head of the sorted list
+                            - sTail, the sentinel tail of the sorted list, initially 'sHead'
+                        - While 'left' OR 'right' is not equal to null
+                            - If 'right' is null OR ('left' is not null AND 'left.val' is
+                              less than or equal to 'right.val')
+                                - Set 'sTail.next' to 'left'
+                                - Set 'sTail' to 'left'
+                                - Set 'left' to 'left.next'
+                            - Else
+                                - Set 'sTail.next' to 'right'
+                                - Set 'sTail' to 'right'
+                                - Set 'right' to 'right.next'
+                        - Return 'sHead.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(nlogn), where 'n' is the number of nodes
+        - O(nlogn), 'logn' because we break the list in half each time, 'n' because
+          we merge the two sorted list
+    - Space Complexity = O(logn), where 'n' is the number of nodes
+        - O(logn), recursive call stack memory
