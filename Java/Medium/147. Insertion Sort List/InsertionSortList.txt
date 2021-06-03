@@ -1,0 +1,46 @@
+Question
+    Given the head of a singly linked list, sort the list using insertion sort, and return the sorted list's head.
+
+    The steps of the insertion sort algorithm:
+        - Insertion sort iterates, consuming one input element each repetition and growing a sorted output list.
+        - At each iteration, insertion sort removes one element from the input data, finds the location it belongs
+          within the sorted list and inserts it there.
+        - It repeats until no input elements remain.
+
+    The following is a graphical example of the insertion sort algorithm. The partially sorted list (black)
+    initially contains only the first element in the list. One element (red) is removed from the input data and
+    inserted in-place into the sorted list with each iteration.
+
+Thoughts Before Coding
+    - For each of the node 'y'
+        - We will first need to disconnect 'y' from the input list
+            - This can be done by setting 'y.next' to 'null'
+        - But, before we set 'y.next' to null
+            - We will want to save the next node
+    - Where do we insert 'y'?
+        - We will need to skip all of the nodes 'x' that are
+          less than or equal to 'y.val'
+        - The first node 'z' that is greater than 'y.val'
+            - We can insert 'y' in between 'x' and 'z'
+
+Answer
+    - Create the following variables
+        - sHead, sentinel head of the sorted list
+        - node, our current location inside the input list, initially 'head'
+    - While 'node' is not equal to null
+        - Create a variable 'next' and set it to 'node.next'
+        - Set 'node.next' to null
+        - Create a variable 'cur' to keep track of our current location
+          inside the sorted list, initially 'sHead'
+        - While 'cur.next' is not equal to null AND 'cur.next.val' is less than or
+          equal to 'node.val'
+            - Set 'cur' to 'cur.next'
+        - Set 'node.next' to 'cur.next'
+        - Set 'cur.next' to 'node'
+        - Set 'node' to 'next'
+    - Return 'sHead.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n^2), where 'n' is the number of nodes
+        - O(n^2), for each of the nodes, we find its insertion position
+    - Space Complexity = O(1)
