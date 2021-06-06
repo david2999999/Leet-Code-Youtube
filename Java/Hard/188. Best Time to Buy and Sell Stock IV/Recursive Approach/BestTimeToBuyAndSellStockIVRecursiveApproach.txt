@@ -1,0 +1,69 @@
+Question
+    You are given an integer array prices where prices[i]
+    is the price of a given stock on the ith day, and an
+    integer k.
+
+    Find the maximum profit you can achieve. You may
+    complete at most k transactions.
+
+    Note: You may not engage in multiple transactions
+    simultaneously (i.e., you must sell the stock before
+    you buy again).
+
+Thoughts Before Coding
+    - We will first implement the recursive approach
+        - We have 2 possible states (buy, sell), which we can
+          denote as 2 integers (0 = buy, 1 = sell)
+            - For each of the index 'i'
+                - When we are currently at the 'buy' state
+                    - We have two choices
+                        - Buy the current stock at index 'i' and
+                          transit to 'sell' state
+                        - Skip the current stock
+                    - We will want to pick the choice that
+                      will give us the higher profit
+                - When we are currently at the 'sell' state
+                    - We have two choices
+                        - Sell the stock at the current price
+                          and transit to 'buy' state
+                        - Skip the current stock
+                    - We will pick the choice that will give
+                      us the higher profit
+    - A side case we have to consider is the 'k' number of
+      transaction that we are allowed to make
+        - Every single time we perform a 'buy -> sell'
+            - We will need to decrement the number of transaction
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - i, the current index we are processing
+            - s, the current state, initially (0 = buy)
+            - k, the number of transactions left
+            - prices, input array
+        - What is the base case?
+            - If 'i' is out of bound OR 'k' is equal to 0
+                - Return 0
+        - In each of the recursive call
+            - If 's' is equal to 0 (buy)
+                - Recursively find the profit 'p1' if we buy the current stock
+                    - i => i + 1
+                    - s => 1
+                - Recursively find the profit 'p2' if we skip the current stock
+                    - i => i + 1
+                - Return 'max(p1 - prices[i], p2)'
+            - Else, (sell state)
+                - Recursively find the profit 'p1' if we sell at the current price
+                    - i => i + 1
+                    - s => 0
+                    - k => k - 1
+                - Recursively find the profit 'p2' if we skip the current price
+                    - i => i + 1
+                - Return 'max(p1 + prices[i], p2)'
+        - This approach is not efficient enough due to overlapping recursive calls
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2^n), where 'n' is the length of the input array
+        - O(2^n), each recursive call has up to 2 choices and a depth of 'n'
+    - Space Complexity = O(n), where 'n' is the length of the input array
+        - O(n), recursive call stack memory
