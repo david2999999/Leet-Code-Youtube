@@ -1,0 +1,39 @@
+Question
+    Given an array nums of size n, return the majority element.
+
+    The majority element is the element that appears more than ⌊n / 2⌋ times.
+    You may assume that the majority element always exists in the array.
+
+Thoughts Before Coding
+    - If we are given the input array [x, y, x, y, x]
+        - How can we find the majority element?
+            - We can see that the first 'x' cancels out the first 'y'
+            - The second 'x' cancels out the second 'y'
+            - This will leave us the last 'x' as the majority element
+    - We can keep track of the frequency 'count' of the current majority element
+        - Then for each of the element 'num' in the input array
+            - if 'num' is equal to the current majority element
+                - We can increment the 'count'
+            - If 'num' is not equal to the current majority element
+                - We can decrement the 'count'
+        - If our 'count' ever reaches 0, we will update the majority element
+
+Answer
+    - Create the following variables
+        - majority, the majority element
+        - count, the frequency of the current majority element
+    - Iterate through the elements of 'nums', denoted as 'num'
+        - If 'count' is equal to 0
+            - Set 'majority' to 'num'
+            - Set 'count' to 1
+            - continue to next iteration
+        - If 'num' is equal to 'majority'
+            - Increment 'count'
+        - Else
+            - Decrement 'count'
+    - Return 'majority'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each element once
+    - Space Complexity = O(1)
