@@ -1,0 +1,69 @@
+Question
+    You are given an integer array prices where prices[i]
+    is the price of a given stock on the ith day, and an
+    integer k.
+
+    Find the maximum profit you can achieve. You may
+    complete at most k transactions.
+
+    Note: You may not engage in multiple transactions
+    simultaneously (i.e., you must sell the stock before
+    you buy again).
+
+Thoughts Before Coding
+    - In the recursive approach
+        - The solution is not efficient enough due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - we are trying to find the maximum 'profit' at the current 'i, s, k'
+        - This means we can cache 'i, s, k' with maximum 'profit'
+
+Answer
+    - Create a 3D matrix 'memo' to cache previously calculated results
+        - The x-axis represent 'i'
+        - The y-axis represent 's'
+        - The z-axis represent 'k'
+        - The values represent 'profit'
+    - Fill 'memo' with -1
+        - This is to prevent the side case where we can get no profit from the input array
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - i, the current index we are processing
+            - s, the current state, initially (0 = buy)
+            - k, the number of transactions left
+            - prices, input array
+            - memo, cache
+        - What is the base case?
+            - If 'i' is out of bound OR 'k' is equal to 0
+                - Return 0
+            - If 'memo[i][s][k]' is not equal to -1
+                - Return 'memo[i][s][k]'
+        - In each of the recursive call
+            - If 's' is equal to 0 (buy)
+                - Recursively find the profit 'p1' if we buy the current stock
+                    - i => i + 1
+                    - s => 1 (sell)
+                - Recursively find the profit 'p2' if we skip the current stock
+                    - i => i + 1
+                - Put 'max(p1 - prices[i], p2)' at 'memo[i][s][k]'
+                - Return 'memo[i][s][k]'
+            - Else, (sell state)
+                - Recursively find the profit 'p1' if we sell at the current price
+                    - i => i + 1
+                    - s => 0
+                    - k => k - 1
+                - Recursively find the profit 'p2' if we skip the current price
+                    - i => i + 1
+                - Put 'max(p1 + prices[i], p2)' at 'memo[i][s][k]'
+                - Return 'memo[i][s][k]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(nk2) + O(nk2) = O(nk), where 'n' is the length of the input array
+      and 'k' is the input value
+        - O(nk2), filling 'memo' with -1
+        - O(nk2), each recursive call has 'n * k * 2' states with 'i, k, s'
+    - Space Complexity = O(n) + O(nk2) = O(nk), where 'n' is the length of the input array
+      and 'k' is the input value
+        - O(n), recursive call stack memory
+        - O(nk2), 'memo'
