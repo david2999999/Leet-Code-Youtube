@@ -1,0 +1,48 @@
+Question
+    You are given an integer array prices where prices[i]
+    is the price of a given stock on the ith day, and an
+    integer k.
+
+    Find the maximum profit you can achieve. You may
+    complete at most k transactions.
+
+    Note: You may not engage in multiple transactions
+    simultaneously (i.e., you must sell the stock before
+    you buy again).
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached the current 'i, s, k' with maximum amount
+                  of profit 'profit'
+            - This means we can create a 3D matrix 'profit' to keep track
+              of the maximum of profit for all combinations of 'i, s, k'
+
+Answer
+    - Create a 3D matrix 'profit'
+        - The x-axis represent 'i'
+        - The y-axis represent 's'
+        - The z-axis represent 'k'
+        - The values represent maximum profit
+    - Iterate through the indices from 'prices.length - 1 -> 0', denoted as 'i'
+        - Iterate through the states from '1 -> 0', denoted as 's' (0 = buy, 1 = sell)
+            - Iterate through the transactions from '1 -> k', denoted as 'j'
+                - If 's' is equal to '0'
+                    - Set 'profit[i][s][j]' to the larger value between
+                        - profit[i + 1][1][j] - prices[i]
+                        - profit[i + 1][s][j]
+                - Else ('s' is equal to 1)
+                    - Set 'profit[i][s][j]' to the larger value between
+                        - profit[i + 1][0][j - 1] + prices[i]
+                        - profit[i + 1][s][j]
+    - Return 'profit[0][0][k]', this is the maximum amount of profit
+      if we start at index '0' with a state of '0', and 'k' available transactions
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2nk) = O(nk), where 'n' is the length of 'prices' and
+      'k' is the input value
+        - O(2nk), nested 'for' loops
+    - Space Complexity = O(2nk) = O(nk), where 'n' is the length of 'prices' and
+      'k' is the input value
+        - O(2nk), 'profit' matrix
