@@ -1,0 +1,45 @@
+Question
+    You are given an integer array prices where prices[i]
+    is the price of a given stock on the ith day, and an
+    integer k.
+
+    Find the maximum profit you can achieve. You may
+    complete at most k transactions.
+
+    Note: You may not engage in multiple transactions
+    simultaneously (i.e., you must sell the stock before
+    you buy again).
+
+Thoughts Before Coding
+    - In the 3D bottom up approach
+        - In each of the iteration
+            - We are only relying on values from the row 'i + 1'
+        - This means we can create a 2D matrix to represent our 3D matrix
+            - In each of the iteration
+                - We will be updating the values from the previous iteration
+
+Answer
+    - Create a 2D matrix 'profit'
+        - The rows represent 's'
+        - The column represent 'k'
+        - The values represent maximum profit
+    - Iterate through the indices from 'prices.length - 1 -> 0', denoted as 'i'
+        - Iterate through the states from '1 -> 0', denoted as 's' (0 = buy, 1 = sell)
+            - Iterate through the transactions from '1 -> k', denoted as 'j'
+                - If 's' is equal to '0'
+                    - Set 'profit[s][j]' to the larger value between
+                        - profit[1][j] - prices[i]
+                        - profit[s][j]
+                - Else ('s' is equal to 1)
+                    - Set 'profit[s][j]' to the larger value between
+                        - profit[0][j - 1] + prices[i]
+                        - profit[s][j]
+    - Return 'profit[0][k]', this is the maximum amount of profit
+      if we start at index '0' with a state of '0', and 'k' available transactions
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2nk) = O(nk), where 'n' is the length of 'prices' and
+      'k' is the input value
+        - O(2nk), nested 'for' loops
+    - Space Complexity = O(2k) = O(k), where 'k' is the input value
+        - O(2k), 'profit' matrix
