@@ -1,0 +1,33 @@
+Question
+    Reverse bits of a given 32 bits unsigned integer.
+
+Thoughts Before Coding
+    - We can process the bits of 'n' from 'right -> left'
+        - This will allow us to reverse the ordering of the bits
+    - How can we retrieve the current rightmost bit of 'n'?
+        - We can use the AND operator
+            - rightmost bit = n & 1
+        - In order to allow us to process the next rightmost bit
+            - we can remove the current rightmost bit using the shift operator
+                - n = n >> 1
+    - How can we add the current rightmost bit to our resulting 'reverse' bit string?
+        - We can use the OR operator
+            - reverse = reverse | rightmost bit
+
+Answer
+    - Create a variable 'reverse'
+    - Iterate through from 0 -> 31, denoted as 'i'
+        - Retrieve the current rightmost bit
+            - bit = n & 1
+        - Remove the rightmost bit
+            - n = n >> 1
+        - Set 'reverse' to 'reverse | bit'
+        - If 'i' is less than 31
+            - Shift 'reverse' to the left by 1 place to give space
+              for the next rightmost bit
+    - Return 'reverse'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(32) = O(1)
+        - O(32), process each bit
+    - Space Complexity = O(1)
