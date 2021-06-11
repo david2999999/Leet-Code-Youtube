@@ -1,0 +1,26 @@
+Question
+    Write a function that takes an unsigned integer and
+    returns the number of '1' bits it has (also known as
+    the Hamming weight).
+
+Thoughts Before Coding
+    - We can use Brian Kernighan's Algorithm
+        - In the algorithm, it states that we can remove the current rightmost
+          set bit using the following formula
+            - n & (n - 1)
+            - How does this formula work?
+                - Example: 100
+                    - 100 & 011 = 000
+    - We will continuously apply the formula until 'n' reaches 0
+
+Answer
+    - Create a variable 'ones'
+    - While 'n' is not equal to 0
+        - Set 'n' to 'n & (n - 1)'
+        - Increment 'ones'
+    - Return 'ones'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(32) = O(1)
+        - O(32), maximum number of bits that 'n' can have
+    - Space Complexity = O(1)
