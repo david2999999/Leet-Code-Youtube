@@ -1,0 +1,46 @@
+Question
+    You are a professional robber planning to rob houses along a street. Each house has a certain amount of
+    money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+    Given an integer array nums representing the amount of money of each house, return the
+    maximum amount of money you can rob tonight without alerting the police.
+
+Thoughts Before Coding
+    - The recursive approach is inefficient due to
+      overlapping recursive calls
+        - we can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the maximum amount of 'money'
+              at the current index 'i'
+            - This means we can cache 'i' and 'money'
+
+Answer
+    - Create an array 'memo' to cache previously calculated results
+        - The indices represent 'i'
+    - Fill 'memo' with -1
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - i, the current index
+            - nums, input array
+            - memo, cache
+        - What is the base case?
+            - If 'i' is out of bound
+                - Return 0
+            - If 'memo[i]' is not equal to -1
+                - Return 'memo[i]'
+        - In each of the recursive call
+            - Recursively find the money 'm1' if we rob the current house
+                - i => i + 2
+            - Recursively find the money 'm2' if we skip the current house
+                - i => i + 1
+            - Put 'max(m1 + nums[i], m2)' at 'memo[i]'
+            - Return 'memo[i]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n) + O(n) = O(n), where 'n' is the length of the input array
+        - O(n), fill 'memo' with -1
+        - O(n), there are 'n' possible states with 'i'
+    - Space Complexity = O(n) + O(n) = O(n), where 'n' is the length of the input array
+        - O(n), recursive call stack memory
+        - O(n), 'memo' array
