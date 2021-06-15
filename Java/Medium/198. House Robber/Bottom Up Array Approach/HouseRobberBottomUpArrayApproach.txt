@@ -1,0 +1,31 @@
+Question
+    You are a professional robber planning to rob houses along a street. Each house has a certain amount of
+    money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+    Given an integer array nums representing the amount of money of each house, return the
+    maximum amount of money you can rob tonight without alerting the police.
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached the current index 'i' with the maximum
+                  amount of 'money'
+            - This means we can create an array 'money' to keep track
+              the maximum amount of money for all possible values of 'i'
+
+Answer
+    - Create an array 'money'
+        - The indices represent 'i'
+        - The values represent maximum amount of money
+    - Iterate through the indices from 'nums.length - 1 -> 0', denoted as 'i'
+        - Set 'money[i]' to the larger value between
+            - money[i + 2] + nums[i]
+            - money[i + 1]
+    - Return 'money[0]', maximum amount of money if we start at index 0
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each index once
