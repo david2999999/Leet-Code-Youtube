@@ -1,0 +1,35 @@
+Question
+    You are a professional robber planning to rob houses along a street. Each house has a certain amount of
+    money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+    Given an integer array nums representing the amount of money of each house, return the
+    maximum amount of money you can rob tonight without alerting the police.
+
+Thoughts Before Coding
+    - In the array bottom up approach
+        - in each of the iteration
+            - We are only relying on values at index 'i + 1' and 'i + 2'
+            - This means we can create two variables to keep
+              track of the values at the two indices
+                - Then in each of the iteration
+                    - We will be updating the two variables
+
+Answer
+    - Create two variables
+        - m1, the maximum amount of money at index 'i + 1'
+        - m2, the maximum amount of money at index 'i + 2'
+    - Iterate through the indices from 'nums.length - 1 -> 0', denoted as 'i'
+        - Create a variable 'm' to keep track of the maximum amount of
+          money at the current index
+            - Set 'm' to the larger value between
+                - m2 + nums[i]
+                - m1
+        - Set 'm2' to 'm1'
+        - Set 'm1' to 'm'
+    - Return 'm1', which is the maximum amount of money if we start
+      at index 0
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(1)
