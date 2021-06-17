@@ -1,0 +1,45 @@
+Question
+    Given the root of a binary tree, imagine yourself
+    standing on the right side of it, return the values of
+    the nodes you can see ordered from top to bottom.
+
+Thoughts Before Coding
+    - Lets first go over the preorder traversal
+        - In the preorder traversal
+            - The direction is 'root -> left -> right'
+        - We can implement a modified preorder traversal
+            - The direction is 'root -> right -> left'
+    - The next part is how can we determine the current node 'x'
+      is the first node at the level?
+        - We can keep track of the current level 'y'
+        - If our current list of node values has 'y' elements,
+          this means 'x' is the first node at the level
+    - We can keep track of the current 'level' as we move downward
+
+Answer
+    - Create a list 'result' to keep track of the node values
+    - Implement the modified preorder traversal
+        - What parameters do we need?
+            - node, the current node we are visiting
+            - result, the list of resulting nodes
+            - level, the current level, initially 0
+        - What is the base case?
+            - if 'node' is equal to null
+                - Return from the recursive call
+        - In each of the recursive call
+            - If 'level' is equal to 'result.size()'
+                - Add 'node.val' to 'result'
+            - Recursively traverse to the right side
+                - node => node.right
+                - level => level + 1
+            - Recursively traverse to the left side
+                - node => node.left
+                - level => level + 1
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(h) + O(h) = O(h), where 'h' is the height of the tree
+        - O(h), recursive call stack memory
+        - O(h), result list
