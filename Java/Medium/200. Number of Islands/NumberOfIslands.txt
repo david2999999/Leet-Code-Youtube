@@ -1,0 +1,46 @@
+Question
+    Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water),
+    return the number of islands.
+
+    An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
+    You may assume all four edges of the grid are all surrounded by water.
+
+Thoughts Before Coding
+    - For each of the cell at 'r, c' with a value of '1'
+        - We will need to increment the number of islands
+        - We will need to mark the current island as visited
+            - We can implement a recursive depth first search approach
+              to find the surrounding lands that are connected
+              to the current cell
+            - We can mark the island by sinking the island
+                - This means converting all of the '1s -> 0s'
+
+Answer
+    - Create a variable 'islands'
+    - Iterate through the rows and columns of 'grid', denoted as 'r, c'
+        - If 'grid[r][c]' is equal to '1'
+            - Increment 'islands'
+            - Implement a recursive approach to sink the island
+                - What parameters do we need?
+                    - r, the current row
+                    - c, the current column
+                    - grid, the input grid
+                - What is the base case?
+                    - If 'r, c' is out of bound OR does not contain a '1'
+                        - return from the recursive call
+                - In each of the recursive call
+                    - Set 'grid[r][c]' to '0'
+                    - Iterate through the 4 directions, denoted as 'd'
+                        - Calculate 'nr, nc'
+                            - nr = r + d[0]
+                            - nc = c + d[1]
+                        - Recursively traverse to that direction
+                            - r => nr
+                            - c => nc
+    - Return 'islands'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the total number of cells
+        - O(n), visit each cell at most twice
+    - Space Complexity = O(d), where 'd' is the depth of the largest island
+        - O(d), recursive call stack memory
