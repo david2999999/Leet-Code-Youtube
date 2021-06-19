@@ -1,0 +1,56 @@
+Question
+    Write an algorithm to determine if a number n is happy.
+
+    A happy number is a number defined by the following process:
+        - Starting with any positive integer, replace the number by the sum of the squares of its digits.
+        - Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+        - Those numbers for which this process ends in 1 are happy.
+
+    Return true if n is a happy number, and false if not.
+
+Thoughts Before Coding
+    - Lets break this question down into two parts
+        - The first part is finding the sum of the square of its digits inside 'x'
+            - We can process the digits inside 'x' from right -> left
+                - We can retrieve the rightmost digit using the modulus operation
+                    - d = x % 10
+            - Then we can remove the current rightmost digit using division
+                - x = x / 10
+        - The next part is detecting a cycle
+            - We can use Floyd's Cycle Detection Algorithm
+                - We are going have two variables
+                    - slow, this number will change 1 step at a time
+                    - fast, this number will change 2 steps at a time
+            - If 'slow' ever catches up to 'fast'
+                - This means we have found a cycle
+
+Answer
+    - Create a method to allow us to find the sum of the squares of the digits inside a value 'x'
+        - What parameters do we need?
+            - x, the current number we are processing
+        - In the method
+            - Create a variable 'sum'
+            - While 'x' is greater than 0
+                - Retrieve the rightmost digit
+                    - d = x % 10
+                - Increment 'sum' by 'd * d'
+                - Remove the rightmost digit
+                    - x = x / 10
+            - Return 'sum'
+    - Create two variables
+        - slow, initially 'n'
+        - fast, initially 'n'
+    - While 'slow' is not equal to 1
+        - invoke the method 1 time on 'slow'
+            - Set 'slow' to the result
+        - Invoke the method twice on 'fast'
+            - Set 'fast' to the result
+        - If 'slow' is equal to 'fast'
+            - break from the loop
+    - Return true if 'slow' is equal to 1
+        - Else, return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(k * 10) = O(k), where 'k' is the number of loops
+        - O(k * 10), in each of the loops and process the digits inside the number
+    - Space Complexity = O(1)
