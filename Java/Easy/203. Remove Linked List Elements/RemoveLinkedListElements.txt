@@ -1,0 +1,31 @@
+Question
+    Given the head of a linked list and an
+    integer val, remove all the nodes of the
+    linked list that has Node.val == val, and
+    return the new head.
+
+Thoughts Before Coding
+    - For each of the node 'x' inside the input list
+        - We will first want to disconnect 'x'
+        - But, before we disconnect 'x', we should the 'next' node
+    - If 'x.val' is not equal to 'val'
+        - Then we can append 'x' to our resulting list
+
+Answer
+    - Create the following variables
+        - sHead, the sentinel head node
+        - sTail, the current tail of the resulting list, initially 'sHead'
+        - node, our current position, initially 'head'
+    - While 'node' is not equal to null
+        - Create a variable 'next' and set it to 'node.next'
+        - Set 'node.next' to null
+        - If 'node.val' is not equal to 'val'
+            - Set 'sTail.next' to 'node'
+            - Set 'sTail' to 'node'
+        - Set 'node' to 'next'
+    - Return 'sHead.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(1)
