@@ -1,0 +1,42 @@
+Question
+    Given two strings s and t, determine if they are isomorphic.
+
+    Two strings s and t are isomorphic if the characters in s can be replaced
+    to get t.
+
+    All occurrences of a character must be replaced with another character
+    while preserving the order of characters. No two characters may map to
+    the same character, but a character may map to itself.
+
+Thoughts Before Coding
+    - If we currently have two character 'c' and 'd' inside 's' and 't' respectively
+        - If 'c -> d'
+            - We will need a quick way to check if 'c' maps to 'd'
+            - We can create a HashMap, where we track of 'c -> d'
+        - This means no two characters can map to the character 'd'
+            - We will need a way to check if we already have a
+              character that maps to 'd'
+                - We can create a HashSet to keep track of previously
+                  seen 'd'
+
+Answer
+    - Create two variables
+        - map, HashMap to keep track of 'c -> d'
+        - seen, keep track of previously seen 'd'
+    - Iterate through the indices of 's', denoted as 'i'
+        - Retrieve the two character 'c' and 'd' from 's' and 't' at index 'i'
+        - If 'map' contains 'c'
+            - If 'map.get(c)' does not equal to 'd'
+                - Return false
+        - Else
+            - If 'seen' contains 'd'
+                - return false
+        - Put 'c' and 'd' into 'map'
+        - Add 'd' to 'seen'
+    - Return true
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of characters
+        - O(n), visit each index once
+    - Space Complexity = O(2n) = O(n), where 'n' is the number of characters
+        - O(2n), 'map' and 'seen'
