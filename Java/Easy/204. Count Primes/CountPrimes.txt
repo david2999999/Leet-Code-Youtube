@@ -1,0 +1,45 @@
+Question
+    Count the number of prime numbers less than a
+    non-negative number, n.
+
+Thoughts Before Coding
+    - We will be implementing sieve of Eratosthenes
+        - We are going to create a boolean array 'isPrime', which
+         has size of 'n' (0 -> n - 1)
+            - The indices represent the number
+            - The values represent if the number is prime or not
+    - Initially all of the values inside the 'isPrime' array
+      will be equal to true with the exception of 0 and 1
+        - Then for each of the prime number/index 'i'
+            - We are going to go through all of the multiples of 'i'
+            - Then we can set the cells at the multiples to false
+        - For example: 2
+            - 4, 6, 8, ...
+    - After, we have created the array
+        - We can count the number of cells with a value of true
+
+Answer
+    - Lets first validate the input parameter
+        - If 'n' is equal to 0 OR 1
+            - Return 0
+    - Create a boolean array 'isPrime' with size 'n'
+        - Fill the array with true
+    - Set 'isPrime[0]' to false
+    - Set 'isPrime[1]' to false
+    - Iterate through the indices of 'n', from '2 -> n / 2', denoted as 'i'
+        - If 'isPrime[i]' is false
+            - continue to next index
+        - Iterate through the multiples, denoted as 'j', where 'i * j' is less than 'n'
+            - Set 'isPrime[i * j]' to false
+    - Create a variable 'primes'
+    - Iterate through the elements of 'isPrime', denoted as 'p'
+        - If 'p' is true
+            - Increment 'primes'
+    - Return 'primes'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n) + O(n) = O(n), where 'n' is the input value
+        - O(n), created the boolean table
+        - O(n), count the number of primes
+    - Space Complexity = O(n), where 'n' is the input value
+        - O(n), 'isPrime' array
