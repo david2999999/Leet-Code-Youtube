@@ -1,0 +1,24 @@
+Question
+    Given the head of a singly linked list, reverse the list,
+    and return the reversed list.
+
+Thoughts Before Coding
+    - For each of the node 'x' inside the input list
+        - We will first want to disconnect 'x'
+        - Then we prepend 'x' to our 'reverse' list
+
+Answer
+    - Create the following variables
+        - reverse, the head of the reverse list, initially 'null'
+        - node, our current position, initially 'head'
+    - While 'node' is not equal to null
+        - Create a variable 'next' and set it to 'node.next'
+        - Set 'node.next' to 'reverse'
+        - Set 'reverse' to 'node'
+        - Set 'node' to 'next'
+    - Return 'reverse'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(1)
