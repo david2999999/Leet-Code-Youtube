@@ -11,11 +11,50 @@ Question
     Return true if you can finish all courses. Otherwise, return false.
 
 Thoughts Before Coding
-    -
+    - We will implementing topological sort
+        - Each of the courses can be treated as a node inside a graph
+        - If we currently have the prerequisites [x, y] and [y, z]
+            - We can draw an edge from y -> x
+            - We can draw an edge from z -> y
+                - Then the current graph will be z -> y -> x
+        - The indegree of node 'z' is equal to 0
 
 Answer
-    -
+    - Create a custom class 'Node'
+        - There will be the following fields
+            - id, the course of the id
+            - neighbors, neighboring nodes
+            - indegree, the number of incoming edges
+        - constructor(id)
+            - Initialize the field 'id'
+            - Initialize 'neighbors' list
+    - Create an array 'nodes' to keep track of all the nodes/courses
+    - Iterate through from 0 -> numCourses - 1, denoted as 'id'
+        - Set 'nodes[id]' to a new node with 'id'
+    - Iterate through the 'prerequisites', denoted as 'pre'
+        - Add 'nodes[pre[0]]' to the neighbors of 'nodes[pre[1]]'
+        - Increment the indgree of 'nodes[pre[0]]'
+    - Create a 'queue' to process all of the nodes
+    - Create a variable 'courses' to keep track of the number of courses we have taken
+    - Iterate through the indices of 'nodes', denoted as 'id'
+        - If 'nodes[id].indegree' is equal to 0
+            - Add 'id' to 'queue'
+    - While 'queue' is not empty
+        - Poll an 'id' from 'queue'
+        - Increment 'courses'
+        - Iterate through the neighbors of 'nodes[id]', denoted as 'neighbor'
+            - Decrement indegree of 'nodes[neighbor.id].indegree'
+            - If 'nodes[neighbor.id].indegree' is equal to 0
+                - Add 'neighbor.id' to 'queue'
+    - Return true if 'courses' is equal to 'numCourses'
+        - Else, return false
 
 What is the Time and Space Complexity?
-    - Time Complexity =
-    - Space Complexity =
+    - Time Complexity = O(n + e) + O(n) = O(n + e), where 'n,e' are the number of
+      nodes and edges
+        - O(n + e), create the 'nodes' array
+        - O(n), processing all of the nodes/courses
+    - Space Complexity = O(n + e) + O(n) = O(n + e), where 'n,e' are the number of
+     nodes and edges
+        - O(n + e), 'nodes' array
+        - O(n), 'queue'
