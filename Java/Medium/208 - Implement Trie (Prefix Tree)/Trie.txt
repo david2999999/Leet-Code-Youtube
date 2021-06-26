@@ -1,0 +1,83 @@
+Question
+    A trie (pronounced as "try") or prefix tree is a tree data structure used to
+    efficiently store and retrieve keys in a dataset of strings. There are various
+    applications of this data structure, such as autocomplete and spellchecker.
+
+    Implement the Trie class:
+        - Trie() Initializes the trie object.
+        - void insert(String word) Inserts the string word into the trie.
+        - boolean search(String word) Returns true if the string word is in the
+          trie (i.e., was inserted before), and false otherwise.
+        - boolean startsWith(String prefix) Returns true if there is a previously
+          inserted string word that has the prefix prefix, and false otherwise.
+
+Thoughts Before Coding
+    - A prefix tree is a tree, which contains nodes (TrieNode)
+        - Each of the nodes inside the tree represents a character
+          inside a word
+        - A path from the 'root' node down to any of the nodes
+          represent the prefix associated a word
+    - For each of the node 'x'
+        - We will need to check if the character 'c' exists
+        - We will need a quick way to check the children node associated
+          with the character 'c'
+            - We can create a HashMap to map 'c -> children TrieNode'
+    - Now, how can we know if we have found a word?
+        - Each of the nodes can have a boolean flag to indicate
+          if the current node is the last character of word or not
+        - For example: if we have the word 'xyz'
+            - The node associated with 'z' will be have a boolean
+              flag of true
+    - The root node does not have a character
+
+Answer
+    - Create a custom class 'TrieNode'
+        - There will be the following fields
+            - children, HashMap to keep track of 'c -> children TrieNode'
+            - isWord, boolean flag to indicate if we have found a word
+    - Fields
+        - root, the root TrieNode
+    - Trie()
+        - Initialize the 'root' node
+    - insert(word)
+        - Create a variable 'node' to keep track of our current location
+          inside the Trie, initially 'root'
+        - Iterate through the indices of 'word', denoted as 'i'
+            - Retrieve the current character 'c' at index 'i'
+            - Put 'c' and a new TrieNode into 'node.children' if it
+              does not exists
+            - Set 'node' to 'node.children.get(c)'
+        - Set 'node.isWord' to true
+    - search(word)
+        - Create a variable 'node' to keep track of our current location
+          inside the Trie, initially 'root'
+        - Iterate through the indices of 'word', denoted as 'i'
+            - Retrieve the current character 'c' at index 'i'
+            - If 'node.children' does not contain 'c'
+                - return false
+            - Set 'node' to 'node.children.get(c)'
+        - Return true if 'node.isWord' is true
+            - Else, return false
+    - startsWith(prefix)
+        - Create a variable 'node' to keep track of our current location
+          inside the Trie, initially 'root'
+        - Iterate through the indices of 'prefix', denoted as 'i'
+            - Retrieve the current character 'c' at index 'i'
+            - If 'node.children' does not contain 'c'
+                - return false
+            - Set 'node' to 'node.children.get(c)'
+        - Return true
+
+What is the Time and Space Complexity?
+    - Trie
+        - Space Complexity = O(n), where 'n' is the number of nodes
+            - O(n), prefix tree
+    - insert(word)
+        - Time Complexity = O(k), where 'k' is the length of 'word'
+            - O(k), process each character inside 'word'
+    - search(word)
+        - Time Complexity = O(k), where 'k' is the length of 'word'
+            - O(k), process each character inside 'word'
+    - startsWith(prefix)
+        - Time Complexity = O(k), where 'k' is the length of 'prefix'
+            - O(k), process each character inside 'prefix'
