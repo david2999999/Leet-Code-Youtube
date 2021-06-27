@@ -1,0 +1,43 @@
+Question
+    Given an array of positive integers nums and a positive
+    integer target, return the minimal length of a
+    contiguous subarray [numsl, numsl+1, ..., numsr-1, numsr]
+     of which the sum is greater than or equal to target.
+     If there is no such subarray, return 0 instead.
+
+    Constraints:
+        - 1 <= target <= 10^9
+        - 1 <= nums.length <= 10^5
+        - 1 <= nums[i] <= 10^5
+
+Thoughts Before Coding
+    - We can implement a sliding window approach
+        - We will be keeping track of the current left and right boundary
+          of our current subarray
+        - One pointer 'j' will be scanning forward for more elements
+          to be included in our current subarray
+        - One pointer 'i' will stay on the left side of our subarray
+            - If the 'sum' of the elements inside our subarray is greater
+              than or equal to 'target'
+                - We will need to shrink our current window/subarray
+                - This can be done by moving our pointer 'i'
+    - We will find the window with the minimum length
+
+Answer
+    - Create the following variables
+        - i, our current left boundary
+        - sum, the sum of our current subarray
+        - minLength, the minimum length subarray, initially 'Integer.MAX_VALUE'
+    - Iterate through the indices of 'nums', denoted as 'j'
+        - Increment 'sum' by 'nums[j]'
+        - while 'sum' is greater than or equal to 'target'
+            - Update 'minLength' if 'j - i + 1' is smaller
+            - Decrement 'sum' by 'nums[i]'
+                - Increment 'i'
+    - Return 'minLength' if it is not equal to 'Integer.MAX_VALUE'
+        - Else, return 0
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), two pointer approach
+    - Space Complexity = O(1)
