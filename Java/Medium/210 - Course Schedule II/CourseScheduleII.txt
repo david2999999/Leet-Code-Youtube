@@ -1,0 +1,63 @@
+Question
+    There are a total of numCourses courses you have to take,
+    labeled from 0 to numCourses - 1. You are given an array prerequisites where
+    prerequisites[i] = [ai, bi] indicates that you must take course bi first if
+    you want to take course ai.
+
+    For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+
+    Return the ordering of courses you should take to finish all courses. If there are many
+    valid answers, return any of them. If it is impossible to finish all courses, return an empty array.
+
+Thoughts Before Coding
+    - We will be implementing the concept of Topological sort
+        - Each of the courses can be represented as node inside a graph
+        - For example: [x, y] and [y, z]
+            - We can draw a directed edge from y -> x
+            - We can draw a directed edge from z -> y
+            - Now our graph becomes z -> y -> x
+
+Answer
+    - Create a custom class 'Node'
+        - There will be two fields
+            - neighbors, list of neighboring nodes/courses
+            - indegree, number of incoming edges
+    - Create an array of 'nodes'
+        - The indices represent the course id
+        - The values represent the nodes
+    - Iterate through the indices of 'nodes', denoted as 'id'
+        - Set a new node at 'nodes[id]'
+    - Iterate through the prerequisites, denoted as 'pre'
+        - Add 'pre[0]' to 'nodes[pre[1]].neighbors'
+        - Increment the indegree of 'nodes[pre[0]]'
+    - Create the following variables
+        - courses, the ordering of the courses
+        - i, the current index we are populating inside 'courses'
+        - queue, to process all of the courses
+    - Iterate through the indices of 'nodes', denoted as 'id'
+        - If 'nodes[id].indegree' is equal to 0
+            - Add 'id' to 'queue'
+    - While 'queue' is not empty
+        - Poll an 'id' from 'queue'
+        - Set 'courses[i]' to 'id'
+        - Increment 'i'
+        - Iterate through the neighbors of 'id', denoted as 'neighborId'
+            - Decrement 'nodes[neighborId].indegree'
+            - If 'nodes[neighborId].indegree' is equal to 0
+                - Add 'neighborId' to 'queue'
+    - If 'i' is equal to 'numCourses'
+        - Return 'courses'
+    - Else
+        - Return an empty array
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n + e) + O(n) + O(n + e) = O(n + e), where 'n,e' are
+      the number of nodes and edges
+        - O(n + e), initializing the nodes array
+        - O(n), find all of the starting courses with prerequisites
+        - O(n + e), processed all of the nodes and edges
+    - Space Complexity = O(n + e) + O(n) + O(n) = O(n + e), where 'n,e' are
+        the number of nodes and edges
+        - O(n + e), 'nodes' array
+        - O(n), 'courses'
+        - O(n), 'queue'
