@@ -1,0 +1,79 @@
+Question
+    Design a data structure that supports adding new words and
+    finding if a string matches any previously added string.
+
+    Implement the WordDictionary class:
+        - WordDictionary() Initializes the object.
+        - void addWord(word) Adds word to the data structure, it can
+          be matched later.
+        - bool search(word) Returns true if there is any string in the
+          data structure that matches word or false otherwise. word may
+          contain dots '.' where dots can be matched with any letter.
+
+Thoughts Before Coding
+    - The best way to search up a word or a prefix of a word will be
+      using a prefix tree / Trie
+    - A side case we have to handle is the '.' character
+        - If we are currently at node 'x'
+            - This means we will need to check all of the children nodes
+              of 'x' to check if we can match the word
+            - This can be done recursively
+
+Answer
+    - TrieNode
+        - There will be two fields
+            - children, HashMap to keep track of 'c -> TrieNode'
+            - isWord, boolean variable to indicate if we have reached
+              the last character of a word
+    - Fields
+        - root, root of the Trie
+    - WordDictionary()
+        - Initialize the 'root'
+    - addWord(word)
+        - Create a variable 'node' to keep track of our current location
+          inside Trie, initially 'root'
+        - Iterate through the indices of 'word', denoted as 'i'
+            - Retrieve the current character 'c' at index 'i'
+            - Put 'c' and a new TrieNode into 'node.children' if
+              it does not exist
+            - Set 'node' to 'node.children.get(c)'
+        - Set 'node.isWord' to true
+    - search(word)
+        - Implement a recursive approach
+            - What parameters do we need?
+                - word, the input word
+                - i, our current starting index, initially 0
+                - node, our current location inside the Trie, initially 'root'
+            - What is the base case?
+                - If 'i' is out of bound AND 'node.isWord' is true
+                    - Return true
+            - In each of the recursive call
+                - Iterate through the indices of 'word', denoted as 'j', starting from 'i'
+                    - Retrieve the current character 'c' at index 'j'
+                    - If 'c' is equal to '.'
+                        - Iterate through the children nodes of 'node', denoted as 'child'
+                            - Recursively check the 'child'
+                                - i => j + 1
+                                - node => child
+                            - If the recursive result is true
+                                - Return true
+                    - If 'node.children' does not contain 'c'
+                        - Return false
+                    - Set 'node' to 'node.children.get(c)'
+                - Return true if 'node.isWord' is true
+                    - Else, return false
+
+What is the Time and Space Complexity?
+    - WordDictionary()
+        - Space Complexity = O(n), where 'n' is the total number of TrieNodes
+            - O(n), 'Trie'
+    - addWord(word)
+        - Time Complexity = O(k), where 'k' is the length of 'word'
+            - O(k), visit each index once
+    - search(word)
+        - Average Case
+            - Time Complexity = O(k), where 'k' is the length of 'word'
+                - O(k), visit each index once
+        - Worse Case
+            - Time Complexity = O(n), where 'n' is the total number of TrieNodes
+                - O(n), search through all nodes
