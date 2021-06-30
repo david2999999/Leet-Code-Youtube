@@ -1,0 +1,63 @@
+Question
+    You are a professional robber planning to rob houses along a street. Each house has a certain amount
+    of money stashed. All houses at this place are arranged in a circle. That means the first house is the
+    neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically
+    contact the police if two adjacent houses were broken into on the same night.
+
+    Given an integer array nums representing the amount of money of each house, return the maximum amount of money
+    you can rob tonight without alerting the police.
+
+Thoughts Before Coding
+    - The recursive approach is inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the maximum amount of 'money'
+              at the current index 'i'
+                - This means we can cache 'i' with 'money'
+
+Answer
+    - Lets validate the input parameter
+        - If 'nums' is empty
+            - Return 0
+        - If 'nums.length' is equal to 1
+            - return 'nums[0]'
+    - Create a method to find the maximum amount of money we can rob
+        - What parameters do we need?
+            - i, the current index
+            - end, the last index of the house we can rob
+            - memo, cache
+            - nums, the input array
+        - What is the base case?
+            - If 'i' is greater than 'end'
+                - Return 0
+            - If 'memo[i]' is not equal to -1
+                - Return 'memo[i]'
+        - In each of the recursive call
+            - Recursively find the amount of money 'm1' if we rob
+              the current house
+                - i => i + 2
+            - Recursively find the amount of money 'm2' if we skip
+              the current house
+                - i => i + 1
+            - Put 'max(m1 + nums[i], m2)' at 'memo[i]'
+            - Return 'memo[i]'
+    - Create an array 'memo' to cache previously calculated results
+        - Fill 'memo' with -1
+    - Recursively find the maximum amount of money 'm1' if we start at index 0
+        - i => 0
+        - end => nums.length - 2
+    - Fill 'memo' with -1
+    - Recursively find the maximum amount of money 'm2' if we start at index 1
+        - i => 1
+        - end => nums.length - 1
+    - Return 'max(m1, m2)'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2n) + O(2n) = O(n), where 'n' is the length of the input array
+        - O(2n), fill 'memo' with -1
+        - O(2n), we have made 2 recursive calls
+            - There is a total of 'n' possible states with 'i'
+    - Space Complexity = O(n) + O(n) = O(n), where 'n' is the length of the input array
+        - O(n), recursive call stack memory
+        - O(n), 'memo'
