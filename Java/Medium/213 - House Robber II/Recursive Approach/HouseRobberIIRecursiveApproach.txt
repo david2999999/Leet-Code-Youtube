@@ -1,0 +1,61 @@
+Question
+    You are a professional robber planning to rob houses along a street. Each house has a certain amount
+    of money stashed. All houses at this place are arranged in a circle. That means the first house is the
+    neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically
+    contact the police if two adjacent houses were broken into on the same night.
+
+    Given an integer array nums representing the amount of money of each house, return the maximum amount of money
+    you can rob tonight without alerting the police.
+
+Thoughts Before Coding
+    - We have two initial starting positions
+        - If we start from index 0 (first index)
+            - We are not allowed to rob the last house
+        - If we start from index 1 (second index)
+            - We are allowed to rob the last house
+        - We will pick the initial starting position that
+          will give us the maximum amount of money
+    - For each of the house at index 'i'
+        - We have up to 2 choices
+            - We can rob the current house and skip the next house (i + 2)
+            - We can skip the current house and move to the next house (i + 1)
+        - We will pick the choice that will give the maximum amount
+          of money
+
+Answer
+    - Lets validate the input parameter
+        - If 'nums' is empty
+            - Return 0
+        - If 'nums.length' is equal to 1
+            - return 'nums[0]'
+    - Create a method to find the maximum amount of money we can rob
+        - What parameters do we need?
+            - i, the current index
+            - end, the last index of the house we can rob
+            - nums, the input array
+        - What is the base case?
+            - If 'i' is greater than 'end'
+                - Return 0
+        - In each of the recursive call
+            - Recursively find the amount of money 'm1' if we rob
+              the current house
+                - i => i + 2
+            - Recursively find the amount of money 'm2' if we skip
+              the current house
+                - i => i + 1
+            - Return 'max(m1 + nums[i], m2)'
+    - Recursively find the maximum amount of money 'm1' if we start at index 0
+        - i => 0
+        - end => nums.length - 2
+    - Recursively find the maximum amount of money 'm2' if we start at index 1
+        - i => 1
+        - end => nums.length - 1
+    - Return 'max(m1, m2)'
+    - This approach is not efficient enough due to overlapping recursive calls
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2 * 2^n) = O(2^n), where 'n' is the length of the input array
+        - O(2 * 2^n), we have two initial recursive calls
+            - Each recursive call has up to 2 choices and a depth of 'n'
+    - Space Complexity = O(n), where 'n' is the length of the input array
+        - O(n), recursive call stack memory
