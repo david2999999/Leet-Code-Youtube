@@ -1,0 +1,52 @@
+Question
+    You are a professional robber planning to rob houses along a street. Each house has a certain amount
+    of money stashed. All houses at this place are arranged in a circle. That means the first house is the
+    neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically
+    contact the police if two adjacent houses were broken into on the same night.
+
+    Given an integer array nums representing the amount of money of each house, return the maximum amount of money
+    you can rob tonight without alerting the police.
+
+Thoughts Before Coding
+    - In the array bottom up approach
+        - In each of the iteration
+            - We are only relying on values from indices 'i + 1' and 'i + 2'
+            - This means we can create two variables to represent
+              these 2 values
+                - In each of the iteration
+                    - We will update these 2 variables
+
+Answer
+    - Lets validate the input parameter
+        - If 'nums' is empty
+            - Return 0
+        - If 'nums.length' is equal to 1
+            - Return 'nums[0]'
+    - Create a method to find the maximum amount of money
+        - What parameters do we need?
+            - start, the starting index
+            - end, the ending index
+            - nums, input array
+        - In the method
+            - Create two variables
+                 - m2, the maximum amount of money at 'i + 2'
+                 - m1, the maximum amount of money at 'i + 1'
+            - Iterate through from 'end -> start', denoted as 'i'
+                - Create a variable 'm' and set it to the larger value between
+                    - m2 + nums[i]
+                    - m1
+                - Update 'm2' to 'm1'
+                - Update 'm1' to 'm'
+            - Return 'm1'
+    - Invoke the method for index 0 to get 'm1'
+        - start => 0
+        - end => nums.length - 2
+    - Invoke the method for index 1 to get 'm2'
+        - start => 1
+        - end => nums.length - 1
+    - Return 'max(m1, m2)'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2n) = O(n), where 'n' is the length of the input array
+        - O(2n), 2 'for' loops
+    - Space Complexity = O(1)
