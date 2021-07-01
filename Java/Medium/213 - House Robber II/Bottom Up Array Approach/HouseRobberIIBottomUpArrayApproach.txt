@@ -1,0 +1,53 @@
+Question
+    You are a professional robber planning to rob houses along a street. Each house has a certain amount
+    of money stashed. All houses at this place are arranged in a circle. That means the first house is the
+    neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically
+    contact the police if two adjacent houses were broken into on the same night.
+
+    Given an integer array nums representing the amount of money of each house, return the maximum amount of money
+    you can rob tonight without alerting the police.
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up
+      approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached 'money' with index 'i'
+                - This means we can create an array 'money' to keep
+                  track of the maximum amount of money for
+                  all values of 'i'
+
+Answer
+    - Lets validate the input parameter
+        - If 'nums' is empty
+            - Return 0
+        - If 'nums.length' is equal to 1
+            - Return 'nums[0]'
+    - Create a method to find the maximum amount of money
+        - What parameters do we need?
+            - start, the starting index
+            - end, the ending index
+            - nums, input array
+        - In the method
+            - Create an array 'money' to keep
+                track of the maximum amount of money for
+                all values of 'i'
+            - Iterate through from 'end -> start', denoted as 'i'
+                - Set 'money[i]' to the larger value between
+                    - money[i + 2] + nums[i]
+                    - money[i + 1]
+            - Return 'money[start]', the maximum amount of money
+              if start at 'start' index
+    - Invoke the method for index 0 to get 'm1'
+        - start => 0
+        - end => nums.length - 2
+    - Invoke the method for index 1 to get 'm2'
+        - start => 1
+        - end => nums.length - 1
+    - Return 'max(m1, m2)'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2n) = O(n), where 'n' is the length of the input array
+        - O(2n), 2 'for' loops
+    - Space Complexity = O(2n) = O(n), where 'n' is the length of the input array
+        - O(2n), 'money' array
