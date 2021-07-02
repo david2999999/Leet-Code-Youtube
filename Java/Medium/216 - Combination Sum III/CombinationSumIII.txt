@@ -1,0 +1,48 @@
+Question
+    Find all valid combinations of k numbers that sum up to n such that the following conditions are true:
+        - Only numbers 1 through 9 are used.
+        - Each number is used at most once.
+
+    Return a list of all possible valid combinations. The list must not contain the same combination twice,
+    and the combinations may be returned in any order.
+
+Thoughts Before Coding
+    - We will be implementing a recursive backtracking approach
+        - For each of the element 'x', where '1 <= x <= 9'
+            - We can include 'x' in our current combination if 'x' is
+              less than or equal to 'n'
+                - After including 'x' in our combination
+                    - We can continue to find the rest of the combination
+                      for 'n - x'
+            - We should note that we are not allowed to use the same element twice
+                - This means after including 'x'
+                    - We should continue to search for elements from 'x + 1'
+        - After finding the current combination
+            - We will backtrack of our steps by removing the last element
+              from the current combination
+                - This will give space for the next elements
+
+Answer
+    - Create a list 'result' to keep track of all combinations
+    - Implement a recursive backtracking approach
+        - What parameters do we need?
+            - i, our current starting element
+            - comb, our current combination
+            - result, list of all combinations
+            - k, the input value
+            - n, the current sum
+        - What is the base case?
+            - If 'k' is equal to 'comb.size()'
+                - If 'n' is equal to 0
+                    - Add a copy of 'comb' to 'result'
+                - Return from the recursive call
+        - In each of the recursive call
+            - Iterate through from 'i -> 9', denoted as 'j'
+                - If 'j' is greater than 'n'
+                    - break from the loop
+                - Add 'j' to 'comb'
+                - Recursively find the rest of the combination
+                    - i => j + 1
+                    - n => n - j
+                - Remove the last element from 'comb'
+    - Return 'result'
