@@ -1,0 +1,26 @@
+Question
+    Given an integer array nums, return true if any value
+    appears at least twice in the array, and return false
+    if every element is distinct.
+
+Thoughts Before Coding
+    - For each of the element 'x' in the input array
+        - We will need a quick way to check if 'x' is seen before
+        - We can create a HashSet to keep track of previously seen elements
+            - Then we can quickly check if an element 'x' exist before
+              by checking the HashSet
+
+Answer
+    - Create a HashSet 'seen'
+    - Iterate through the elements of 'nums', denoted as 'x'
+        - If 'seen' contains 'x'
+            - Return true
+        - Add 'x' to 'seen'
+    - Return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each element once
+    - Space Complexity = O(n), where 'n' is the length of the input array
+       - O(n), HashSet
+
