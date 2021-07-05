@@ -1,0 +1,26 @@
+Question
+    Given an integer array nums and an integer k, return
+    true if there are two distinct indices i and j in the
+    array such that nums[i] == nums[j] and abs(i - j) <= k.
+
+Thoughts Before Coding
+    - For each of the element 'x' at index 'j'
+        - We will want to find a previous element 'x' at index 'i', where
+          the difference 'j - i' is less than or equal to 'k'
+        - This means we will need a quick way to check element and its
+          associated index
+            - We can create a HashMap, where we keep track of 'element -> index'
+
+Answer
+    - Create a HashMap 'map' to keep track of 'element -> index'
+    - Iterate through the indices of 'nums', denoted as 'j'
+        - If 'map' contains 'nums[j]' AND 'j - map.get(nums[j])' is less than or equal to 'k'
+            - Return true
+        - Put 'nums[j]' and 'j' into the 'map'
+    - Return false, if we have failed to find the pair
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(n), where 'n' is the length of the input array
+        - O(n), 'map'
