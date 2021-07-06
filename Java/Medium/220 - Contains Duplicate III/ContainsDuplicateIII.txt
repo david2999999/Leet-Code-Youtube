@@ -1,0 +1,39 @@
+Question
+    Given an integer array nums and two integers k and t, return true if
+    there are two distinct indices i and j in the array such that
+    abs(nums[i] - nums[j]) <= t and abs(i - j) <= k.
+
+Thoughts Before Coding
+    - For each of the element 'x' at index 'i'
+        - We will want to search for an element 'y' from indices 'i - k -> i - 1'
+        - What is the value of 'y'?
+            - We will want 'y' to be as close to 'x' as possible
+            - This is because 'abs(x - y) <= t'
+        - This means 'y' can be the smallest value that is greater
+          than 'x' OR the largest value that is smaller than 'x'
+            - This will mean we will need a quick way to find the 'ceiling' and
+              'floor' of 'x'
+            - We can create a TreeSet to allow us to quickly find the 'ceiling'
+              and the 'floor' in 'log' time complexity
+
+Answer
+    - Create a TreeSet 'set' to keep track of previously seen elements
+    - Iterate through the indices of 'nums', denoted as 'i'
+        - Retrieve the current element 'x' at index 'i'
+        - Find the 'ceiling' of 'x' from 'set'
+        - If 'ceiling' is not null AND 'abs(ceiling - x) <= t'
+            - Return true
+        - Find the 'floor' of 'x' from 'set'
+        - If 'floor' is not null AND 'abs(x - floor) <= t'
+            - Return true
+        - Add 'x' to 'set'
+        - If 'set.size()' is greater than 'k'
+            - Remove the element 'nums[i - k]' from 'set'
+    - Return false, we have failed to find the pair
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(nlogk), where 'n' is the total number of elements
+      and 'k' is the input value
+        - O(nlogk), visit each index once, and operate on our TreeSet
+    - Space Complexity = O(k), where 'k' is the input value
+        - O(k), 'TreeSet'
