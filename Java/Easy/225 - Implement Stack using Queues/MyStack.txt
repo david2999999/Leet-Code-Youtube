@@ -1,0 +1,59 @@
+Question
+    Implement a last in first out (LIFO) stack using only two queues. The implemented stack should support all the functions of a normal queue (push, top, pop, and empty).
+
+    Implement the MyStack class:
+        - void push(int x) Pushes element x to the top of the stack.
+        - int pop() Removes the element on the top of the stack and returns it.
+        - int top() Returns the element on the top of the stack.
+        - boolean empty() Returns true if the stack is empty, false otherwise.
+
+Thoughts Before Coding
+    - Lets first imagine our 'stack' and 'queue' as linear data structure
+    - Inside a 'stack'
+        - Add an element
+            - We are adding the element to the end of the 'stack'
+        - Remove an element
+            - We are removing the element from the end of the 'stack'
+    - Inside a 'queue'
+        - Add an element
+            - We are adding the element to the end of the 'queue'
+        - Remove an element
+            - We are removing the element from the start of the 'queue'
+    - We will need to remove the element from the end of the 'queue'
+        - If the 'queue' currently has 'n' elements
+            - We can move 'n - 1' elements to another 'queue2'
+        - A better approach is to use a single 'queue'
+            - We can remove 'n - 1' elements from 'queue' and
+              then just add back the elements
+                - This will essentially rotate the 'queue' and
+                  move the last element to the first element
+
+Answer
+    - MyStack()
+        - Initialize a 'queue'
+    - push(x)
+        - Add 'x' to 'queue'
+        - Rotate by 'n - 1' elements inside 'queue'
+            - This will allow us to reduce the time complexity
+              of 'pop' and 'top' to O(1)
+    - pop()
+        - Return 'queue.poll()'
+    - top()
+        - Return 'queue.peek()'
+    - empty()
+        - Return 'queue.isEmpty()'
+
+What is the Time and Space Complexity?
+    - MyStack()
+        - Space Complexity = O(n), where 'n' is the total number of elements
+            - O(n), 'queue'
+    - push(x)
+        - Time Complexity = O(n), where 'n' is the total number of elements
+            - O(n), rotate 'queue'
+    - pop()
+        - Time Complexity = O(1)
+    - top()
+        - Time Complexity = O(1)
+    - empty()
+        - Time Complexity = O(1)
+
