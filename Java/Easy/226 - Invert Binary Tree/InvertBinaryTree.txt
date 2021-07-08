@@ -1,0 +1,31 @@
+Question
+    Given the root of a binary tree, invert the tree, and
+    return its root.
+
+Thoughts Before Coding
+    - For each of the node 'x'
+        - We will first need to invert its 'left' and 'right' subtree
+        - Now, how can we invert the subtree that is rooted at 'x'?
+            - We can just swap the children subtrees
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - root, the current root of the subtree we are inverting
+        - What is the base case?
+            - If 'root' is equal to null
+                - Return null
+        - In each of the recursive call
+            - Recursively invert the 'left' subtree
+                - root => root.left
+            - Recursively invert the 'right' subtree
+                - root => root.right
+            - Set 'root.right' to 'left'
+            - Set 'root.left' to 'right'
+            - Return 'root'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(h), where 'h' is the height of the tree
+        - O(h), recursive call stack memory
