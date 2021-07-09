@@ -1,0 +1,44 @@
+Question
+    You are given a sorted unique integer array nums.
+
+    Return the smallest sorted list of ranges that cover
+    all the numbers in the array exactly. That is, each
+    element of nums is covered by exactly one of the ranges,
+    and there is no integer x such that x is in one of the
+    ranges but not in nums.
+
+    Each range [a,b] in the list should be output as:
+        - "a->b" if a != b
+        - "a" if a == b
+
+Thoughts Before Coding
+    - For each of the ranges
+        - It is easy to find the 'start' value
+        - How can we find the 'end' value?
+            - If we are currently at index 'i' with the value of 'x'
+                - We can check the value 'y' at index 'i + 1'
+                - If 'x + 1' is not equal to 'y'
+                    - This means 'x' is the last element inside the range
+
+Answer
+    - Lets validate the input parameter
+        - If 'nums' is empty
+            - Return an empty list
+    - Create a list 'ranges' to keep track of all the ranges
+    - Create a variable 'start' to keep track of the starting range
+        - This value will be initially 'nums[0]'
+    - Iterate through the indices of 'nums', denoted as 'i'
+        - If 'i' is at the last index OR 'nums[i] + 1' is not equal to 'nums[i + 1]'
+            - If 'start' is equal to 'nums[i]'
+                - Add 'start' to 'ranges'
+            - Else
+                - Add 'start -> nums[i]' to 'ranges'
+            - If 'i' is not at the last index
+                - Set 'start' to 'nums[i + 1]'
+    - Return 'ranges'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each index once
+    - Space Complexity = O(n), where 'n' is the length of the input array
+        - O(n), 'ranges' list
