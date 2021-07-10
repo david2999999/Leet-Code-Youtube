@@ -1,0 +1,60 @@
+Question
+    Given an integer array of size n, find all elements
+    that appear more than ⌊ n/3 ⌋ times.
+
+    Follow-up: Could you solve the problem in linear time
+    and in O(1) space?
+
+Thoughts Before Coding
+    - Lets first recap Majority Element I
+        - In that question, we are trying to find all of the elements
+          that appears more than 'n / 2' times
+            - We can see that the majority element can always
+              cancel out all of the other elements
+                - arr = [x, y, x, y, x]
+            - We can keep track of the count of the majority element
+                - When we see an element that does not equal to
+                  majority element
+                    - We can decrement the count
+                - When we see an element that does equal to
+                  majority element
+                    - We will increment the count
+                - If 'count' ever reaches to 0
+                    - We will update the majority element
+    - In this current question
+        - We are finding elements that appears more than 'n / 3'
+            - This means there can be at most 2 majority elements
+        - We can keep track of our 2 majority elements and also
+          the 'count' of the 2 majority elements
+
+Answer
+    - Create the following variables
+        - m1, the first majority element, initially 'nums[0]'
+        - m2, the second majority element, initially 'nums[0]'
+        - c1, the frequency of 'm1'
+        - c2, the frequency of 'm2'
+        - majorities, list to keep track of all majority elements
+    - Iterate through the elements of 'nums', denoted as 'num'
+        - If 'num' is equal to 'm1'
+            - Increment 'c1'
+        - Else if 'num' is equal to 'm2'
+            - Increment 'c2'
+        - Else if 'm1' is equal to 0
+            - Set 'm1' to 'num'
+            - Set 'c1' to '1'
+        - Else if 'm2' is equal to 0
+            - Set 'm2' to 'num'
+            - Set 'c2' to '1'
+        - Else
+            - Decrement both 'c1' and 'c2'
+    - If 'm1' is a majority element
+        - Add 'm1' to 'majorities'
+    - If 'm1' is not equal to 'm2' AND 'm2' is a majority element
+        - Add 'm2' to 'majorities'
+    - Return 'majorities'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(3n) = O(n), where 'n' is the length of the input array
+        - O(3n), iterate through once to find 'm1' and 'm2'
+            - 2 iterations to verify if 'm1' and 'm2' are majority elements
+    - Space Complexity = O(1)
