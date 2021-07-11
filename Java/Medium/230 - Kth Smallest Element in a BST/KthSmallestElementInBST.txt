@@ -1,0 +1,30 @@
+Question
+    Given the root of a binary search tree, and an integer
+    k, return the kth (1-indexed) smallest element in the
+    tree.
+
+Thoughts Before Coding
+    - If all of the node values are in sorted order
+        - We can retrieve the value that is located at the 'kth' position
+    - How can we sort all of the node values?
+        - We can implement an inorder traversal, which will allow
+          us to traverse the nodes in ascending order
+        - We will implementing an iterative inorder traversal
+
+Answer
+    - Create a 'stack' to implement iterative inorder traversal
+    - Create a variable 'n' to keep track of position of the current node, initially 0
+    - Push all of the nodes on the left path of 'root' into 'stack'
+    - While 'stack' is not empty
+        - Pop a 'node' from 'stack'
+        - Increment 'n'
+        - If 'n' is equal to 'k'
+            - Return 'node.val'
+        - Push all of the nodes on the left path of 'node.right'
+    - Return -1, if we have failed to find the value
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(h), where 'h' is the height of the tree
+        - O(h), 'stack'
