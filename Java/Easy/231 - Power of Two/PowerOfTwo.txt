@@ -1,0 +1,33 @@
+Question
+    Given an integer n, return true if it is a power of two. Otherwise, return false.
+
+    An integer n is a power of two, if there exists an integer x such that n == 2^x.
+
+Thoughts Before Coding
+    - Lets first go over the brute force approach
+        - We can continuously divide 'n' by 2 until 'n' reaches the value of 1
+        - If 'n' can not be divide by 2
+            - Then we know it is not a power of 2
+    - A better approach is to use bit operations
+        - lets look for a pattern
+            - 1, 2, 4, 8, ...
+            - 1, 10, 100, 1000
+        - We can see that if the bit string is a power of 2
+            - There is only 1 set bit
+        - we can just count the number of set bits inside the bit string
+            - This approach will cost us O(32) time complexity
+    - An even better approach is to use the following formula
+        - We use the formula 'n & (n - 1)'
+            - If we currently have the number 'n = 4', which has the bit string 100
+                - n & (n - 1) = 100 & 011 = 0
+
+Answer
+    - Lets first validate the input parameter
+        - If 'n' is less than or equal to 0
+            - Return false
+    - Return true if 'n & (n - 1)' is equal to 0
+        - Else, return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(1)
+    - Space Complexity = O(1)
