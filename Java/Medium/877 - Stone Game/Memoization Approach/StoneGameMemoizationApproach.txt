@@ -1,0 +1,69 @@
+Question
+    Alex and Lee play a game with piles of stones.  There are an even number of piles arranged in a row,
+    and each pile has a positive integer number of stones piles[i].
+
+    The objective of the game is to end with the most stones.  The total number of stones is
+    odd, so there are no ties.
+
+    Alex and Lee take turns, with Alex starting first.  Each turn, a player takes the entire pile of
+    stones from either the beginning or the end of the row.  This continues until there are no more
+    piles left, at which point the person with the most stones wins.
+
+    Assuming Alex and Lee play optimally, return True if and only if Alex wins the game.
+
+Thoughts Before Coding
+    - The recursive approach is inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - in each of the recursive call
+            - We are trying to find the 'score' at the current 'p, i, j'
+            - This means we can cache 'p, i, j' with 'score'
+
+Answer
+    - Create a 3D matrix 'memo' to cache previously calculated results
+        - The 'x-axis' represent 'p'
+        - The 'y-axis' represent 'i'
+        - The 'z-axis' represent 'j'
+        - The value represent 'score'
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - piles, the input array
+            - p, the current player, initially 0
+                - 0, Alex
+                - 1, Lee
+            - i, the current left boundary
+            - j, the current right boundary
+            - memo, cache
+        - What is the base case?
+            - If 'i' is greater than 'j'
+                - Return 0
+            - If 'memo[p][i][j]' is not equal to 0
+                - Return 'memo[p][i][j]'
+        - In each of the recursive call
+            - If 'p' is equal to 0 (Alex)
+                - Recursively find the score 's1' if 'Alex' pick from the left side
+                    - p => 1
+                    - i => i + 1
+                - Recursively find the score 's2' if 'Alex' pick from the right side
+                    - p => 1
+                    - j => j - 1
+                - Put 'max(s1 + piles[i], s2 + piles[j])' at 'memo[p][i][j]'
+                - Return 'memo[p][i][j]'
+            - Else, 'p' is equal to 1 (Lee)
+                - Recursively find the score 's1' if 'Lee' pick from the left side
+                    - p => 0
+                    - i => i + 1
+                - Recursively find the score 's2' if 'Lee' pick from the right side
+                    - p => 0
+                    - j => j - 1
+                - Put 'min(s1 - piles[i], s2 - piles[j])' at 'memo[p][i][j]'
+                - Return 'memo[p][i][j]'
+    - Return true if the result of the recursive call is greater than 0
+        - Else, return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2 * n^2) = O(n^2), where 'n' is the length of the input array
+        - O(2 * n^2), there is a total of '2 * n * n' states with 'p, i, j'
+    - Space Complexity = O(2 * n^2) + O(n) = O(n^2), where 'n' is the length of the input array
+        - O(2 * n^2), 'memo'
+        - O(n), recursive call stack memory
