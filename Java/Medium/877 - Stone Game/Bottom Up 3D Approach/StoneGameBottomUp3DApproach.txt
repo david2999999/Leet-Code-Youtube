@@ -1,0 +1,55 @@
+Question
+    Alex and Lee play a game with piles of stones.  There are an even number of piles arranged in a row,
+    and each pile has a positive integer number of stones piles[i].
+
+    The objective of the game is to end with the most stones.  The total number of stones is
+    odd, so there are no ties.
+
+    Alex and Lee take turns, with Alex starting first.  Each turn, a player takes the entire pile of
+    stones from either the beginning or the end of the row.  This continues until there are no more
+    piles left, at which point the person with the most stones wins.
+
+    Assuming Alex and Lee play optimally, return True if and only if Alex wins the game.
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - in the memoization approach
+                - We have cached 'i, j, p' with 'score'
+            - This means we can create a 3D matrix 'score' to keep track
+              of the score for all combinations of 'i, j, p'
+
+Answer
+    - Create a 3D matrix 'score'
+        - The 'x-axis' represent 'i'
+        - The 'y-axis' represent 'j'
+        - The 'z-axis' represent 'p'
+    - Create a variable 'n', which is equal to 'piles.length'
+    - Iterate through from 'n - 1 -> 0', denoted as 'i'
+        - Iterate through from '0 -> n - 1', denoted as 'j'
+            - Iterate through from '1 -> 0', denoted as 'p'
+                - If 'i' is greater than 'j'
+                    - continue to next iteration
+                - If 'i' is equal to 'j'
+                    - If 'p' is equal to 0 (Alex)
+                        - Set 'score[i][j][p]' to 'piles[i]'
+                    - Else (Lee)
+                        - Set 'score[i][j][p]' to '-piles[i]'
+                    - continue to next iteration
+                - If 'p' is equal to 0 (Alex)
+                    - Set 'score[i][j][p]' to the larger value between
+                        - score[i + 1][j][1] + piles[i]
+                        - score[i][j - 1][1] + piles[j]
+                - Else (Lee)
+                    - Set 'score[i][j][p]' to the smaller value between
+                        - score[i + 1][j][0] - piles[i]
+                        - score[i][j - 1][0] - piles[j]
+    - Return true 'score[0][n - 1][0]' is greater than 0 (Alex has won)
+        - score[0][n - 1][0] is the score with the current left and right boundaries
+          and 'Alex' starting first
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n^2 * 2) = O(n^2), where 'n' is the length of the input array
+        - O(n^2 * 2), nested 'for' loops
+    - Space Complexity = O(n^2 * 2) = O(n^2), where 'n' is the length of the input array
+        - O(n^2 * 2), 'score' matrix
