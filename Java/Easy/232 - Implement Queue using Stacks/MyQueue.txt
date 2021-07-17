@@ -1,0 +1,65 @@
+Question
+    Implement a first in first out (FIFO) queue using only two stacks.
+    The implemented queue should support all the functions of a normal queue
+    (push, peek, pop, and empty).
+
+    Implement the MyQueue class:
+        - void push(int x) Pushes element x to the back of the queue.
+        - int pop() Removes the element from the front of the queue and returns it.
+        - int peek() Returns the element at the front of the queue.
+        - boolean empty() Returns true if the queue is empty, false otherwise.
+
+Thoughts Before Coding
+    - Lets first go over the directions of a 'stack' and 'queue'
+        - Inside a 'stack'
+            - if we want to add an element
+                - We add it to the end of the stack
+            - If we want to remove an element
+                - We remove it from the end of the stack
+        - Inside a 'queue'
+            - if we want to add an element
+                - We add it to the end of the queue
+            - If we want to remove an element
+                - We remove it from the front of the queue
+    - If we currently have two stacks 's1' and 's2'
+        - If there are 'n' elements inside 's1'
+            - We can reverse the ordering of the elements if we move 'n' elements
+             from 's1' into 's2'
+            - Then we can remove the element that is currently at the end of 's2'
+    - Now, lets bring everything together
+        - We will have 2 stacks
+            - One stack 's1' will handle the new elements
+            - One stack 's2' will handle the removal of the elements
+        - We should only move elements from 's1' to 's2' if 's2' is empty
+
+Answer
+    - MyQueue
+        - Create two fields
+            - s1, stack to handle new elements
+            - s2, stack to handle removal of elements
+    - push(x)
+        - Push 'x' into 's1'
+    - pop()
+        - If 's2' is empty
+            - Move all elements from 's1' into 's2'
+        - Return 's2.pop()'
+    - peek()
+        - If 's2' is empty
+            - Move all elements from 's1' into 's2'
+        - Return 's2.peek()'
+    - empty()
+        - Return true if both 's1' and 's2' is empty
+            - Else, return false
+
+What is the Time and Space Complexity?
+    - MyQueue
+        - Space Complexity = O(n), where 'n' is the number of elements
+            - O(n), 2 stacks
+    - push(x)
+        - Time Complexity = O(1)
+    - pop()
+        - Time Complexity = Amortized time complexity = O(1)
+    - peek()
+        - Time Complexity = Amortized time complexity = O(1)
+    - empty()
+        - Time Complexity = O(1)
