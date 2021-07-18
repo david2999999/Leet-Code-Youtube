@@ -1,0 +1,49 @@
+Question
+    Given the head of a singly linked list, return true if it is a palindrome.
+
+Thoughts Before Coding
+    - Lets first go over the definition of a palindrome
+        - A palindrome is a word that can be read the same way forwards
+          and backwards
+    - We are given a singly linked list
+        - We can reverse the ordering of the nodes in the upper half of the list
+            - Then we can compare the reverse upper half with the lower half
+        - Now, how can we reverse the upper half?
+            - We will need to find the upper mid node
+            - How can we find the upper mid node?
+                - We can implement a two pointer approach
+                    - We will have two pointer 'slow' and 'fast'
+                        - The 'fast' pointer moves 2 steps at a time
+                        - The 'slow' pointer moves 1 step at a time
+                    - When the 'fast' pointer reaches the end of the list
+                        - Then the 'slow' pointer will reach the mid node
+                - This will allow us to reverse the list starting from the 'slow'
+                  pointer
+
+Answer
+    - Lets validate the input parameter
+        - If 'head' OR 'head.next' is equal to null
+            - Return true
+    - Find the upper mid node
+        - Create two variables
+            - slow, moves 1 step at a time, initially 'head'
+            - fast, moves 2 step at a time, initially 'head'
+        - While 'fast' AND 'fast.next'
+            - Set 'fast' to 'fast.next.next'
+            - Set 'slow' to 'slow.next'
+        - If 'fast' is not equal to null
+            - Set 'slow' to 'slow.next'
+    - We can then 'reverse' the ordering of the upper half starting from 'slow'
+    - While 'head' AND 'reverse' is not equal to null
+        - If 'head.val' is not equal to 'reverse.val'
+            - Return false
+        - Set 'head' to 'head.next'
+        - Set 'reverse' to 'reverse.next'
+    - Return true
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n / 2) + O(n / 2) + O(n / 2) = O(n), where 'n' is the number of nodes
+        - O(n / 2), finding the upper mid node
+        - O(n / 2), reverse the upper list
+        - O(n / 2), check if lower and reverse upper list are the same
+    - Space Complexity = O(1)
