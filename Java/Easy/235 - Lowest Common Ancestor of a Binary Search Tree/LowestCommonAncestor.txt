@@ -1,0 +1,57 @@
+Question
+    Given a binary search tree (BST), find the lowest common
+    ancestor (LCA) of two given nodes in the BST.
+
+    According to the definition of LCA on Wikipedia: “The lowest common ancestor is
+    defined between two nodes p and q as the lowest node in T that has both p and
+    q as descendants (where we allow a node to be a descendant of itself).”
+
+Thoughts Before Coding
+    - For each of the node 'x' inside the binary search tree
+        - How can we determine if 'x' is the lowest common ancestor?
+            - 'x' is a lowest common ancestor if it has 'p' and 'q'
+              in separate subtrees
+            - How can we determine if 'p' and 'q' are currently
+              in separate subtrees?
+                - Since, we are searching inside a binary search
+                  tree
+                    - We can determine the location of the nodes
+                      using its values
+                - If 'x.val' is greater than 'p.val'
+                    - Then we know 'p' is located on the left side
+                    - This will also apply to 'q'
+                - If 'x.val' is less than 'p.val'
+                    - Then we know 'p' is located on the right side
+                    - This will also apply to 'q'
+    - A side case we have to handle to is what if 'x' is equal to
+      'p' or 'q'
+        - Since, we are searching from 'root -> left'
+        - If 'x' is equal to one of the nodes
+            - Then the other node must also be in the subtree
+              of 'x'
+            - This means 'x' will be the lowest common ancestor
+
+Answer
+    - Create a variable 'node' to keep track of our current location
+      inside the tree, initially 'root'
+    - While 'node' is not equal to null
+        - If 'node' is equal to 'p' OR 'q'
+            - Return 'node'
+        - Create a boolean variable 'pIsOnLeft'
+            - Set 'pIsOnLeft' to true if 'p.val' is less than 'node.val'
+        - Create a boolean variable 'qIsOnLeft'
+            - Set 'qIsOnLeft' to true if 'q.val' is less than 'node.val'
+        - If 'pIsOnLeft' is not equal to 'qIsOnLeft'
+            - Return 'node'
+        - Else
+            - If 'pIsOnLeft' is true
+                - Set 'node' to 'node.left'
+            - Else
+                - Set 'node' to 'node.right'
+    - Return null
+
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(h), where 'h' is the height of the tree
+        - O(h), we search from 'root -> leaf'
+    - Space Complexity = O(1)
