@@ -1,0 +1,56 @@
+Question
+    Given a binary tree, find the lowest common ancestor
+    (LCA) of two given nodes in the tree.
+
+    According to the definition of LCA on Wikipedia:
+    “The lowest common ancestor is defined between two
+    nodes p and q as the lowest node in T that has both p
+    and q as descendants (where we allow a node to be a
+    descendant of itself).”
+
+Thoughts Before Coding
+    - For each of the node 'x' inside the binary tree
+        - We will want to find 'p' and 'q' on the 'left' and 'right'
+          subtree
+        - How can we determine if 'x' is the lowest common ancestor?
+            - There are 2 cases
+                - 1) If 'left' and 'right' are equal to true
+                    - This means we have found 'p' and 'q' in
+                      different subtrees
+                - 2) If we have found 'p' or 'q' in the 'left'
+                     or 'right' subtree and the current node 'x'
+                     is equal to 'p' or 'q'
+
+Answer
+    - Create a custom class 'Ancestor' to keep track
+      of the lowest common ancestor
+        - There will be 1 field 'node'
+    - Create an instance of 'ancestor'
+    - Implement the recursive approach to find the ancestor
+        - What parameters do we need?
+            - node, the current node we are visiting
+            - p, the input node
+            - q, the input node
+            - ancestor, helper class to save the LCA
+        - What is the base case?
+            - If 'node' is equal to null
+                - Return false
+        - In each of the recursive call
+            - Recursively search the 'left' subtree for 'p' and 'q'
+                - node => node.left
+            - Recursively search the 'right' subtree for 'p' and 'q'
+                - node => node.right
+            - Create a boolean variable 'current'
+                - if 'node' is equal to 'p' OR 'q'
+                    - Set 'current' to true
+            - If ('left' AND 'right' is true) OR (('left' OR 'right') AND 'current' is true)
+                - Set 'ancestor.node' to 'node'
+                - return false
+            - Return true if 'left' OR 'right' OR 'current'
+    - Return 'ancestor.node'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(h), where 'h' is the height of the tree
+        - O(h), recursive call stack memory
