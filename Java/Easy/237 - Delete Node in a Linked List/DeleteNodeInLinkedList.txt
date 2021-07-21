@@ -1,0 +1,26 @@
+Question
+    Write a function to delete a node in a singly-linked list.
+    You will not be given access to the head of the list, instead
+    you will be given access to the node to be deleted directly.
+
+    It is guaranteed that the node to be deleted is not a tail node in the list.
+
+Thoughts Before Coding
+    - When we want to delete a node 'y' inside a singly linked list
+        - We will need to have access to the previous node 'x'
+        - Then we can delete 'y' by setting 'x.next' to 'x.next.next'
+    - But, in our current problem
+        - We are given direct access to 'y'
+        - Since we are in a singly linked list, we do not
+          have access to the previous node 'x'
+    - If we currently have a node 'z' that is after 'y'
+        - We can copy the value inside node 'z' to node 'y'
+        - Then we can remove node 'z' instead
+
+Answer
+    - Set 'node.val' to 'node.next.val'
+    - Set 'node.next' to 'node.next.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(1)
+    - Space Complexity = O(1)
