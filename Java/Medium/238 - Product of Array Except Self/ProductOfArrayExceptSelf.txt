@@ -1,0 +1,37 @@
+Question
+    Given an integer array nums, return an array answer such that answer[i] is
+    equal to the product of all the elements of nums except nums[i].
+
+    The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+    You must write an algorithm that runs in O(n) time and without using the division operation.
+
+Thoughts Before Coding
+    - For each of the indices 'i'
+        - We will want to find the product of the elements that are at the left
+          and the right side
+        - We can perform 2 scans on the input array
+            - One scan will be from left -> right
+                - This will allow us to find all of the product of elements
+                  on the left side of each index 'i'
+            - One scan will be from right -> left
+                - This will allow us to find all of the product of elements
+                  on the right side of each index 'i'
+
+Answer
+    - Create an array 'answer' to keep track of the result
+    - Create a variable 'product' to keep track of the product on the left side, initially 1
+    - Iterate through the indices of 'nums', denoted as 'i'
+        - Set 'answer[i]' to 'product'
+        - Multiply 'product' by 'nums[i]'
+    - Reset 'product' to 1
+    - Iterate through the indices of 'nums' from 'right -> left', denoted as 'i'
+        - Multiply 'answer[i]' by 'product'
+        - Multiply 'product' by 'nums[i]'
+    - Return 'answer'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2n) = O(n), where 'n' is the length of the input array
+        - O(2n), 2 iterations
+    - Space Complexity = O(n), where 'n' is the length of the input array
+        - O(n), 'answer' array
