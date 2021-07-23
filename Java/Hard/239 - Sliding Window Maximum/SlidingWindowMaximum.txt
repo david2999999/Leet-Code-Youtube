@@ -1,0 +1,51 @@
+Question
+    You are given an array of integers nums, there is a
+    sliding window of size k which is moving from the very left
+    of the array to the very right. You can only see the k numbers
+    in the window. Each time the sliding window moves right by one position.
+
+    Return the max sliding window.
+
+Thoughts Before Coding
+    - Lets break this question down into parts
+        - The first thing we need is a way to quickly retrieve the
+          largest element inside a group of 'k' elements
+            - We can create a max heap to keep track of the elements
+            - This will allow us to retrieve the largest element
+              in O(1) time
+        - The second thing is how can we check if the current largest
+          element is valid or not?
+            - Instead of storing the numbers inside our max heap
+                - We can store the indices of the numbers instead
+            - Then when we iterate through the input array
+                - We can quickly check if the index of the largest number
+                  is out of bound or not
+    - Lets bring everything together
+        - We will be storing indices inside our maximum heap
+        - Then we can create a custom comparator to sort the elements
+          using the input array
+
+Answer
+    - Create a maximum heap 'maxHeap' to sort the elements
+        - The heap will contain the indices of the elements
+        - The elements will be sorted using the input array
+    - Create an array 'result' with a size of 'nums.length - k + 1'
+    - Create a variable 'j' to keep track of the current index
+      we are populating inside 'result'
+    - Iterate through the indices of 'nums', denoted as 'i'
+        - While 'maxHeap' is not empty AND 'maxHeap.peek()' is less than 'i - k + 1'
+            - Poll an index from 'maxHeap'
+        - Add 'i' to 'maxHeap'
+        - If 'i' is greater than or equal to 'k - 1'
+            - Set 'result[j]' to 'nums[maxHeap.peek()]'
+            - Increment 'j'
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(nlogk), where 'n' is the length of the input array
+      and 'k' is the input value
+        - O(nlogk), we visit each index and add elements to the heap
+    - Space Complexity = O(n - k) + O(k) = O(n), where 'n' is the length of the input array
+       and 'k' is the input value
+        - O(n - k), resulting array
+        - O(k), heap
