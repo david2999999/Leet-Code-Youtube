@@ -1,0 +1,38 @@
+Question
+    Write an efficient algorithm that searches for a
+    target value in an m x n integer matrix. The matrix
+    has the following properties:
+
+    - Integers in each row are sorted in ascending from left to right.
+    - Integers in each column are sorted in ascending from top to bottom.
+
+Thoughts Before Coding
+    - Lets first go over a straight forward approach
+        - Since each of the rows are sorted in ascending order
+            - We can iterate through the rows and then perform a binary
+              search to find the target value
+            - This approach will cost us O(rlogc) time complexity
+    - A better approach is to start from the top right corner of the input matrix
+        - If we are currently at the cell 'r, c'
+            - If the current value 'x' is less than 'target'
+                - We have to search downward to 'r + 1'
+            - If the current value 'x' is greater than 'target'
+                - We have to search leftward to 'c - 1'
+
+Answer
+    - Create two variables
+        - r, our current row, initially 0
+        - c, our current column, initially at the last column
+    - While 'r' is not out of bound AND 'c' is greater than or equal to 0
+        - If 'matrix[r][c]' is equal to 'target'
+            - Return true
+        - Else if 'matrix[r][c]' is less than 'target'
+            - Set 'r' to 'r + 1'
+        - Else
+            - Set 'c' to 'c - 1'
+    - Return false, if we have failed to find the 'target'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(r + c), where 'r, c' are the number of rows and columns
+        - O(r + c), search leftward + downward
+    - Space Complexity = O(1)
