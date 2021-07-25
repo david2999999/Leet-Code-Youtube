@@ -1,0 +1,35 @@
+Question
+    Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+Thoughts Before Coding
+    - Lets first go over the definition of an anagram
+        - Two strings are anagrams if they have the same characters
+          but the position of the characters may or may not be in
+          the same order
+    - This means we can keep track of the frequency of each character
+      inside 's' and 't'
+        - Then if the frequency of each character is the same
+            - Then we know that the two strings are anagrams
+    - We are only dealing with lowercase characters
+        - We can create two arrays with size 26 to keep
+          track of the frequency of each character
+        - Then after we find the frequency of all characters
+            - If the arrays are the same
+                - Then we know the two strings are anagrams
+
+Answer
+    - Lets validate the input parameter
+        - If 's' does not have the same length as 't'
+            - Return false
+    - Create two arrays 'c1' and 'c2', both of size 26
+    - Iterate through the indices of 's', denoted as 'i'
+        - Increment the frequency of the character currently at index 'i'
+          inside 's' at 'c1'
+    - Perform the same operation for 't', but using the array 'c2'
+    - Return true if 'c1' is equal to 'c2'
+        - Else, return false
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2n) = O(n), where 'n' is the length of the input string
+        - O(2n), find the frequency of characters inside 's' and 't'
+    - Space Complexity = O(1)
