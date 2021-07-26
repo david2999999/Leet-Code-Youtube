@@ -1,0 +1,52 @@
+Question
+    Given the root of a binary tree, return all root-to-leaf paths in any order.
+
+    A leaf is a node with no children.
+
+Thoughts Before Coding
+    - We will be implementing a recursive backtracking approach
+        - For each of the node 'x'
+            - We will add the value of 'x' to the our current 'path'
+            - Then we can recursively traverse to the left
+              and right subtrees of 'x'
+        - Now, how can we determine if we have found the end of the path?
+            - Since, the paths are from root -> leaf
+                - We have found the end of a path if the current node
+                   is a leaf node
+                - The current node is a leaf node if both of
+                  the children are null
+        - After we have visited the node 'x'
+            - We can backtrack our steps by removing the value 'x'
+              from our current path
+                - This will give space for another path
+
+Answer
+    - Create a list 'paths' to keep track of all paths
+    - Implement a recursive backtracking approach
+        - What parameters do we need?
+            - node, the current node we are visiting
+            - path, StringBuilder keeping tracking of the current path
+            - paths, list of all paths
+        - What is the base case?
+            - If 'node' is null
+                - Return from the recursive call
+        - In each of the recursive call
+            - Save the 'length' of the 'path'
+            - Append 'node.val' to 'path'
+            - If both of the children of 'node' is null
+                - Add a string representation of 'path' to 'paths'
+            - Append "->" to 'path'
+            - Recursively traverse to the left subtree
+                - node => node.left
+            - Recursively traverse to the right subtree
+                - node => node.right
+            - Set the length of 'path' to 'length'
+    - Return 'paths'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(p) + O(h) = O(p), where 'p' is the
+      total number of paths and 'h' is the height of the tree
+        - O(p), 'paths' list
+        - O(h), recursive call stack memory
