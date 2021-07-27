@@ -1,0 +1,30 @@
+Question
+    Given an integer num, repeatedly add all its
+    digits until the result has only one digit, and return it.
+
+Thoughts Before Coding
+    - Lets go over the different approach
+        - The first approach is the most straightforward
+            - We will continuously find the sum of the digits
+              until the sum is a single digit
+        - A more optimized approach is to use the concept of digital root
+            - Digital root allows us to find the single digit sum
+              from the sum of the digits
+            - The rule states that for any value 'n'
+                - The digital root of 0 is equal to 0
+                - The digital root of multiples of 9 is equal to 9
+                    - For example: 81 => 9
+                - The digital root of numbers that are divisible by 9
+                  is equal to 'n % 9'
+                    - Example: 38 => 38 % 9 = 2
+
+Answer
+    - If 'num' is equal to 0
+        - Return 0
+    - If 'num' is divisible by 9
+        - Return '9'
+    - Return 'num % 9'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(1)
+    - Space Complexity = O(1)
