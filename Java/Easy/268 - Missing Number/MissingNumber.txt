@@ -1,0 +1,28 @@
+Question
+    Given an array nums containing n distinct numbers in the range [0, n],
+    return the only number in the range that is missing from the array.
+
+    Follow up: Could you implement a solution using only
+    O(1) extra space complexity and O(n) runtime complexity?
+
+Thoughts Before Coding
+    - If we currently have the numbers from 0 -> n
+        - We can easily determine the 'sum' of the elements using the following formula
+            - (n * (n + 1)) / 2
+        - If we currently have the numbers from 0 -> 3, the sum is equal to 6
+            - (n * (n + 1)) / 2 = (3 * 4) / 2 = 12 / 2 = 6
+    - If the sum of the elements inside the input array is equal to 'y'
+        - then we can easily know the missing number by 'sum - y'
+
+Answer
+    - Create the following variables
+        - n, the number of elements, will be equal to 'nums.length'
+        - sum, the sum of the input array
+    - Iterate through the elements of the input array, denoted as 'x'
+        - increment 'sum' by 'x'
+    - Return '(n * (n + 1)) / 2 - sum'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the length of the input array
+        - O(n), visit each element once
+    - Space Complexity = O(1)
