@@ -1,0 +1,47 @@
+Question
+    You are a product manager and currently leading a
+    team to develop a new product. Unfortunately, the latest
+    version of your product fails the quality check. Since
+    each version is developed based on the previous version,
+    all the versions after a bad version are also bad.
+
+    Suppose you have n versions [1, 2, ..., n] and you want
+    to find out the first bad one, which causes all the
+    following ones to be bad.
+
+    You are given an API bool isBadVersion(version) which
+    returns whether version is bad. Implement a function
+    to find the first bad version. You should minimize the
+    number of calls to the API.
+
+Thoughts Before Coding
+    - Lets first go over the straight forward approach
+        - We can iterate through from 1 -> n
+            - Then return the first bad version
+        - This approach will cost us O(n) time complexity
+    - We will need to find a more optimized approach
+        - For each of the number 'x'
+            - if 'x' is not a bad version
+                - Then we have to search rightward
+            - If 'x' is a bad version
+                - 'x' may or may not be the first bad version
+                - This means we will need to search leftward with 'x' inclusive
+        - This means we can implement a binary search approach
+
+Answer
+    - Create two variables
+        - left, the current left boundary, initially 1
+        - right, the current right boundary, initially 'n'
+    - While 'left' is less than 'right'
+        - Calculate 'mid'
+            - mid = left + (right - left) / 2
+        - If 'mid' is not a bad version
+            - Set 'left' to 'mid + 1'
+        - Else
+            - Set 'right' to 'mid'
+    - Return 'left', which will be the first bad version
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(logn), where 'n' is the input value
+        - O(logn), binary search
+    - Space Complexity = O(1)
