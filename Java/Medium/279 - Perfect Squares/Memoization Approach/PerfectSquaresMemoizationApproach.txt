@@ -1,0 +1,47 @@
+Question
+    Given an integer n, return the least number of
+    perfect square numbers that sum to n.
+
+    A perfect square is an integer that is the
+    square of an integer; in other words, it is the product of some integer with itself. For example, 1, 4, 9, and
+    16 are perfect squares while 3 and 11 are not.
+
+Thoughts Before Coding
+    - The recursive approach is inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the minimum number of squares 'minSquares' at
+              the current value 'n'
+        - This means we can cache 'n' with 'minSquares'
+
+Answer
+    - Create an array 'memo' to cache previously calculated results
+        - The indices represent 'n'
+        - The values represent 'minSquares'
+    - Lets implement our top down memoization approach
+        - What parameters do we need?
+            - n, the current value
+            - memo, cache
+        - What is the base case?
+            - If 'n' is equal to 0
+                - Return 0
+            - If 'memo[n]' is not equal to 0
+                - Return 'memo[n]'
+        - In each of the recursive call
+            - Create a variable 'minSquares', initially 'Integer.MAX_VALUE'
+            - Iterate through from '1 -> k', where 'k^2' is less than or equal to 'n'
+                - Find 'k^2'
+                - Recursively find the minimum number of 'squares' if we pick 'k'
+                    - n => n - k^2
+                - Update 'minSquares' if 'squares + 1' is smaller
+            - Put 'minSquares' at 'memo[n]'
+            - Return 'memo[n]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(sqrt(n) * n), where 'n' is the input value
+        - O(sqrt(n) * n), there are 'n' possible states and in each of the
+          recursive call, we iterate through 'sqrt(n)' indices
+    - Space Complexity = O(n) + O(n) = O(n), where 'n' is the input value
+        - O(n), recursive call stack memory
+        - O(n), 'memo'
