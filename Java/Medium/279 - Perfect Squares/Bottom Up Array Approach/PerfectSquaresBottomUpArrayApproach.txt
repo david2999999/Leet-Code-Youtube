@@ -1,0 +1,33 @@
+Question
+    Given an integer n, return the least number of
+    perfect square numbers that sum to n.
+
+    A perfect square is an integer that is the
+    square of an integer; in other words, it is the product of some integer with itself. For example, 1, 4, 9, and
+    16 are perfect squares while 3 and 11 are not.
+
+Thoughts Before Coding
+    - lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - in the memoization approach
+                - We have cached 'n' with the minimum number of squares 'minSquares'
+                  that sum up to 'n'
+            - This means we can create an array 'minSquares' to keep track
+              of the minimum number of squares for all possible values of 'n'
+
+Answer
+    - Create an array 'minSquares'
+        - The indices represent 'n'
+        - The values represent 'minSquares'
+    - Iterate through the indices from '1 -> n', denoted as 'm'
+        - Set 'minSquares[m]' to 'Integer.MAX_VALUE'
+        - Iterate through from '1 -> k', where 'k^2' is less than or equal to 'm'
+            - Calculate 'k^2'
+            - Update 'minSquares[m]' if 'minSquares[m - k^2] + 1'
+    - Return 'minSquares[n]', the minimum number of squares for the value 'n'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n * sqrt(n)), where 'n' is the input value
+        - O(n * sqrt(n)), nested 'for' loops
+    - Space Complexity = O(n), where 'n' is the input value
+        - O(n), 'minSquares' array
