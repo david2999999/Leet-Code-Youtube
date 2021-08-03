@@ -1,0 +1,29 @@
+Question
+    Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+    Note that you must do this in-place without making a copy of the array.
+
+Thoughts Before Coding
+    - We can implement a two pointer approach
+        - one pointer 'j' will scan forward for elements that are
+          non-zero
+        - one pointer 'i' will stay on the left side to populate
+          all of the elements that are non-zero
+    - After 'j' has found all of the non-zero elements
+        - We can populate the remaining elements with 0 using pointer 'i'
+
+Answer
+    - Create one variable
+        - i, the left pointer, initially 0
+    - Iterate through the indices of 'nums', denoted as 'j'
+        - If 'nums[j]' is not equal to 0
+            - Set 'nums[i]' to 'nums[j]'
+            - Increment 'i'
+    - While 'i' is not out of bound
+        - Set 'nums[i]' to 0
+        - Increment 'i'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2n) = O(n), where 'n' is the length of the input array
+        - O(2n), at most 2 loops
+    - Space Complexity = O(1)
