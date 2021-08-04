@@ -1,0 +1,53 @@
+Question
+    According to Wikipedia's article: "The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970."
+
+    The board is made up of an m x n grid of cells, where each cell has an initial state: live (represented by a 1) or dead (represented by a 0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):
+        - Any live cell with fewer than two live neighbors dies as if caused by under-population.
+        - Any live cell with two or three live neighbors lives on to the next generation.
+        - Any live cell with more than three live neighbors dies, as if by over-population.
+        - Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+
+    The next state is created by applying the above rules simultaneously to every cell in the current state, where births and deaths occur simultaneously. Given the current state of the m x n grid board, return the next state.
+
+Thoughts Before Coding
+    - For each of the cell at 'r, c'
+        - We will need to check the number of 'live' neighbors around the cell in
+          the 8 directions
+    - If our current cell is equal to '1'
+        - If the number of 'live' neighbors is less than 2 OR greater than 3
+            - Then the cell will die in the next state (0)
+    - If our current cell is equal to '0'
+        - If the number of 'live' neighbors is equal to 3
+            - Then our current cell will live in the next state (1)
+    - This means we will need a way to mark the cells and then convert the cells
+      after we have processed all of the cells
+        - For example:
+             - If the current cell is '1' and we want to convert to '0' in the next state
+                - We can mark the cell as '-1'
+            - If the current cell is '0' and we want to convert to '1' in the next state
+                - We can mark the cell as '2'
+        - When checking for live cells
+            - We will need to account for '1' and '-1'
+
+Answer
+    - We will first mark the board
+        - Iterate through the rows and columns of 'board', denoted as 'r, c'
+            - Find the number of 'live' neighbors
+            - If 'board[r][c]' is equal to 1
+                - If 'live' is less than 2 OR greater than '3'
+                    - Set 'board[r][c]' to -1
+            - Else (dead cell)
+                - If 'live' is equal to 3
+                    - Set 'board[r][c]' to 2
+    - We will need to convert the board
+        - Iterate through the rows and columns of 'board', denoted as 'r, c'
+            - If 'board[r][c]' is equal to -1
+                - Set 'board[r][c]' to 0
+            - If 'board[r][c]' is equal to 2
+                - Set 'board[r][c]' to 1
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(8mn) + O(mn) = O(mn), where 'm,n' are the number of rows and columns
+        - O(8mn), marking the cells
+        - O(mn), converting the cells
+    - Space Complexity = O(1)
