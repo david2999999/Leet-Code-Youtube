@@ -1,0 +1,41 @@
+Question
+    Given a pattern and a string s, find if s follows the same pattern.
+
+    Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s.
+
+Thoughts Before Coding
+    - Lets first go over the definition of a bijection
+        - This means a letter can match to a single word
+        - A word can not match to 2 different letters
+    - We will need a quick way match a letter -> word
+        - We can create a HashMap where we map 'letter -> word'
+    - We will need to keep track if we have already used a word or not
+        - We can create a HashSet to keep track of previously seen 'words'
+
+Answer
+    - Split the input string 's' by space to create an array of 'words'
+    - If 'words.length' is not equal to 'patterns.length()'
+        - Return false
+    - Create a HashMap 'map' to keep track of 'letter -> word'
+    - Create a HashSet 'seen' to keep track of previously seen words
+    - Iterate through the indices of 'pattern', denoted as 'i'
+        - Retrieve the character 'c' inside 'pattern' at index 'i'
+        - Retrieve the word 'word' inside 'words' at index 'i'
+        - If 'map' does not contain 'c'
+            - If 'seen' contains 'word'
+                - Return false
+            - Put 'c' and 'word' into 'map'
+            - Add 'word' to 'seen'
+        - Else
+            - If 'map.get(c)' is not equal to 'word'
+                - Return false
+    - Return true after we have processed all of the letters
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(s) + O(s + p) = O(s + p), where 's,p' are the length of the two input strings
+        - O(s), split the input string 's' by space
+        - O(s + p), iterate through all indices of 'p' and check for the words
+    - Space Complexity = O(s) + O(s + p) + O(s) = O(s + p), where 's,p' are the length of the two input strings
+        - O(s), split string
+        - O(s + p), map
+        - O(s), set
