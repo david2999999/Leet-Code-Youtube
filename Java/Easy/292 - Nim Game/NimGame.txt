@@ -1,0 +1,32 @@
+Question
+    You are playing the following Nim Game with your friend:
+        - Initially, there is a heap of stones on the table.
+        - You and your friend will alternate taking turns, and you go first.
+        - On each turn, the person whose turn it is will remove 1 to 3 stones from the heap.
+        - The one who removes the last stone is the winner.
+
+    Given n, the number of stones in the heap, return true
+    if you can win the game assuming both you and your friend play optimally, otherwise return false.
+
+Thoughts Before Coding
+    - Lets go over the difference cases
+        - For each of the value 'n'
+            - If 'n' is equal to '1 -> 3'
+                - Then we will always win
+            - If 'n' is equal to '4'
+                - We will always lose
+            - If 'n' is equal to '5'
+                - We can pick 1 stone and the friend will always lose
+            - If 'n' is equal to '6'
+                - We can pick 2 stones and the friend will always lose
+            - If 'n' is equal to '7'
+                - We can pick 3 stones and the friend will always lose
+            - If 'n' is equal to '8'
+                - We will always lose
+
+Answer
+    - Return true if 'n' is not divisible by 4
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(1)
+    - Space Complexity = O(1)
