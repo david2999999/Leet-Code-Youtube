@@ -1,0 +1,57 @@
+Question
+    The median is the middle value in an ordered integer list. If the size of the list is even,
+    there is no middle value and the median is the mean of the two middle values.
+        - For example, for arr = [2,3,4], the median is 3.
+        - For example, for arr = [2,3], the median is (2 + 3) / 2 = 2.5.
+
+    Implement the MedianFinder class:
+        - MedianFinder() initializes the MedianFinder object.
+        - void addNum(int num) adds the integer num from the data stream to the data structure.
+        - double findMedian() returns the median of all elements so far. Answers within 10-5 of the actual answer will be accepted.
+
+Thoughts Before Coding
+    - If we are given an array 'arr'
+        - The median is the value in the middle of the array
+            - This means we can break the array into two parts
+                - [left, right]
+            - We want the largest element from the left side
+            - We want the smallest element from the right side
+        - The 'left' and 'right' sides does not need to be sorted
+    - We can use a 'maxHeap' for the left side
+    - We can use a 'minHeap' for the right side
+    - If there is an odd number of elements
+        - We can have the extra element on the left side
+
+Answer
+    - MedianFinder
+        - Create three fields
+            - minHeap, represent the left side
+            - maxHeap, represent the right side
+            - isOdd, indicates if there are an odd number of elements, initially false
+    - addNum(num)
+        - If 'isOdd' is false
+            - Add 'num' to 'minHeap'
+            - Add 'minHeap.poll()' to 'maxHeap'
+                - [1] [2], next element is 3
+                - [1] [2, 3]
+                - [1, 2] [3]
+        - Else
+            - Add 'num' to 'maxHeap'
+            - Add 'maxHeap.poll()' to 'minHeap'
+        - Set 'isOdd' to '!isOdd'
+    - findMedian()
+        - if 'isOdd' is true
+            - Return 'maxHeap.peek()'
+        - Else
+            - Return '(maxHeap.peek() + minHeap.peek()) / 2.0'
+
+
+What is the Time and Space Complexity?
+    - MedianFinder
+        - Space Complexity = O(n), where 'n' is the number of elements
+            - O(n), 'minHeap' and 'maxHeap'
+    - addNum
+        - Time Complexity = O(2log(n/2)) = O(log(n/2)), where 'n' is the number of elements
+            - O(log(n/2)), process elements inside heap
+    - findMedian()
+        - Time Complexity = O(1)
