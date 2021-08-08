@@ -1,0 +1,57 @@
+Question
+    You are playing the Bulls and Cows game with your friend.
+
+    You write down a secret number and ask your friend to
+    guess what the number is. When your friend makes a guess,
+    you provide a hint with the following info:
+        - The number of "bulls", which are digits in the guess that are in the correct position.
+        - The number of "cows", which are digits in the guess that are in your secret number but are located in the wrong position. Specifically, the non-bull digits in the guess that could be rearranged such that they become bulls.
+
+    Given the secret number secret and your friend's guess guess,
+    return the hint for your friend's guess.
+
+    The hint should be formatted as "xAyB", where x is the number of
+    bulls and y is the number of cows. Note that both secret and guess
+    may contain duplicate digits.
+
+Thoughts Before Coding
+    - For each of the index 'i'
+        - If we currently have two digits 'c' and 'd' inside 'secret' and 'guess' respectively
+            - If 'c' is equal to 'd'
+                - Then we can increment the number of bulls
+            - If 'c' is not equal to 'd'
+                - We will need to save 'c' somewhere
+                    - Since, 'c' may appear multiple times inside 'secret'
+                    - We will need to keep track of 'c' and also its frequency
+                - We can create a HashMap to keep track of 'c -> frequency'
+    - We can perform another scan inside 'guess' to find out the number of cows
+    - Lets bring it all together
+        - The first scan will find the number of bulls
+        - The second scan will find the number of cows
+
+Answer
+    - Create a HashMap 'map' to keep track of 'c -> frequency'
+    - Create two variables
+        - bulls, # of bulls
+        - cows, # of cows
+    - Iterate through the indices of 'secret', denoted as 'i'
+        - Retrieve the two digits 'c' and 'd' at index 'i' inside 'secret' and 'guess'
+        - If 'c' is equal to 'd'
+            - Increment 'bulls'
+        - Else
+            - Increment the frequency of 'c' inside 'map'
+    - Iterate through the indices of 'guess', denoted as 'i'
+        - Retrieve the two digits 'c' and 'd' at index 'i' inside 'secret' and 'guess'
+        - If 'c' is equal to 'd'
+            - continue to next index
+        - If 'd' is inside 'map' AND 'map.get(d)' is greater than 0
+            - Decrement frequency of 'd' inside 'map'
+            - Increment 'cows'
+    - Return a string representation of 'bulls' and 'cows'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n) + O(n) = O(n), where 'n' is the length of either input strings
+        - O(n), find the number of bulls
+        - O(n), find the number of cows
+    - Space Complexity = O(10) = O(1)
+        - O(10), 'map'
