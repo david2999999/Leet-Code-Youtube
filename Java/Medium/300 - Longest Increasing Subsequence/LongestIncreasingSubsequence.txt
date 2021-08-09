@@ -1,0 +1,37 @@
+Question
+    Given an integer array nums, return the length of the
+    longest strictly increasing subsequence.
+
+    A subsequence is a sequence that can be derived from
+    an array by deleting some or no elements without
+    changing the order of the remaining elements.
+    For example, [3,6,2,7] is a subsequence of the
+    array [0,3,1,6,2,2,7].
+
+Thoughts Before Coding
+    - For each of the index 'j' with the value of 'y'
+        - We will need to find an element 'x' from indices '0 -> j - 1', denoted as 'i'
+            - If 'x' is smaller than 'y', we can form a new increasing subsequence
+                - If the longest increasing subsequence length at 'x' is equal to 'k'
+                - Then we can increment 1 to 'k' to account for the value 'y'
+        - We will want to pick the index 'i' that will give the longest
+          increasing subsequence length
+
+Answer
+    - Create an array 'length' to keep track of the longest subsequence length
+      at each of the indices
+    - Create a variable 'maxLength' to keep track of the longest subsequence length
+      in the whole array
+    - Iterate through the indices of 'nums', denoted as 'j'
+        - Place '1' at 'nums[j]'
+        - Iterate through the indices from '0 -> j - 1', denoted as 'i'
+            - If 'nums[i]' is less than 'nums[j]'
+                - Update 'length[j]' if 'length[i] + 1' is greater
+        - Update 'maxLength' if 'length[j]' is greater
+    - Return 'maxLength'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n^2), where 'n' is the length of the input array
+        - O(n^2), nested 'for' loops
+    - Space Complexity = O(n), where 'n' is the length of the input array
+        - O(n), 'length' array
