@@ -1,0 +1,45 @@
+Question
+    Given an integer array nums, handle multiple queries of the following type:
+
+    Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
+    Implement the NumArray class:
+
+    NumArray(int[] nums) Initializes the object with the integer array nums.
+    int sumRange(int left, int right) Returns the sum of the elements of nums between indices left and right inclusive (i.e. nums[left] + nums[left + 1] + ... + nums[right]).
+
+Thoughts Before Coding
+    - Lets first go over a brute force approach
+        - The approach is just to iterate through from indices 'left -> right' to
+          find the total sum
+        - If there are 'x' queries
+            - The time complexity will be equal to O(x * n)
+    - Now, lets find an optimized approach
+        - We can find the prefix sum of the input array
+            - the prefix sum
+                - for each of the index 'i'
+                    - We will precalculate the sum of the elements from '0 -> i'
+            - Lets say we have two prefix sums
+                - x, the sum of the elements from '0 -> i'
+                - y, the sum of the elements from '0 -> j', where 'j >= i'
+                - The sum between indices 'i -> j' is just 'y - x'
+
+Answer
+    - NumArray(nums)
+        - Create an array 'sum' to keep track of the prefix sum
+        - Iterate through the indices of 'nums', denoted as 'i'
+            - Set 'sum[i + 1]' to 'sum[i] + nums[i]'
+    - sumRange(left, right)
+        - Return 'sum[right + 1] - sum[left]'
+    - input array = [1, 2, 3], sum = [0, 1, 3, 6]
+        - (0, 0) = (left, right)
+            - sum[1] - sum[0] = 1 - 0 = 1
+            - sum[0] - sum[0] = 0 NOT THE RIGHT ANSWER
+
+What is the Time and Space Complexity?
+    - NumArray
+        - Time Complexity = O(n), where 'n' is the length of the input array
+            - O(n), find the prefix sum
+        - Space Complexity = O(n), where 'n' is the length of the input array
+            - O(n), 'sum' array
+    - sumRange
+        - Time Complexity = O(1)
