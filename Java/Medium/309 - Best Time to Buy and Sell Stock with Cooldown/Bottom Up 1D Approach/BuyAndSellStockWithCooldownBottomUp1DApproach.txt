@@ -1,0 +1,45 @@
+Question
+    You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+    Find the maximum profit you can achieve. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times) with the following restrictions:
+
+        - After you sell your stock, you cannot buy stock on the next day (i.e., cooldown one day).
+
+    Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+
+Thoughts Before Coding
+    - In the 2D bottom up approach
+        - In each of the iteration
+            - We are only relying on values from the rows 'i + 1'
+            - This means we can create a single array to represent our 2D matrix
+                - in each of the iteration
+                    - We will be replacing the values from the previous iteration
+
+Answer
+    - Create an array 'profit' to keep track of the maximum profit
+        - The indices represent 's'
+        - The values represent 'profit'
+    - Iterate through the indices from 'prices.length - 1 -> 0', denoted as 'i'
+        - Create a variable 'prev' to keep track of the previous value before
+          we have replaced it, initially 0
+        - Iterate through the indices from '2 -> 0', denoted as 's'
+            - Create a variable 'cur' to keep track of the current value 'profit[s]'
+            - If 's' is equal to 2 (cooldown)
+                - Set 'profit[s]' to 'profit[0]'
+            - else if 's' is equal to '0' (buy)
+                - Set 'profit[s]' to the larger value between
+                    - 'prev - prices[i]', buying the current stock
+                    - 'profit[s]', skipping the current stock
+            - Else (sell, s == 1)
+                - Set 'profit[s]' to the larger value between
+                    - 'prev + prices[i]', selling the current stock
+                    - 'profit[s]', skipping the current stock
+            - Set 'prev' to 'cur'
+    - Return 'profit[0]', which is the maximum profit if we start at index 0
+      with the 'buy' state
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(3n) = O(n), where 'n' is the length of the input array
+        - O(3n), nested 'for' loops
+    - Space Complexity = O(3) = O(1)
+         - O(3), 'profit' array
