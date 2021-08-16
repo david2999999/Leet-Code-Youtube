@@ -1,0 +1,51 @@
+Question
+    A tree is an undirected graph in which any two vertices are connected by exactly one path.
+    In other words, any connected graph without simple cycles is a tree.
+
+    Given a tree of n nodes labelled from 0 to n - 1, and an array of n - 1 edges where edges[i] =
+    [ai, bi] indicates that there is an undirected edge between the two nodes ai and bi in the tree,
+    you can choose any node of the tree as the root. When you select a node x as the root, the result tree
+    has height h. Among all possible rooted trees, those with minimum height (i.e. min(h))  are called minimum height trees (MHTs).
+
+    Return a list of all MHTs' root labels. You can return the answer in any order.
+
+    The height of a rooted tree is the number of edges on the longest downward path between the root and a leaf.
+
+Thoughts Before Coding
+    - we will want to find a node that is toward the center of the graph
+        - Then the node at the center can be used as the root of the MHT
+    - We can implement a BFS approach
+        - We can start with the leaf nodes and remove them layer by layer
+    - We should note that there will be at most 2 middle nodes
+
+Answer
+    - Create a HashMap 'map' to be our Adjacency map
+    - Iterate through the indices from '0 -> n - 1', denoted as 'node'
+        - Put 'node' and a new HashSet into 'map'
+    - Iterate through the 'edges', denoted as 'e'
+        - Connect an edge between 'e[0]' and 'e[1]'
+    - Create a 'queue' to implement BFS
+    - Iterate through the keys of 'map', denoted as 'node'
+        - If 'map.get(node).size()' is equal to 1
+            - Add 'node' to 'queue'
+    - While 'map.size()' is greater than 2
+        - Retrieve the 'size' of 'queue'
+        - Iterate through the indices from '0 -> size - 1'
+            - Poll a 'node' from 'queue'
+            - Iterate through the neighbors of 'node', denoted as 'neighbor'
+                - Remove 'node' from 'map.get(neighbor)'
+                - If 'map.get(neighbor).size()' is equal to 1
+                    - Add 'neighbor' to 'queue'
+            - Remove 'node' from 'map'
+    - Return a list of 'map.keySet()'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n + e) + O(n) + O(n + e) = O(n + e), where 'n, e' are
+      the number of nodes and edges
+        - O(n + e), creating 'map'
+        - O(n), finding initial leaf nodes
+        - O(n + e), BFS
+    - Space Complexity = O(n + e) + O(n) = O(n + e), where 'n, e' are
+       the number of nodes and edges
+        - O(n + e), 'map'
+        - O(n), 'queue'
