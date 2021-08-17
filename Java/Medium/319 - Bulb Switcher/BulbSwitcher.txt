@@ -1,0 +1,47 @@
+Question
+    There are n bulbs that are initially off. You first
+    turn on all the bulbs, then you turn off every second bulb.
+
+    On the third round, you toggle every third bulb
+    (turning on if it's off or turning off if it's on).
+    For the ith round, you toggle every i bulb. For the
+    nth round, you only toggle the last bulb.
+
+    Return the number of bulbs that are on after n rounds.
+
+Thoughts Before Coding
+    - We can see that if we toggle a light bulb odd number of times
+        - it will turn on
+    - How can we determine if we have toggle the bulb located at 'x' at
+      the 'n' round?
+        - if 'x' is divisible by 'n'
+            - Then we know we have toggle the light bulb
+    - We just need to find the light bulbs that has been toggled odd number of times
+        - How can we determine if the light bulb located as 'x' has
+          been toggled odd number of times?
+            - If 'x' has an even number of divisors
+                - Then we know it will stay on
+            - If 'x' has an odd number of divisors
+                - Then we know it will stay off
+        - For example:
+            - x = 15
+                - (3 * 5) (1 * 15) = 4 divisors = even
+            - x = 16
+                - (4 * 4) (1 * 16) (2 * 8) = 5 divisors = odd
+            - x = 9
+                - (3 * 3) (1 * 9) = 3 divisors
+        - All of the perfect squares has an odd number of divisors
+    - If we are given 'n' light bulbs
+        - How many perfect squares are less than or equal to 'n'
+            - There will be 'sqrt(n)' number of perfect squares
+                - Make sure to floor the result
+            - If 'n' is equal to '5'
+                - 1, 4 = 2
+                - sqrt(5) = 2.xxx = floor(2.xxx) = 2
+
+Answer
+    - Return '(int) (sqrt(n))'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(1)
+    - Space Complexity = O(1)
