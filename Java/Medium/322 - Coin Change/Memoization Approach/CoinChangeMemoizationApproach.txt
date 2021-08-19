@@ -1,0 +1,64 @@
+Question
+    You are given an integer array coins representing coins
+    of different denominations and an integer amount representing
+    a total amount of money.
+
+    Return the fewest number of coins that you need to make up
+    that amount. If that amount of money cannot be made up by
+    any combination of the coins, return -1.
+
+    You may assume that you have an infinite number of each
+    kind of coin.
+
+    Constraints:
+        - 1 <= coins.length <= 12
+        - 1 <= coins[i] <= 2^31 - 1
+        - 0 <= amount <= 10^4
+
+Thoughts Before Coding
+    - The recursive approach is inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the minimum number of coins 'minCoins' at
+              the current 'amount'
+            - This means we can cache 'amount' with 'minCoins'
+
+Answer
+    - Create an array 'memo' to cache previously calculated results
+        - The indices will represent 'amount'
+        - The values will represent 'minCoins'
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - coins, input coins
+            - amount
+            - memo, cache
+        - What is the base case?
+            - If 'amount' is equal to 0
+                - Return 0
+            - If 'memo[amount]' is not equal to 0
+                - Return 'memo[amount]'
+        - In each of the recursive call
+            - Create a variable 'minCoins' to keep track of the minimum number of
+              coins for 'amount', initially '10000 + 1'
+            - Iterate through the 'coins', denoted as 'c'
+                - IF 'c' is greater than 'amount'
+                    - continue to next iteration
+                - Recursively find the number of coins 'x' if we pick 'c'
+                    - amount => amount - c
+                - Update 'minCoins' if 'x + 1' is smaller
+        - Put 'minCoins' at 'memo[amount]'
+        - Return 'memo[amount]'
+    - If the recursive result 'minCoins' is less than or equal to '10000'
+        - Return 'minCoins'
+    - Else
+        - Return -1
+
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(a * n), where 'a' is the input amount and 'n' is the number of coins
+        - O(a * n), there are 'a' possible states with 'amount' and in each
+          of the recursive call, we iterate through all of the coins
+    - Space Complexity = O(a) + O(a) = O(a), where 'a' is the input amount
+        - O(a), recursive call stack memory
+        - O(a), 'memo'
