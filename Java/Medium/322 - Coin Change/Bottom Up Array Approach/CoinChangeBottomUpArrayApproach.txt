@@ -1,0 +1,47 @@
+Question
+    You are given an integer array coins representing coins
+    of different denominations and an integer amount representing
+    a total amount of money.
+
+    Return the fewest number of coins that you need to make up
+    that amount. If that amount of money cannot be made up by
+    any combination of the coins, return -1.
+
+    You may assume that you have an infinite number of each
+    kind of coin.
+
+    Constraints:
+        - 1 <= coins.length <= 12
+        - 1 <= coins[i] <= 2^31 - 1
+        - 0 <= amount <= 10^4
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached the current 'amount' with 'minCoins'
+            - This means we can create an array 'minCoins' to keep
+              track of the minimum number of coins for all possible
+              values of 'amount'
+
+Answer
+    - Create an array 'minCoins' to keep
+      track of the minimum number of coins for all possible
+      values of 'amount'
+        - The indices represent 'amount'
+        - The values represent 'minCoins'
+    - iterate through from '1 -> amount', denoted as 'a'
+        - Set 'minCoins[a]' to '10000 + 1'
+        - Iterate through the 'coins', denoted as 'c'
+            - If 'c' is greater than 'a'
+                - continue
+            - Update 'minCoins[a]' if 'minCoins[a - c] + 1' is smaller
+    - Return 'minCoins[amount]' if 'minCoins[amount]' is less than or equal to 10000
+        - Else, return -1
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(a * n), where 'a' is the input amount and 'n' is the
+      number of coins
+        - O(a * n), nested 'for' loops
+    - Space Complexity = O(a), where 'a' is the input amount
+        - O(a), 'minCoins' array
