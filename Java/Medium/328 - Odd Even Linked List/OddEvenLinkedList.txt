@@ -1,0 +1,50 @@
+Question
+    Given the head of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, and return the reordered list.
+
+    The first node is considered odd, and the second node is even, and so on.
+
+    Note that the relative order inside both the even and odd groups should remain as it was in the input.
+
+    You must solve the problem in O(1) extra space complexity and O(n) time complexity.
+
+Thoughts Before Coding
+    - We can have 2 lists
+        - The odd list
+        - The even list
+    - Then we can append the even list to the odd list
+    - For each of the node 'x'
+        - We will need to check if it is an odd or even node
+        - We can create a boolean variable 'isOdd' to check if the current node
+          is odd or not
+        - If the current node is odd
+            - We can append it to our odd list
+        - If the current node is even
+            - We can append it to our even list
+
+
+Answer
+    - Create the following variables
+        - oHead, the sentinel head of our odd list
+        - oTail, the sentinel tail of our odd list, initially 'oHead'
+        - eHead, the sentinel head of our even list
+        - eTail, the sentinel tail of our even list, initially 'eHead'
+        - node, our current location inside the input list, initially 'head'
+        - isOdd, boolean variable to indicate if the current node is odd or not, initially true
+    - While 'node' is not equal to null
+        - Create a variable 'next' and set it to 'node.next'
+        - Set 'node.next' to null
+        - If 'isOdd' is true
+            - Set 'oTail.next' to 'node'
+            - Set 'oTail' to 'node'
+        - Else
+            - Set 'eTail.next' to 'node'
+            - Set 'eTail' to 'node'
+        - Set 'isOdd' to '!isOdd'
+        - Set 'node' to 'next'
+    - Set 'oTail.next' to 'eHead.next'
+    - Return 'oHead.next'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), visit each node once
+    - Space Complexity = O(1)
