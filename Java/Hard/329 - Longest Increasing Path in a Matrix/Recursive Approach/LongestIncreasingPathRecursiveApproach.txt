@@ -1,0 +1,48 @@
+Question
+    Given an m x n integers matrix, return the length of the
+    longest increasing path in matrix.
+
+    From each cell, you can either move in four directions:
+    left, right, up, or down. You may not move diagonally
+    or move outside the boundary (i.e., wrap-around is not allowed).
+
+Thoughts Before Coding
+    - For each of the cell 'r, c'
+        - We have 4 possible directions 'left, right, down, up'
+        - We will want to check the longest increasing path 'x' from
+          going in each of the direction
+            - We will pick the direction that will give us the longest path
+        - Then we can increment 'x' by 1 to account for the current cell 'r, c'
+
+Answer
+    - Create a variable 'result' to keep track of the longest increasing path
+    - Iterate through the rows and columns of 'matrix', denoted as 'r, c'
+        - Implement a recursive approach to find the 'maxPath'
+            - What parameters do we need?
+                - r, the current row
+                - c, the current column
+                - matrix, input matrix
+            - In the recursive call
+                - Create a variable 'maxPath', which will initially be equal to 0
+                - Iterate through the 4 directions 'left, right, down, up'
+                    - Calculate 'nr, nc' in moving in that direction
+                    - If 'nr, nc' is out of bound OR does not contain a value
+                      that is greater than the current cell
+                        - continue to next direction
+                    - Recursively find the length of the 'path' in moving in that direction
+                        - r => nr
+                        - c => nc
+                    - Update 'maxPath' if 'path' is greater
+                - Return 'maxPath + 1'
+        - Update 'result' if 'maxPath' is greater
+    - Return 'result'
+    - The recursive approach is not efficient enough due to overlapping
+      recursive calls
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n * 4^n), where 'n' is the total number of cells
+        - O(n * 4^n), we have 'n' possible starting cells
+            - In each of the recursive call
+                - We have up to 4 choices and a depth of 'n'
+    - Space Complexity = O(n), where 'n' is the total number of cells
+        - O(n), recursive call stack memory
