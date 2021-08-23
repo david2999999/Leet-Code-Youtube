@@ -1,6 +1,6 @@
 public class LongestIncreasingPathRecursiveApproach {
     private int[][] DIRECTIONS = {
-            { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }
+        { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }
     };
 
     public int longestIncreasingPath(int[][] matrix) {
@@ -22,7 +22,7 @@ public class LongestIncreasingPathRecursiveApproach {
             int nr = r + d[0], nc = c + d[1];
 
             if (nr < 0 || nr >= matrix.length || nc < 0 || nc >= matrix[nr].length ||
-                matrix[nr][nc] <= matrix[r][c]) continue;
+                    matrix[nr][nc] <= matrix[r][c]) continue;
 
             maxPath = Math.max(maxPath, longestIncreasingPath(nr, nc, matrix));
         }
