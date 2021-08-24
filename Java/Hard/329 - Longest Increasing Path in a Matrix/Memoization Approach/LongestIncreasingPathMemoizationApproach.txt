@@ -1,0 +1,57 @@
+Question
+    Given an m x n integers matrix, return the length of the
+    longest increasing path in matrix.
+
+    From each cell, you can either move in four directions:
+    left, right, up, or down. You may not move diagonally
+    or move outside the boundary (i.e., wrap-around is not allowed).
+
+Thoughts Before Coding
+    - The recursive approach is inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - we are trying to find the longest increasing path 'maxPath'
+              at the current 'r, c'
+            - This means we can cache 'r, c' with 'maxPath'
+
+Answer
+    - Create a variable 'result' to keep track of the longest increasing path
+    - Create a 2D matrix 'memo' to cache previously calculated results
+        - The rows represent 'r'
+        - The columns represent 'c'
+        - The values represent 'maxPath'
+    - Iterate through the rows and columns of 'matrix', denoted as 'r, c'
+        - recursively find the longest increasing path 'maxPath' if we start from 'r, c'
+            - What parameters do we need?
+                - r, the current row
+                - c, the current column
+                - matrix, input matrix
+                - memo, cache
+            - What is the base case?
+                - If 'memo[r][c]' is not equal to 0
+                    - Return 'memo[r][c]'
+            - In each of the recursive call
+                - Create a variable 'maxPath', initially 0
+                - Iterate through the 4 directions, denoted as 'd'
+                    - Calculate the new cell 'nr, nc' when moving in the direction
+                    - If 'nr, nc' is out of bound OR 'matrix[nr][nc]' is less than
+                      or equal to 'matrix[r][c]'
+                        - continue to next direction
+                    - Recursively check the longest increasing path 'x'
+                        - r => nr
+                        - c => nc
+                    - Update 'maxPath' if 'x' is greater
+                - Put 'maxPath + 1' at 'memo[r][c]'
+                - Return 'memo[r][c]'
+        - Update 'result' if 'maxPath' is greater
+    - Return 'result'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n + 4n) = O(n), where 'n' is the total number of cells
+        - O(n + 4n), we iterate through all of the cells
+            - We have a total of 'n' possible states
+                - Each recursive call, we iterate through 4 directions
+    - Space Complexity = O(n) + O(n) = O(n), where 'n' is the total number of cells
+        - O(n), recursive call stack memory
+        - O(n), 'memo' matrix
