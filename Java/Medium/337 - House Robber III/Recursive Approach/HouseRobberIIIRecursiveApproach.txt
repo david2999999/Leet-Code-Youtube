@@ -1,0 +1,61 @@
+Question
+    The thief has found himself a new place for his
+    thievery again. There is only one entrance to this
+    area, called root.
+
+    Besides the root, each house has one and only one
+    parent house. After a tour, the smart thief realized
+    that all houses in this place form a binary tree.
+    It will automatically contact the police if two
+    directly-linked houses were broken into on the same night.
+
+    Given the root of the binary tree, return the
+    maximum amount of money the thief can rob without
+    alerting the police.
+
+Thoughts Before Coding
+    - For each of the node 'x' inside the tree
+        - We have two choices
+            - We can rob the current node, and skip the children nodes
+            - We can skip the current node, and rob the children nodes
+        - We will pick the choice that will give the higher amount of money
+
+Answer
+    - Implement our recursive approach
+        - What parameters do we need?
+            - node, the current node we are robbing
+        - What is the base case?
+            - if 'node' is equal to null
+                - Return 0
+        - In each of the recursive call
+            - Recursively find the amount of money 'm1' if we rob the current node
+                - If 'node.left' is equal to null
+                    - Then there are no money on the left subtree
+                - Else
+                    - First recursively rob 'x1' the left child of 'node.left'
+                        - node => node.left.left
+                    - Then recursively rob 'x2' the right child of 'node.left'
+                        - node => node.left.right
+                - Increment 'm1' by 'x1 + x2 + node.val'
+                - If 'node.right' is equal to null
+                    - Then there are no money on the right subtree
+                - Else
+                    - First recursively rob 'x3' the left child of 'node.right'
+                        - node => node.right.left
+                    - Then recursively rob 'x4' the right child of 'node.right'
+                        - node => node.right.right
+                    - Increment 'm1' by 'x3' and 'x4'
+            - Find the amount of money 'm2' if we skip the current node
+                - Recursively find the amount of money 'x1' on the left subtree
+                    - node => node.left
+                - Recursively find the amount of money 'x2' on the right subtree
+                    - node => node.right
+                - Increment 'm2' by 'x1 + x2'
+            - Return 'max(m1, m2)'
+        - The recursive approach is not efficient enough due to overlapping recursive calls
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(6^h), where 'h' is the height of the tree
+        - O(6^h), each recursive call, we have up to 6 recursive calls and a depth of 'h'
+    - Space Complexity = O(h), where 'h' is the height of the tree
+        - O(h), recursive call stack memory
