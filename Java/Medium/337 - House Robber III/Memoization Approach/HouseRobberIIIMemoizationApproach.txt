@@ -1,0 +1,71 @@
+Question
+    The thief has found himself a new place for his
+    thievery again. There is only one entrance to this
+    area, called root.
+
+    Besides the root, each house has one and only one
+    parent house. After a tour, the smart thief realized
+    that all houses in this place form a binary tree.
+    It will automatically contact the police if two
+    directly-linked houses were broken into on the same night.
+
+    Given the root of the binary tree, return the
+    maximum amount of money the thief can rob without
+    alerting the police.
+
+Thoughts Before Coding
+    - The recursive approach is inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - In each of the recursive call
+            - We are trying to find the maximum amount of money 'm' at
+              the current 'node'
+            - This means we can cache 'node' and the maximum amount of money 'm'
+
+Answer
+    - Create a HashMap 'memo' to cache previously calculated results
+        - The key will represent 'node'
+        - The value will represent maximum amount of money 'm'
+    - Implement top down memoization approach
+        - What parameters do we need?
+            - node, the current node we are robbing
+            - memo, cache
+        - What is the base case?
+            - if 'node' is equal to null
+                - Return 0
+            - If 'memo' contains 'node'
+                - Return 'memo.get(node)'
+        - In each of the recursive call
+            - Recursively find the amount of money 'm1' if we rob the current node
+                - If 'node.left' is equal to null
+                    - Then there are no money on the left subtree
+                - Else
+                    - First recursively rob 'x1' the left child of 'node.left'
+                        - node => node.left.left
+                    - Then recursively rob 'x2' the right child of 'node.left'
+                        - node => node.left.right
+                - Increment 'm1' by 'x1 + x2 + node.val'
+                - If 'node.right' is equal to null
+                    - Then there are no money on the right subtree
+                - Else
+                    - First recursively rob 'x3' the left child of 'node.right'
+                        - node => node.right.left
+                    - Then recursively rob 'x4' the right child of 'node.right'
+                        - node => node.right.right
+                    - Increment 'm1' by 'x3' and 'x4'
+            - Find the amount of money 'm2' if we skip the current node
+                - Recursively find the amount of money 'x1' on the left subtree
+                    - node => node.left
+                - Recursively find the amount of money 'x2' on the right subtree
+                    - node => node.right
+                - Increment 'm2' by 'x1 + x2'
+            - Put 'node' and 'max(m1, m2)' inside 'memo'
+            - Return 'max(m1, m2)'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the number of nodes
+        - O(n), there are 'n' number of states
+    - Space Complexity = O(h) + O(n) = O(n), where 'n' is the number of nodes and
+      'h' is the height of the tree
+        - O(h), recursive call stack memory
+        - O(n), total number of nodes
