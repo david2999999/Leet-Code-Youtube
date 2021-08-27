@@ -1,0 +1,28 @@
+Question
+    Given an integer n, return an array ans of length
+    n + 1 such that for each i (0 <= i <= n), ans[i] is
+    the number of 1's in the binary representation of i.
+
+Thoughts Before Coding
+    - For each of the number 'x'
+        - We can denote the number 'y' as the value after
+          we have removed the rightmost bit from 'x'
+        - Then we know the number of set bits inside 'x'
+            - is the number of set bits inside 'y' + 1
+    - Now, how can we remove a rightmost bit from 'x'?
+        - We can use Brian Kernighan Algorithm
+            - x & (x - 1)
+        - x = 3 = 11 -> 10
+        - x & (x - 1) = 3 & 2 = (11) & (10) = 10
+
+Answer
+    - Create an array 'ans' of size 'n + 1'
+    - Iterate through the indices of 'ans' starting from 1, denoted as 'x'
+        - Set 'ans[x]' to 'ans[x & (x - 1)] + 1'
+    - Return 'ans'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n), where 'n' is the input value
+        - O(n), visit each index once
+    - Space Complexity = O(n), where 'n' is the input value
+        - O(n), 'ans' array
