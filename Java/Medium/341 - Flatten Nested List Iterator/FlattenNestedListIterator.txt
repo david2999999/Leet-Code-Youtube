@@ -1,0 +1,49 @@
+Question
+    You are given a nested list of integers nestedList. Each element is either an integer or a
+    list whose elements may also be integers or other lists. Implement an iterator to flatten it.
+
+    Implement the NestedIterator class:
+        - NestedIterator(List<NestedInteger> nestedList) Initializes the iterator with the nested list nestedList.
+        - int next() Returns the next integer in the nested list.
+        - boolean hasNext() Returns true if there are still some integers in the nested list and false otherwise.
+
+Thoughts Before Coding
+    - We can implement a recursive approach to flatten the initial list
+        - This will allow us to easily check the next integer
+    - Now, how can we store the elements inside the flatten list?
+        - We can create a 'queue' to store the elements
+        - Then when we need to implement the 'next' method
+            - We can poll an element from the 'queue'
+        - Then when we need to implement the 'hasNext' method
+            - We can check if the 'queue' is empty or not
+
+Answer
+    - NestedIterator(nestedList)
+        - What fields do we need?
+            - There will be a single field 'queue'
+        - Recursively flatten the list
+            - What parameters do we need?
+                - nestedList, the current nested list
+            - In each of the recursive call
+                - Iterate through the elements of 'nestedList', denoted as 'list'
+                    - If 'list' is an integer
+                        - Add 'list.getInteger()' to 'queue'
+                    - Else
+                        - Recursively flatten the list
+                            - nestedList => list.getList()
+    - next()
+        - Return 'queue.poll()'
+    - hasNext()
+        - Return '!queue.isEmpty()'
+
+What is the Time and Space Complexity?
+    - NestedIterator
+        - Time Complexity = O(n), where 'n' is the total number of elements
+            - O(n), flatten the list
+        - Space Complexity = O(n) + O(d) = O(n), where 'n' is the total number of elements and 'd' is the depth of the list
+            - O(n), 'queue'
+            - O(h), recursive call stack memory
+    - next
+        - Time Complexity = O(1)
+    - hasNext
+        - Time Complexity = O(1)
