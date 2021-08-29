@@ -1,0 +1,49 @@
+Question
+    Given an integer n, break it into the sum of k positive integers, where k >= 2, and maximize the product of those integers.
+
+    Return the maximum product you can get.
+
+Thoughts Before Coding
+    - For each of the number 'n'
+        - We have choices from '1 -> n - 1', denoted as 'x'
+            - Then we can break 'n' into 'x' and 'n - x', which we can call 'y'
+            - 'x'
+            - n - x = 'y'
+        - For the number 'x'
+            - We have 2 choices
+                - We can keep 'x' or also break 'x' down
+                - We will want to pick the choice that will give us the larger value
+        - For the number 'y'
+            - We have 2 choices
+                - We can keep 'y' or also break 'y' down
+                - We will want to pick the choice that will give us the larger value
+        - Then we can find the product between the choices
+    - We will pick the 'x' value that will give us the largest product
+
+Answer
+    - Implement the recursive approach
+        - What parameters do we need?
+            - n, the current value
+        - What is the base case?
+            - If 'n' is equal to 1
+                - Return 1
+        - In each of the recursive call
+            - Create a variable 'maxProduct' , initially 0
+            - Iterate through the numbers from '1 -> n - 1', denoted as 'x'
+                - Calculate 'y', which is equal to 'n - x'
+                - Recursively find the maximum product 'p1' if we decide to break down 'x'
+                    - n => x
+                - Recursively find the maximum product 'p2' if we decide to break down 'y'
+                    - n => y
+                - Update 'maxProduct' if the following is greater
+                    - max(x, p1) * max(y, p2)
+            - Return 'maxProduct'
+    - The recursive approach is not efficient enough due to overlapping
+      recursive calls
+
+What is the Time and Space Complexity?
+    - Time Complexity = O((2n)^n), where 'n' is the input value
+        - O((2n)^n), each recursive call, we have up to '2n' choices and a depth
+          of 'n'
+    - Space Complexity = O(n), where 'n' is the input value
+        - O(n), recursive call stack memory
