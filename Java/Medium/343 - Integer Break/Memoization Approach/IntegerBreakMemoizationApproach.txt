@@ -1,0 +1,47 @@
+Question
+    Given an integer n, break it into the sum of k positive integers, where k >= 2, and maximize the product of those integers.
+
+    Return the maximum product you can get.
+
+Thoughts Before Coding
+    - The recursive approach is inefficient due to overlapping recursive calls
+        - We can avoid overlapping recursive calls using memoization
+    - What do we need to cache?
+        - in each of the recursive call
+            - We are trying to find the maximum product 'maxProduct' at
+              the current 'n'
+            - This means we can cache 'n' with 'maxProduct'
+
+Answer
+    - Create an array 'memo' to cache previously calculated results
+        - The indices represent 'n'
+        - The values represent 'maxProduct'
+    - Implement the top down memoization approach
+        - What parameters do we need?
+            - n, the current value
+            - memo, cache
+        - What is the base case?
+            - If 'n' is equal to 1
+                - Return 1
+            - If 'memo[n]' is not equal to 0
+                - Return 'memo[n]'
+        - In each of the recursive call
+            - Create a variable 'maxProduct' , initially 0
+            - Iterate through the numbers from '1 -> n - 1', denoted as 'x'
+                - Calculate 'y', which is equal to 'n - x'
+                - Recursively find the maximum product 'p1' if we decide to break down 'x'
+                    - n => x
+                - Recursively find the maximum product 'p2' if we decide to break down 'y'
+                    - n => y
+                - Update 'maxProduct' if the following is greater
+                    - max(x, p1) * max(y, p2)
+            - Put 'maxProduct' at 'memo[n]'
+            - Return 'memo[n]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n * n) = O(n^2), where 'n' is the input value
+        - O(n^2), we have up to 'n' states with 'n'
+            - Each recursive call, we iterate through 'n' indices
+    - Space Complexity = O(n) + O(n) = O(n), where 'n' is the input value
+        - O(n), recursive call stack memory
+        - O(n), 'memo'
