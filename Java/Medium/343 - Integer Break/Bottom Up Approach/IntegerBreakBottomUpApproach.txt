@@ -1,0 +1,35 @@
+Question
+    Given an integer n, break it into the sum of k positive integers, where k >= 2, and maximize the product of those integers.
+
+    Return the maximum product you can get.
+
+Thoughts Before Coding
+    - Lets convert the top down memoization approach to a bottom up approach
+        - Where do we start?
+            - In the memoization approach
+                - We have cached the current value 'n' with 'maxProduct'
+            - This means we can create an array 'maxProduct' to keep
+              track of the maximum product for all values of 'n'
+
+Answer
+    - Create an array 'maxProduct'
+        - the indices represent 'n'
+        - The values represent max product
+    - Iterate through the values from '1 -> n', denoted as 'curN'
+        - If 'curN' is equal to '1'
+            - Set 'maxProduct[curN]' to '1'
+            - continue to next iteration
+        - Iterate through the values from '1 -> curN - 1', denoted as 'x'
+            - Calculate 'y'
+                - y = curN - x
+            - If we break down 'x', the maximum product 'p1' will be equal to 'maxProduct[x]'
+            - If we break down 'y', the maximum product 'p2' will be equal to 'maxProduct[y]'
+            - Update 'maxProduct[curN]' if
+                - max(x, p1) * max(y, p2)
+    - Return 'maxProduct[n]'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n^2), where 'n' is the input values
+        - O(n^2), nested 'for' loops
+    - Space Complexity = O(n), where 'n' is the input values
+        - O(n), 'maxProduct' array
