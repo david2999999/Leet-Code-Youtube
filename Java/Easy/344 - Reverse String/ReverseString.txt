@@ -1,0 +1,23 @@
+Question
+    Write a function that reverses a string. The input string is given as an array of characters s.
+
+Thoughts Before Coding
+    - We can implement a two pointer approach
+        - One pointer 'i' will scan from left -> right
+        - One pointer 'j' will scan from right -> left
+    - Then in each of the iteration
+        - We will be swapping the characters at the two indices
+
+Answer
+    - Create two variables
+        - i, initially 0, left pointer
+        - j, initially 's.length - 1', right pointer
+    - While 'i' is less than 'j'
+        - Swap the characters at indices 'i' and 'j'
+        - Increment 'i'
+        - Decrement 'j'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(n / 2) = O(n), where 'n' is the length of the input array
+        - O(n / 2), two pointer approach to swap characters
+    - Space Complexity = O(1)
