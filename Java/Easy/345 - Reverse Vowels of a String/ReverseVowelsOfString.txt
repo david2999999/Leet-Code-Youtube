@@ -1,0 +1,38 @@
+Question
+    Given a string s, reverse only all the vowels in the string and return it.
+
+    The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both cases.
+
+Thoughts Before Coding
+    - For each of the character 'c' at index 'i'
+        - if 'c' is not a vowel
+            - We can just append 'c' to our resulting string
+        - if 'c' is a vowel
+            - We will need to find the current latest
+              vowel on the right side
+    - This means we can implement a two pointer approach
+        - One pointer 'i' will scan from left -> right checking
+          for all of the characters
+        - One pointer 'j' will scan from right -> left and
+          only check for vowels to be appended to our resulting string
+
+Answer
+    - Create the following variables
+        - str, the resulting string
+        - j, our current right pointer, initially 's.length() - 1'
+    - Iterate through the indices of 's', denoted as 'i'
+        - Retrieve the current character 'c'
+        - If 'c' is not a vowel
+            - Append 'c' to 'str'
+            - continue to next iteration
+        - While 's.charAt(j)' is not a vowel
+            - decrement 'j'
+        - Append 's.charAt(j)' to 'str'
+        - Decrement 'j'
+    - Return a string representation of 'str'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(2n) = O(n), where 'n' is the length of the input string
+        - O(2n), two pointer approach
+    - Space Complexity = O(n), where 'n' is the length of the input string
+        - O(n), 'str'
