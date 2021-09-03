@@ -1,0 +1,28 @@
+Question
+    Given two integer arrays nums1 and nums2,
+    return an array of their intersection.
+    Each element in the result must be unique
+    and you may return the result in any order.
+
+Thoughts Before Coding
+    - For each of the element 'x' inside 'nums2'
+        - We will need a quick way to find 'x' inside 'nums1'
+    - We can create a HashSet to store all of the elements inside 'nums1'
+        - Then we can use the set for quick lookup
+
+Answer
+    - Create two fields
+        - seen, HashSet for elements inside 'nums1'
+        - intersections, HashSet for the intersections
+    - Iterate through the elements of 'nums1', denoted as 'x'
+        - Add 'x' to 'seen'
+    - Iterate through the elements of 'nums2', denoted as 'x'
+        - If 'seen' contains 'x'
+            - Add 'x' to 'intersections'
+    - Return an array representation of 'intersections'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(m + n), where 'm,n' are the length of the two input arrays
+        - O(m + n), 2 iterations
+    - Space Complexity = O(3m) = O(m), where 'm' is the length of 'nums1'
+        - O(3m), 2 sets + 1 array
