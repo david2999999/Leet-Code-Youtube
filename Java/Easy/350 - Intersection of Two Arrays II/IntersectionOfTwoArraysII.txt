@@ -1,0 +1,33 @@
+Question
+    Given two integer arrays nums1 and nums2,
+    return an array of their intersection. Each
+    element in the result must appear as many times
+    as it shows in both arrays and you may return the
+    result in any order.
+
+Thoughts Before Coding
+    - For each of the element 'x' inside 'nums2'
+        - We will need a quick way to check if 'x' exists inside 'nums1'
+        - We should note that 'x' may appear multiple times
+            - This means we will need to check for 'x' and also
+              the frequency of 'x'
+    - We can create a HashMap to keep track of the elements inside
+      'nums1'
+        - element -> frequency
+
+Answer
+    - Create a HashMap 'map' to keep track of element and frequency inside 'nums1'
+    - Iterate through the elements inside 'nums1', denoted as 'x'
+        - Increment the frequency of 'x' inside 'map'
+    - Create a list 'intersection' to keep track of all intersections
+    - Iterate through the elements of 'nums2', denoted as 'x'
+        - If 'map' contains 'x' AND the frequency of 'x' is greater than 0
+            - Add 'x' to 'intersection'
+            - Decrement the frequency of 'x' inside 'map'
+    - Return an array representation of 'intersection'
+
+What is the Time and Space Complexity?
+    - Time Complexity = O(m + n), where 'm,n' are the length of the two input arrays
+        - O(m + n), 2 loops
+    - Space Complexity = O(m), where 'm' is the length of 'nums1'
+        - O(m), 'map'
