@@ -59,3 +59,5 @@ algorithm which facilitates a great learning experience.
 ### Time and Space Complexity
 - Average case?
 - Worst case?    
+- Is the answer optimized?
+    - Can you get a better time and space complexity?
