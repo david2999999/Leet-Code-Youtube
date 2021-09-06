@@ -30,6 +30,10 @@ algorithm which facilitates a great learning experience.
     * Then look for overlapping recursive calls, 
         * Provide the top down memoization solution
     * Lastly, flip the solution around and find the bottom up approach
+    * Can the bottom up approach be optimized?
+        * 3D -> 2D
+        * 2D -> 1D
+        * 1D -> Constant Space
 * Trade-offs between time and space?
     * Should we use HashMap/HashSet for quicker lookup?
     * Can we save previously seen values in a data structure?
