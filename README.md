@@ -59,6 +59,8 @@ algorithm which facilitates a great learning experience.
         - What are the parameters?
         - What are the base cases?
         - What do we do in each of the recursive call?
+- Is the code optimized?
+    - What can we do to optimize to code?
         
 ### Time and Space Complexity
 - Average case?
