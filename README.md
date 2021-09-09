@@ -19,6 +19,7 @@ Premium members get access to problem sets based on company questions.
     * We need to have quick lookup for individual elements? HashSet!
     * We need to model a network of people? Graph!
     * Matching Brackets? Stack!
+    * We need to cache results? Array, Matrix, or Map
 * Any algorithms that can be used
     * Finding cycles? 2 POINTER APPROACH
     * Searching in sorted array? BINARY SEARCH
