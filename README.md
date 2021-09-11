@@ -31,6 +31,7 @@ Premium members get access to problem sets based on company questions.
 * Optimizing time and space complexity
     * Can we use a different data structure to improve our runtime?
     * Should we use a different algorithm to improve our runtime?
+    * Can we use a different data structure use less space?
 * How do we approach dynamic programming problems?
     * First find the brute force recursive approach
     * Then look for overlapping recursive calls, 
