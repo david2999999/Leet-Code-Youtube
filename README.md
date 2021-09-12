@@ -74,3 +74,4 @@ Premium members get access to problem sets based on company questions.
 - Worst case?    
 - Is the answer optimized?
     - Can you get a better time and space complexity?
+- Are you accounting for the time complexity in all of the methods inside the class?
