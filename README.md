@@ -13,8 +13,10 @@ Premium members get access to problem sets based on company questions.
 * Finding different approaches for the problem
     * Brute force approach
     * Optimization to the brute force approach
+    * Optimized approach
 * Finding the right data structure
     * We need to map a value to another value? HashMap!
+    * We need a linear set of information? Array
     * We need to keep track of a count of different elements? HashMap!
     * We need to have quick lookup for individual elements? HashSet!
     * We need to model a network of people? Graph!
