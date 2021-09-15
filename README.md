@@ -53,6 +53,7 @@ Premium members get access to problem sets based on company questions.
    * What if our input is null?
    * What if our input is empty?
    * Are there negative values?
+   * Will the constraints effect our answer?
    * Will our additions overflow?
    * Off by one errors?
    * Is the value inside the boundary of allowed values?
