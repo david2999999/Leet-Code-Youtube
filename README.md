@@ -70,6 +70,9 @@ Premium members get access to problem sets based on company questions.
         - What are the parameters?
         - What are the base cases?
         - What do we do in each of the recursive call?
+    - For Tree Problems
+        - What can we do at each of the nodes?
+        - What do we do if the current node is null?
 - Is the code optimized?
     - What can we do to optimize to code?
         
