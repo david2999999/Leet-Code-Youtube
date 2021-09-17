@@ -73,6 +73,10 @@ Premium members get access to problem sets based on company questions.
     - For Tree Problems
         - What can we do at each of the nodes?
         - What do we do if the current node is null?
+    - For Graph Problems
+        - Do we need to create a representation of the graph?
+        - BFS or DFS?
+        - Accounting for cycles?
 - Is the code optimized?
     - What can we do to optimize to code?
         
