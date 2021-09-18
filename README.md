@@ -50,8 +50,6 @@ Premium members get access to problem sets based on company questions.
     * Instead of using data structure, can we use a single value to represent the information we need?
     * Can we find an iterative approach instead of a recursive approach?
 * Side Cases to Consider
-   * What if our input is null?
-   * What if our input is empty?
    * Are there negative values?
    * Will the constraints effect our answer?
    * Will our additions overflow?
@@ -61,6 +59,8 @@ Premium members get access to problem sets based on company questions.
 ### Answer
 - Write our a semi-pseudocode explaining our solution to the problem
     - Validate our input   
+       * What if our input is null?
+       * What if our input is empty?
     - What algorithm are we using?
     - What data structure will we be instantiating?
     - Any side cases to consider when implementing the code
