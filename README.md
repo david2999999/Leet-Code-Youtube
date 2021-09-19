@@ -77,6 +77,9 @@ Premium members get access to problem sets based on company questions.
         - Do we need to create a representation of the graph?
         - BFS or DFS?
         - Accounting for cycles?
+    - For Linked List Problems
+        - Accounting for cycles?
+        - What do we need to perform at each node?
 - Is the code optimized?
     - What can we do to optimize to code?
         
