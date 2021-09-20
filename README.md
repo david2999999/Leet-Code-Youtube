@@ -49,6 +49,8 @@ Premium members get access to problem sets based on company questions.
     * Can we save previously seen values in a data structure?
     * Instead of using data structure, can we use a single value to represent the information we need?
     * Can we find an iterative approach instead of a recursive approach?
+    * Can we use array to replace our data structures?
+        * This will allow a faster runtime
 * Side Cases to Consider
    * Are there negative values?
    * Will the constraints effect our answer?
