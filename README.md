@@ -31,6 +31,7 @@ Premium members get access to problem sets based on company questions.
     * Save memory from our recursive stack? BOTTOM UP APPROACH
     * 2 Sorted Arrays? 2 POINTER APPROACH
     * BFS or DFS?
+    * Sliding window?
 * Optimizing time and space complexity
     * Can we use a different data structure to improve our runtime?
     * Should we use a different algorithm to improve our runtime?
