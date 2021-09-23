@@ -65,6 +65,7 @@ Premium members get access to problem sets based on company questions.
     - Validate our input   
        * What if our input is null?
        * What if our input is empty?
+       * What if our input is negative or equal to 0?
     - What algorithm are we using?
     - What data structure will we be instantiating?
     - Any side cases to consider when implementing the code
