@@ -86,6 +86,7 @@ Premium members get access to problem sets based on company questions.
     - For Linked List Problems
         - Accounting for cycles?
         - What do we need to perform at each node?
+        - What if we reached the last node?
 - Is the code optimized?
     - What can we do to optimize to code?
         
