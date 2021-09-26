@@ -89,6 +89,8 @@ Premium members get access to problem sets based on company questions.
         - What if we reached the last node?
 - Is the code optimized?
     - What can we do to optimize to code?
+    - Can we restructure the code?
+    - Are there vague variable naming?
         
 ### Time and Space Complexity
 - Average case?
