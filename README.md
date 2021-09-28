@@ -90,6 +90,9 @@ Premium members get access to problem sets based on company questions.
     - For list problems
         - Which data structure is more optimized for this question?
             - LinkedList or ArrayList?
+    - For array problems
+        - What should we do at each of the index?
+        - Does the value at the current index rely on the value at another index?
 - Is the code optimized?
     - What can we do to optimize to code?
     - Can we restructure the code?
