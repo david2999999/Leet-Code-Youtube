@@ -68,6 +68,10 @@ Premium members get access to problem sets based on company questions.
        * What if our input is negative or equal to 0?
     - What algorithm are we using?
     - What data structure will we be instantiating?
+        - Stack
+        - Queue
+        - List
+        - Map
     - Any side cases to consider when implementing the code
         - Look out for off-by 1 errors
         - What are the terminating conditions of loops
