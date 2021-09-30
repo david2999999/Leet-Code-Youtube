@@ -42,6 +42,7 @@ Premium members get access to problem sets based on company questions.
     * Then look for overlapping recursive calls, 
         * Provide the top down memoization solution
     * Lastly, flip the solution around and find the bottom up approach
+        * The bottom up approach is the iterative approach
     * Can the bottom up approach be optimized?
         * 3D -> 2D
         * 2D -> 1D
