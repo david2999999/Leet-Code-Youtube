@@ -73,6 +73,8 @@ Premium members get access to problem sets based on company questions.
         - Queue
         - List
         - Map
+        - Set
+        - Priority Queue
     - Any side cases to consider when implementing the code
         - Look out for off-by 1 errors
         - What are the terminating conditions of loops
