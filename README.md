@@ -98,6 +98,7 @@ Premium members get access to problem sets based on company questions.
         - Accounting for cycles?
         - What do we need to perform at each node?
         - What if we reached the last node?
+        - Singly Linked List or Doubly Linked List?
     - For list problems
         - Which data structure is more optimized for this question?
             - LinkedList or ArrayList?
