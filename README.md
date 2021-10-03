@@ -86,6 +86,10 @@ Premium members get access to problem sets based on company questions.
         - What can we do at each of the nodes?
         - What do we do if the current node is null?
         - What do we do at leaf nodes?
+        - What kind of traversal?   
+            - Preorder
+            - Inorder
+            - Postorder
     - For Graph Problems
         - Do we need to create a representation of the graph?
         - BFS or DFS?
