@@ -102,6 +102,7 @@ Premium members get access to problem sets based on company questions.
     - For list problems
         - Which data structure is more optimized for this question?
             - LinkedList or ArrayList?
+        - Can the list be replaced by an array?
     - For array problems
         - What should we do at each of the index?
         - Does the value at the current index rely on the value at another index?
