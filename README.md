@@ -110,6 +110,7 @@ Premium members get access to problem sets based on company questions.
     - What can we do to optimize to code?
     - Can we restructure the code?
     - Are there vague variable naming?
+    - Can we create methods to create cleaner code?
         
 ### Time and Space Complexity
 - Average case?
